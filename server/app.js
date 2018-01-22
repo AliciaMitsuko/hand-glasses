@@ -16,7 +16,7 @@ var app = express();
 
 var mongoose = require('mongoose')
 mongoose.Promise = bluebird
-var DB_PATH = 'mongodb://polytech-admin:Ge8GzZmD7Bw5@ds211588.mlab.com:11588/n-glasses'
+var DB_PATH = 'mongodb://polytech-admin:Ge8GzZmD7Bw5@ds033966.mlab.com:33966/hand-glasses'
 
 mongoose.connect(DB_PATH, { useMongoClient: true})
 .then(()=> { console.log(`Succesfully Connected to the Mongodb Database  at URL :` + DB_PATH)})
