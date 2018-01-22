@@ -6,3 +6,7 @@
 export const environment = {
   production: false
 };
+
+export enum statutAccidentEnum{
+  'LOW', 'MEDIUM', 'HIGH'
+}
