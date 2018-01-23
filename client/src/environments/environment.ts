@@ -10,3 +10,7 @@ export const environment = {
 export enum statutAccidentEnum{
   'LOW', 'MEDIUM', 'HIGH'
 }
+
+export enum userRoleEnum{
+  'CLIENT', 'ADMIN'
+}
