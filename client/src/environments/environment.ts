@@ -7,8 +7,8 @@ export const environment = {
   production: false
 };
 
-export enum statutAccidentEnum{
-  'LOW', 'MEDIUM', 'HIGH'
+export enum gravEnum{
+  'INDEMNE', 'TUE', 'HOSPITALISE', 'LEGER'
 }
 
 export enum userRoleEnum{

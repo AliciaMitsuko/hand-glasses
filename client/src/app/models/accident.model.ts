@@ -1,19 +1,26 @@
-import Localization from "./localization.model";
-import {statutAccidentEnum} from '../../environments/environment';
+import {gravEnum} from '../../environments/environment';
+import Contexte, {default as Situation} from "./situation.model";
+import {GeoJsonTypes} from "geojson";
+
+import * as GeoJSON from "@types/geojson"
 
 class Accident {
     _id:string;
-    location: Localization;
-    statut: statutAccidentEnum;
-    nbAccident: number;
-    date: Date;
+    // coords: GeoJSON.; // coordinates:'lat lon' type: 'point' (si lat, lon vide, complete par adr et gps)
+    date: Date; // jour, mois, an, heure
+    contexte: Contexte; // atm, lum, surf
+    grav: gravEnum;
+    dep: number;
+    comm: number;
 
     constructor(
     ){
-        this.location = new Localization();
-        this.nbAccident = 0,
-        this.statut = statutAccidentEnum.MEDIUM,
-        this.date = new Date()
+      this.date = new Date()
+      this.contexte = new Situation();
+      this.grav = gravEnum.INDEMNE;
+      // this.coords = new
+      this.dep = 1;
+      this.comm = 4;
     }
 }
 
