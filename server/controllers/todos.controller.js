@@ -1,7 +1,34 @@
 var TodoService = require('../services/todos.service')
-
+var _ = require('lodash');
+var fs = require("fs");
+var csv = require("fast-csv");
 _this = this
 
+exports.convertNameToCodeAsync = async function(req, res, next) {
+    try{
+        setTimeout(function() {
+            var options = {delimiter: ';', headers: true};
+
+            var stream;
+            stream = fs.createReadStream('../resources/vehicules_2016.csv');
+
+            var csvStream = csv(options)
+                .on("data", function(data){
+                    console.log(data);
+                    // call method post DB
+                })
+                .on("end", function(){
+                    console.log('done');
+
+                });
+            stream.pipe(csvStream);
+        }, 100);
+        return res.status(200).json({status: 200, message: "Succesfully Save in the DB"});
+    }catch(e){
+        return res.status(400).json({status: 400, message: e.message});
+    }
+
+}
 
 exports.getTodos = async function(req, res, next){
 

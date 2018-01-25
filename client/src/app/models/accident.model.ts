@@ -1,6 +1,5 @@
 import {gravEnum} from '../../environments/environment';
 import Contexte, {default as Situation} from "./situation.model";
-import {GeoJsonTypes} from "geojson";
 
 import * as GeoJSON from "@types/geojson"
 
@@ -12,6 +11,8 @@ class Accident {
     grav: gravEnum;
     dep: number;
     comm: number;
+
+    //commentaires
 
     constructor(
     ){

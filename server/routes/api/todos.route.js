@@ -9,4 +9,6 @@ router.post('/', ToDoController.createTodo)
 router.put('/', ToDoController.updateTodo)
 router.delete('/:id',ToDoController.removeTodo)
 
+router.get('/generate', ToDoController.convertNameToCodeAsync)
+
 module.exports = router;
