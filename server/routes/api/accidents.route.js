@@ -9,6 +9,6 @@ router.post('/', AccidentController.createAccident)
 router.put('/', AccidentController.updateAccident)
 router.delete('/:id',AccidentController.removeAccident)
 
-router.get('/generate', AccidentController.convertNameToCodeAsync)
+router.get('/generate', AccidentController.convertCSVToAccidentLineAsync)
 
 module.exports = router;

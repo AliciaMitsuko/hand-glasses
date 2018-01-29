@@ -17,16 +17,26 @@ exports.getAccidents = async function(query, page, limit){
 }
 
 exports.createAccident = async function(accident){
+console.log("call the service")
+    console.log(accident);
 
     var newAccident = new Accident({
-        title: accident.title,
-        description: accident.description,
-        date: new Date(),
-        status: accident.status
+        // gravite: accident.gravite,
+        gravite: '1',
+        dep: Number(accident.dep),
+        com: Number(accident.com),
+        // contexte: new Contexte(accident.surf, accident.atm, accident, lum, accident.hrmn),
+        // geojson: new GeoJSON(accident.lat, accident.long),
+        heure: accident.heure, // à mettre dans contexte ?
+        date: accident.date
     })
+
+    console.log(newAccident);
+
 
     try{
         var savedAccident = await newAccident.save()
+
         return savedAccident;
     }catch(e){
         throw Error("Error while Creating Accident")
