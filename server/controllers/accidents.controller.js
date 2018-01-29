@@ -8,14 +8,16 @@ _this = this
 
 exports.convertCSVToAccidentLineAsync = async (req, res, next) => {
     function readCSV (index) {
+        var id = req.params.id;
+
         return new Promise((resolve, reject) => {
             let options = { delimiter: ';', headers: true }
             let bool = true
-            let stream = fs.createReadStream('../resources/samples_2016.csv')
+            let stream = fs.createReadStream('../resources/accidents_2016.csv')
 
             let csvStream = csv(options)
                 .on('data', (data) => {
-                    if (bool && (index == 1)) {
+                    if (bool && (index == id)) {
                         console.log(data.adr)
                         bool = false
                         resolve(data)
@@ -23,22 +25,22 @@ exports.convertCSVToAccidentLineAsync = async (req, res, next) => {
                 }).on('end', () => {
                         console.log('end')
                 }).on('error', (error) => { reject(error) })
-
                     stream.pipe(csvStream)
                 }
         )
     }
 
+    var id = req.params.id;
+
     try {
-        readCSV(1).then(
+        readCSV(id).then(
             (accident) => {
             // console.log(accident);
             this.createAccidentFromLine(accident, req, res, next)
         },
-            (error) => {
+        (error) => {
             console.log('error', error)
-        })
-    .catch(function(e) {
+        }).catch(function(e) {
                 return res.status(400).json({ status: 400, message: e.message })
             }
         )
@@ -134,51 +136,4 @@ exports.removeAccident = async function(req, res, next){
         return res.status(400).json({status: 400, message: e.message})
     }
 
-}
-
-
-
-exports.convertCSVToAccidentLineAsyncMARCHEPAS = async function(req, res, next) {
-
-    function readCSV(index) {
-        var deferred = q.defer();
-
-        // return new Promise(
-        setTimeout(function() {
-            var options = {delimiter: ';', headers: true};
-            var bool = true;
-            var stream;
-            stream = fs.createReadStream('../resources/samples_2016.csv');
-
-            var csvStream = csv(options)
-                .on("data", function(data) {
-                    if (bool && (index == 1)) {
-                        console.log(data.adr);
-                        // this.createAccidentFromLine(data);
-                        deferred.resolve(data);
-                        bool = false;
-                    }
-                })
-                .on("end", function() {
-                    console.log('done');
-
-                });
-            stream.pipe(csvStream);
-        }, 100);
-        return deferred.promise;
-        // return new Promise(deferred.resolve, deferred.reject)
-    }
-
-    try {
-        readCSV(1).then( (accident) => {
-            createAccidentFromLine(accident, req, res, next);
-
-    }).catch(function(e) {
-            return res.status(400).json({status: 400, message: e.message});
-        });
-        // return res.status(200).json({status: 200, message: "Succesfully Save in the DB"});
-
-    } catch(e) {
-        return res.status(400).json({status: 400, message: e.message});
-    }
 }
