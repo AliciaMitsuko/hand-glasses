@@ -14,10 +14,12 @@ import { MapPageComponent } from './map-page/map-page.component';
 import { ListPageComponent } from './list-page/list-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 
+import { MapService } from './map.service';
+
 const appRoutes: Routes = [
     { path: 'admin-edit', component: AdminEditComponent },
     { path: 'home',      component: HomePageComponent },
-    { path: '**', component: PageNotFoundComponent }
+    { path: '**', component: HomePageComponent }
 ];
 
 @NgModule({
@@ -40,7 +42,8 @@ const appRoutes: Routes = [
     )
   ],
   providers: [
-    TodoService
+    TodoService,
+    MapService
   ],
   bootstrap: [AppComponent]
 })

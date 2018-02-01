@@ -3,8 +3,13 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
+
 export const environment = {
-  production: false
+  production: false,
+
+  mapbox: {
+      accessToken: 'pk.eyJ1Ijoib3JhbnRob255IiwiYSI6IlNaeGI5WHcifQ.WrKVVuOwRR0aGSzVtR6I5w'
+  }
 };
 
 export enum gravEnum{
@@ -14,3 +19,4 @@ export enum gravEnum{
 export enum userRoleEnum{
   'CLIENT', 'ADMIN'
 }
+
