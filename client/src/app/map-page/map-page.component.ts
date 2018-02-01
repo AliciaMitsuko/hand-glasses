@@ -13,8 +13,10 @@ export class MapPageComponent implements OnInit {
 
     map: mapboxgl.Map;
     style = 'mapbox://styles/mapbox/outdoors-v9';
-    lat = 37.75;
-    lng = -122.41;
+    // lat = 37.75;
+    lat = 42.3667987;
+    // lng = -122.41;
+    lng = -71.0679953;
     message = '';
     // data
     source: any;

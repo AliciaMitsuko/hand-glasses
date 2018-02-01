@@ -8,7 +8,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { AdminEditComponent } from './admin-edit/admin-edit.component';
+import { AdminPageComponent } from './admin/admin-page/admin-page.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { MapPageComponent } from './map-page/map-page.component';
 import { ListPageComponent } from './list-page/list-page.component';
@@ -18,8 +18,8 @@ import { MapService } from './map.service';
 import { AccidentService } from './services/accident.service';
 
 const appRoutes: Routes = [
-    { path: 'admin-edit', component: AdminEditComponent },
-    { path: 'home',      component: HomePageComponent },
+    { path: 'admin', component: AdminPageComponent },
+    { path: 'home', component: HomePageComponent },
     { path: '404', component: PageNotFoundComponent },
     { path: '**', component: HomePageComponent }
 ];
@@ -27,7 +27,7 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    AdminEditComponent,
+    AdminPageComponent,
     PageNotFoundComponent,
     MapPageComponent,
     ListPageComponent,

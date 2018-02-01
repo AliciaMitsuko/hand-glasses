@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdminEditComponent } from './admin-edit.component';
+import { AdminEditComponent } from './admin-page.component';
 
 describe('AdminEditComponent', () => {
   let component: AdminEditComponent;

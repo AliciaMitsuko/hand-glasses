@@ -10,7 +10,8 @@ class Accident {
     contexte: Contexte; // atm, lum, surf
     grav: gravEnum;
     dep: number;
-    comm: number;
+    com: number;
+    num: number;
 
     //commentaires
 
@@ -21,7 +22,7 @@ class Accident {
       this.grav = gravEnum.INDEMNE;
       // this.coords = new
       this.dep = 1;
-      this.comm = 4;
+      this.com = 4;
     }
 }
 

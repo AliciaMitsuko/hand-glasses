@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { TodoService } from '../services/todo.service';
-import ToDo from '../models/todo.model';
+import { TodoService } from '../../services/todo.service';
+import ToDo from '../../models/todo.model';
+import Accident from "../../models/accident.model";
+import {AccidentService} from "../../services/accident.service";
 
 @Component({
   selector: 'app-admin-edit',
-  templateUrl: './admin-edit.component.html',
-  styleUrls: ['./admin-edit.component.scss']
+  templateUrl: './admin-page.component.html',
+  styleUrls: ['./admin-page.component.scss']
 })
-export class AdminEditComponent implements OnInit {
+export class AdminPageComponent implements OnInit {
 
     constructor(
-        private todoService: TodoService
+        private todoService: TodoService,
+        private accidentService: AccidentService
     ) { }
 
     public newTodo: ToDo = new ToDo()
@@ -18,12 +21,20 @@ export class AdminEditComponent implements OnInit {
     todosList: ToDo[];
     editTodos: ToDo[] = [];
 
-    ngOnInit(): void {
+    accidentsList: Accident[];
+
+  ngOnInit(): void {
         this.todoService.getToDos()
             .subscribe(todos => {
                 this.todosList = todos
                 console.log(todos)
             })
+
+      this.accidentService.getAccidents()
+        .subscribe(accidents => {
+          this.accidentsList = accidents
+          console.log(accidents)
+        })
     }
 
 

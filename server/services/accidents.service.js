@@ -21,16 +21,17 @@ console.log("call the service")
     console.log(accident);
 
     var newAccident = new Accident({
-        // id: accident._id, // can't replace
+        num: accident.num, // can't replace
         gravite: Number(accident.gravite),
-        // gravite: 1,
         dep: Number(accident.dep),
         com: Number(accident.com),
         contexte: accident.contexte,
         // geojson: new GeoJSON(accident.lat, accident.long),
+        geojson: accident.geojson,
         heure: accident.heure, // à mettre dans contexte ?
         date: accident.date
     })
+    console.log("[Service] createAccident");
 
     console.log(newAccident);
 

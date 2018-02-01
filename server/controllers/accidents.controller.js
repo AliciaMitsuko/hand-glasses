@@ -13,7 +13,7 @@ exports.convertCSVToAccidentLineAsync = async (req, res, next) => {
             let options = { delimiter: ';', headers: true }
             let bool = true
             // let stream = fs.createReadStream('../resources/accidents_2016.csv')
-            let stream = fs.createReadStream('../resources/accidentsGood.csv')
+            let stream = fs.createReadStream('../resources/accidents_good_2016.csv')
 
             let index=2; // index 1 is the title so starts at index 2
             let csvStream = csv(options)
@@ -54,13 +54,20 @@ exports.convertCSVToAccidentLineAsync = async (req, res, next) => {
 exports.createAccidentFromLine = async function(data, req, res, next) {
 
     var accident = {
-        _id: data.Num_Acc,
+        num: data.Num_Acc,
         gravite: data.grav,
         dep: data.dep,
         com: data.com,
         // contexte: new Contexte(data.surf, data.atm, data, lum, data.hrmn),
         contexte: {surf: Number(data.surf), atm: Number(data.atm), lum: Number(data.lum), heure: data.hrmn},
         // geojson: new GeoJSON(data.lat, data.long),
+        geojson: {
+            type: "Point",
+            coordinates: [
+                data.long,
+                data.lat
+            ]
+        },
         date: new Date('20'+data.an, data.mois, data.jour, data.hrmn.substring(0, 2), data.hrmn.substring(2, 4)),
         an: Number(data.an),
         mois: Number(data.mois),

@@ -71,3 +71,38 @@
 
   </div>
 </div>
+
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+
+    <div class="todos" *ngIf="accidentsList">
+      <table class="table">
+        <thead class="h">
+        <tr class="h">
+          <th class="h">Id</th>
+          <th class="h">Num</th>
+          <th class="h">Comm</th>
+          <th class="h">Contexte</th>
+          <th class="h">Dep</th>
+          <th class="h">Gravite</th>
+          <th class="h">Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="todo" (dblclick)="editTodo(accident)" *ngFor="let accident of accidentsList">
+
+          <ng-container>
+            <td>{{accident._id}}</td>
+            <td>{{accident.num}}</td>
+            <td>{{accident.com}}</td>
+            <td>{{accident.contexte}}</td>
+            <td>{{accident.dep}}</td>
+            <td>{{accident.grav}}</td>
+            <td>{{accident.date}}</td>
+          </ng-container>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+</div>
