@@ -7,14 +7,15 @@ _this = this
 
 
 exports.convertCSVToAccidentLineAsync = async (req, res, next) => {
-    function readCSV (index) {
-        var id = req.params.id;
+    function readCSV (id) {
 
         return new Promise((resolve, reject) => {
             let options = { delimiter: ';', headers: true }
             let bool = true
-            let stream = fs.createReadStream('../resources/accidents_2016.csv')
+            // let stream = fs.createReadStream('../resources/accidents_2016.csv')
+            let stream = fs.createReadStream('../resources/accidentsGood.csv')
 
+            let index=2; // index 1 is the title so starts at index 2
             let csvStream = csv(options)
                 .on('data', (data) => {
                     if (bool && (index == id)) {
@@ -22,6 +23,7 @@ exports.convertCSVToAccidentLineAsync = async (req, res, next) => {
                         bool = false
                         resolve(data)
                     }
+                    index+=1
                 }).on('end', () => {
                         console.log('end')
                 }).on('error', (error) => { reject(error) })

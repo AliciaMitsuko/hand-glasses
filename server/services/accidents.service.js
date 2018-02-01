@@ -22,8 +22,8 @@ console.log("call the service")
 
     var newAccident = new Accident({
         // id: accident._id, // can't replace
-        // gravite: Number(accident.gravite),
-        gravite: 1,
+        gravite: Number(accident.gravite),
+        // gravite: 1,
         dep: Number(accident.dep),
         com: Number(accident.com),
         contexte: accident.contexte,
