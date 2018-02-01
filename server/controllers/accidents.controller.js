@@ -85,7 +85,7 @@ exports.createAccidentFromLine = async function(data, req, res, next) {
 exports.getAccidents = async function(req, res, next){
 
     var page = req.query.page ? req.query.page : 1
-    var limit = req.query.limit ? req.query.limit : 10; 
+    var limit = req.query.limit ? req.query.limit : 1000;
 
     console.log(page, limit)
 

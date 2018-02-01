@@ -16,6 +16,8 @@ import { HomePageComponent } from './home-page/home-page.component';
 
 import { MapService } from './map.service';
 import { AccidentService } from './services/accident.service';
+import {DataTableModule} from "angular2-datatable";
+import { TableComponent } from './admin/table/table.component';
 
 const appRoutes: Routes = [
     { path: 'admin', component: AdminPageComponent },
@@ -31,12 +33,14 @@ const appRoutes: Routes = [
     PageNotFoundComponent,
     MapPageComponent,
     ListPageComponent,
-    HomePageComponent
+    HomePageComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    DataTableModule,
     NgbModule.forRoot(),
     RouterModule.forRoot(
         appRoutes,

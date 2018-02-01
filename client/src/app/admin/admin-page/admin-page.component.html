@@ -1,4 +1,7 @@
 <div class="row">
+  <app-table></app-table>
+</div>
+<div class="row">
   <div class="col-md-2"></div>
   <div class="col-md-8">
 
@@ -96,9 +99,9 @@
             <td>{{accident._id}}</td>
             <td>{{accident.num}}</td>
             <td>{{accident.com}}</td>
-            <td>{{accident.contexte}}</td>
+            <td>{{accident.contexte.atm}}, {{accident.contexte.lum}}, {{accident.contexte.surf}}</td>
             <td>{{accident.dep}}</td>
-            <td>{{accident.grav}}</td>
+            <td>{{accident.gravite}}</td>
             <td>{{accident.date}}</td>
           </ng-container>
         </tr>
