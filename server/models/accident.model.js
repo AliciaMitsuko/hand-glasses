@@ -4,14 +4,11 @@ var mongoosePaginate = require('mongoose-paginate')
 
 var AccidentSchema = new mongoose.Schema({
     // geojson: GeoJSON,
-    // contexte: Contexte,
-    gravite: String,
+    contexte: {surf: Number, atm: Number, lum: Number, heure: String},
+    gravite: Number,
     dep: Number,
     com: Number,
     heure: String,
-    // gravite: String,
-    // dep: String,
-    // com: String,
     date: Date
 })
 

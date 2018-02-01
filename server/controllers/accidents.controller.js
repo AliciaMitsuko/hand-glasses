@@ -35,12 +35,12 @@ exports.convertCSVToAccidentLineAsync = async (req, res, next) => {
     try {
         readCSV(id).then(
             (accident) => {
-            // console.log(accident);
-            this.createAccidentFromLine(accident, req, res, next)
-        },
-        (error) => {
-            console.log('error', error)
-        }).catch(function(e) {
+                // console.log(accident);
+                this.createAccidentFromLine(accident, req, res, next)
+            },
+            (error) => {
+                console.log('error', error)
+            }).catch(function(e) {
                 return res.status(400).json({ status: 400, message: e.message })
             }
         )
@@ -52,13 +52,18 @@ exports.convertCSVToAccidentLineAsync = async (req, res, next) => {
 exports.createAccidentFromLine = async function(data, req, res, next) {
 
     var accident = {
+        _id: data.Num_Acc,
         gravite: data.grav,
         dep: data.dep,
         com: data.com,
         // contexte: new Contexte(data.surf, data.atm, data, lum, data.hrmn),
+        contexte: {surf: Number(data.surf), atm: Number(data.atm), lum: Number(data.lum), heure: data.hrmn},
         // geojson: new GeoJSON(data.lat, data.long),
         heure: data.hrmn, // à mettre dans contexte ?
-        date: new Date(data.an, data.mois, data.jour)
+        date: new Date('20'+data.an, data.mois, data.jour),
+        an: Number(data.an),
+        mois: Number(data.mois),
+        jour: Number(data.jour)
     };
 
     try{
