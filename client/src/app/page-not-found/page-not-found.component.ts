@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AccidentService} from "../services/accident.service";
 
 @Component({
   selector: 'app-page-not-found',
@@ -7,9 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageNotFoundComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private accidentService: AccidentService
+  ) { }
 
   ngOnInit() {
+
+  }
+
+  generateAccidents(from: number, to:number) {
+    let lineStart = 2;
+    for (let index = from+lineStart; index < to+lineStart; index++) {
+      this.accidentService.generateAccidents(index)
+        .subscribe(accidents => {
+        })
+
+    }
   }
 
 }

@@ -8,7 +8,7 @@ var AccidentSchema = new mongoose.Schema({
     gravite: Number,
     dep: Number,
     com: Number,
-    heure: String,
+    // heure: String,
     date: Date
 })
 

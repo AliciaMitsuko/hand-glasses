@@ -61,8 +61,7 @@ exports.createAccidentFromLine = async function(data, req, res, next) {
         // contexte: new Contexte(data.surf, data.atm, data, lum, data.hrmn),
         contexte: {surf: Number(data.surf), atm: Number(data.atm), lum: Number(data.lum), heure: data.hrmn},
         // geojson: new GeoJSON(data.lat, data.long),
-        heure: data.hrmn, // à mettre dans contexte ?
-        date: new Date('20'+data.an, data.mois, data.jour),
+        date: new Date('20'+data.an, data.mois, data.jour, data.hrmn.substring(0, 2), data.hrmn.substring(2, 4)),
         an: Number(data.an),
         mois: Number(data.mois),
         jour: Number(data.jour)

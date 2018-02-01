@@ -15,10 +15,12 @@ import { ListPageComponent } from './list-page/list-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 
 import { MapService } from './map.service';
+import { AccidentService } from './services/accident.service';
 
 const appRoutes: Routes = [
     { path: 'admin-edit', component: AdminEditComponent },
     { path: 'home',      component: HomePageComponent },
+    { path: '404', component: PageNotFoundComponent },
     { path: '**', component: HomePageComponent }
 ];
 
@@ -43,7 +45,8 @@ const appRoutes: Routes = [
   ],
   providers: [
     TodoService,
-    MapService
+    MapService,
+    AccidentService
   ],
   bootstrap: [AppComponent]
 })
