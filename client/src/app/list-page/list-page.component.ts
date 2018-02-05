@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AccidentService} from '../services/accident.service';
+import Accident from '../models/accident.model';
 
 @Component({
   selector: 'app-list-page',
@@ -7,34 +9,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListPageComponent implements OnInit {
 
-    folders = [
-        {
-            name: 'Photos',
-            updated: new Date('1/1/16'),
-        },
-        {
-            name: 'Recipes',
-            updated: new Date('1/17/16'),
-        },
-        {
-            name: 'Work',
-            updated: new Date('1/28/16'),
-        }
-    ];
-    notes = [
-        {
-            name: 'Vacation Itinerary',
-            updated: new Date('2/20/16'),
-        },
-        {
-            name: 'Kitchen Remodel',
-            updated: new Date('1/18/16'),
-        }
-    ];
+    public accidentsList: Accident[];
 
-  constructor() { }
+  constructor(private accidentService: AccidentService) { }
 
   ngOnInit() {
+      this.accidentService.getAccidents()
+          .subscribe(accidents => {
+              this.accidentsList = accidents
+              console.log(accidents);
+          });
   }
+
+    gravToIcon(num: number) {
+        switch(num) {
+            case 1: {
+                return '../../assets/icons/like.svg';
+            }
+            case 2: {
+                return '../../assets/icons/skull.svg';
+            }
+            case 3  || 4 : {
+                return '../../assets/icons/accident.svg';
+            }
+            default: {
+                return '../../assets/icons/question.svg';
+
+            }
+        }
+    }
 
 }

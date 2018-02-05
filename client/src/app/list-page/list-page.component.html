@@ -1,15 +1,26 @@
-<!--<mat-list>
-  <h3 mat-subheader>Folders</h3>
+<mat-list>
+  <!--<h3 mat-subheader>Folders</h3>
   <mat-list-item *ngFor="let folder of folders">
     <mat-icon mat-list-icon>folder</mat-icon>
     <h4 mat-line>{{folder.name}}</h4>
     <p mat-line> {{folder.updated | date}} </p>
   </mat-list-item>
-  <mat-divider></mat-divider>
-  <h3 mat-subheader>Notes</h3>
-  <mat-list-item *ngFor="let note of notes">
-    <mat-icon mat-list-icon>note</mat-icon>
-    <h4 mat-line>{{note.name}}</h4>
-    <p mat-line> {{note.updated | date}} </p>
+  <mat-divider></mat-divider>-->
+  <!--<h3 mat-subheader>Notes</h3>-->
+  <mat-list-item *ngFor="let accident of accidentsList">
+    <div class="row">
+      <div class="col-4">
+        <img [src]="gravToIcon(accident.gravite)" height="35"/>
+      </div>
+      <div class="col-8">
+        <div class="row">
+          <h4>Commune</h4>
+        </div>
+        <div class="row">
+          <p mat-line> dpt : {{accident.dep}}</p> &nbsp;
+          <p mat-line> {{accident.gravite }} </p>
+        </div>
+      </div>
+    </div>
   </mat-list-item>
-</mat-list>-->
+</mat-list>
