@@ -18,6 +18,8 @@ import { MapService } from './map.service';
 import { AccidentService } from './services/accident.service';
 import {DataTableModule} from "angular2-datatable";
 import { TableComponent } from './admin/table/table.component';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
 
 import {FilterPipe, SortByPipe} from './FilterPipe'
 
@@ -43,6 +45,8 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    MatListModule,
+    MatIconModule,
     DataTableModule,
     NgbModule.forRoot(),
     RouterModule.forRoot(
