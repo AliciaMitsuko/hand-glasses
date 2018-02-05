@@ -19,7 +19,9 @@ import { AccidentService } from './services/accident.service';
 import {DataTableModule} from "angular2-datatable";
 import { TableComponent } from './admin/table/table.component';
 import { MatListModule } from '@angular/material/list';
+import { MatTableModule, MatSortModule } from '@angular/material';
 import { MatIconModule } from '@angular/material/icon';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {FilterPipe, SortByPipe} from './FilterPipe'
 
@@ -46,8 +48,11 @@ const appRoutes: Routes = [
     HttpClientModule,
     FormsModule,
     MatListModule,
+    MatTableModule,
     MatIconModule,
+    MatSortModule,
     DataTableModule,
+    BrowserAnimationsModule,
     NgbModule.forRoot(),
     RouterModule.forRoot(
         appRoutes,

@@ -1,0 +1,11 @@
+.changeViewButton {
+  position: absolute;
+  top: 1vh;
+  right: 2vw;
+}
+
+@media screen and (min-width: 575px) {
+  .changeViewButton {
+    display:none;
+  }
+}
