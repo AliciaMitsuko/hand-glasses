@@ -13,8 +13,8 @@ export class MapPageComponent implements OnInit {
 
     map: mapboxgl.Map;
     style = 'mapbox://styles/mapbox/outdoors-v9';
-    lat = 37.75;
-    lng = -122.41;
+    lat = 48.86;
+    lng = 2.33;
     message = '';
     // data
     source: any;
@@ -33,26 +33,31 @@ export class MapPageComponent implements OnInit {
                 this.lng = position.coords.longitude;
                 this.map.flyTo({
                     center: [this.lng, this.lat]
-                })
+                });
             });
         }
-        this.buildMap()
+        this.buildMap();
     }
     buildMap() {
+
         this.map = new mapboxgl.Map({
             container: 'map',
             style: this.style,
             zoom: 13,
             center: [this.lng, this.lat]
         });
+
         /// Add map controls
-        this.map.addControl(new mapboxgl.NavigationControl());
+        const nav = new mapboxgl.NavigationControl();
+        this.map.addControl(nav, 'bottom-right');
+
         //// Add Marker on Click
         this.map.on('click', (event) => {
-            const coordinates = [event.lngLat.lng, event.lngLat.lat]
-            const newMarker   = new GeoJson(coordinates, { message: this.message })
+            const coordinates = [event.lngLat.lng, event.lngLat.lat];
+            const newMarker   = new GeoJson(coordinates, { message: this.message });
             //this.mapService.createMarker(newMarker)
-        })
+        });
+
         /// Add realtime firebase data on map load
         this.map.on('load', (event) => {
             /// register source
@@ -64,7 +69,7 @@ export class MapPageComponent implements OnInit {
                 }
             });
             /// get source
-            this.source = this.map.getSource('firebase')
+            this.source = this.map.getSource('firebase');
             /// subscribe to realtime database and set data source
             /*this.markers.subscribe(markers => {
                 let data = new FeatureCollection(markers)
@@ -87,8 +92,8 @@ export class MapPageComponent implements OnInit {
                     'text-halo-color': '#fff',
                     'text-halo-width': 2
                 }
-            })
-        })
+            });
+        });
     }
     /// Helpers
     removeMarker(marker) {
@@ -97,6 +102,6 @@ export class MapPageComponent implements OnInit {
     flyTo(data: GeoJson) {
         this.map.flyTo({
             center: data.geometry.coordinates
-        })
+        });
     }
 }

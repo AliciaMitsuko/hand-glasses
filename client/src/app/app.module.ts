@@ -15,6 +15,8 @@ import { ListPageComponent } from './list-page/list-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 
 import { MapService } from './map.service';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
 
 const appRoutes: Routes = [
     { path: 'admin-edit', component: AdminEditComponent },
@@ -35,6 +37,8 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    MatListModule,
+    MatIconModule,
     NgbModule.forRoot(),
     RouterModule.forRoot(
         appRoutes,
