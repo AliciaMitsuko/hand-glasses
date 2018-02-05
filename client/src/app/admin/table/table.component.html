@@ -2,8 +2,7 @@
 
 
 <div class="row">
-  <h2 class="col-xs-6">Simple data table</h2>
-  <div class="col-xs-2">
+  <div class="col-lg-4 offset-2">
     <label class="label-control">Rows on page</label>
     <select class="form-control input-sm" [(ngModel)]="rowsOnPage">
       <option [ngValue]="5">5</option>
@@ -11,21 +10,29 @@
       <option [ngValue]="15">15</option>
     </select>
   </div>
-  <div class="col-xs-4">
+  <div class="col-lg-6">
     <div class="row">
-      <label class="col-xs-12 label-control">Sort by</label>
+      <label class="col-lg-12 label-control">Sort by</label>
     </div>
-    <div class="col-xs-6">
+    <div class="col-lg-6">
       <div class="row">
         <select class="form-control input-sm" [(ngModel)]="sortBy">
-          <option ngValue="name">Name</option>
-          <option ngValue="email">Email</option>
-          <option ngValue="age">Age</option>
-          <option [ngValue]="sortByWordLength">City</option>
+          <!--<option ngValue="name">Name</option>-->
+          <!--<option ngValue="email">Email</option>-->
+          <!--<option ngValue="age">Age</option>-->
+          <!--<option [ngValue]="sortByWordLength">City</option>-->
+
+          <option ngValue="Id">Id</option>
+          <option ngValue="Num">Num</option>
+          <option ngValue="Com">Com</option>
+          <option ngValue="Contexte">Contexte</option>
+          <option ngValue="Dep">Dep</option>
+          <option ngValue="Gravite">Gravite</option>
+          <option ngValue="Date">Date</option>
         </select>
       </div>
     </div>
-    <div class="col-xs-6">
+    <div class="col-lg-6">
       <div class="row">
         <select class="form-control input-sm" [(ngModel)]="sortOrder">
           <option ngValue="asc">Ascending</option>
@@ -36,6 +43,10 @@
     </div>
   </div>
 </div>
+
+<div class="row">
+
+  <div class="col-lg-6 offset-2">
 <div class="panel panel-default">
   <div class="panel-heading">User information</div>
 
@@ -46,23 +57,35 @@
     <tr>
       <th style="width: 10%"></th>
       <th style="width: 20%">
-        <mfDefaultSorter by="num">Num</mfDefaultSorter>
-      </th>
-      <th style="width: 40%">
-        <mfDefaultSorter by="email">Email</mfDefaultSorter>
-      </th>
-      <th style="width: 10%">
-        <mfDefaultSorter by="age">Age</mfDefaultSorter>
+        <mfDefaultSorter by="Id">Id</mfDefaultSorter>
       </th>
       <th style="width: 20%">
-        <mfDefaultSorter [by]="sortByWordLength">City</mfDefaultSorter>
+        <mfDefaultSorter by="Num">Num</mfDefaultSorter>
       </th>
+      <th style="width: 10%">
+        <mfDefaultSorter by="Com">Com</mfDefaultSorter>
+      </th>
+      <th style="width: 10%">
+        <mfDefaultSorter by="Contexte">Contexte</mfDefaultSorter>
+      </th>
+      <th style="width: 10%">
+        <mfDefaultSorter by="Dep">Dep</mfDefaultSorter>
+      </th>
+      <th style="width: 10%">
+        <mfDefaultSorter by="Gravite">Gravite</mfDefaultSorter>
+      </th>
+      <th style="width: 10%">
+        <mfDefaultSorter by="Date">Date</mfDefaultSorter>
+      </th>
+      <!--<th style="width: 20%">-->
+        <!--<mfDefaultSorter [by]="sortByWordLength">City</mfDefaultSorter>-->
+      <!--</th>-->
     </tr>
     <tr>
-      <th colspan="5">
-        Filter by name:
-        <input class="form-control" [(ngModel)]="filterQuery"/>
-      </th>
+      <!--<th colspan="5">-->
+        <!--Filter by name:-->
+        <!--<input class="form-control" [(ngModel)]="filterQuery"/>-->
+      <!--</th>-->
     </tr>
     </thead>
     <tbody>
@@ -93,4 +116,6 @@
     </tr>
     </tfoot>
   </table>
+</div>
+  </div>
 </div>
