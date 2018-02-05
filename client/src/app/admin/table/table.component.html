@@ -63,13 +63,13 @@
         <mfDefaultSorter by="num">Num</mfDefaultSorter>
       </th>
       <th style="width: 10%">
+        <mfDefaultSorter by="dep">Dep</mfDefaultSorter>
+      </th>
+      <th style="width: 10%">
         <mfDefaultSorter by="com">Com</mfDefaultSorter>
       </th>
       <th style="width: 10%">
         <mfDefaultSorter by="contexte">Contexte</mfDefaultSorter>
-      </th>
-      <th style="width: 10%">
-        <mfDefaultSorter by="dep">Dep</mfDefaultSorter>
       </th>
       <th style="width: 10%">
         <mfDefaultSorter by="gravite">Gravite</mfDefaultSorter>
@@ -97,10 +97,21 @@
       </td>
       <td>{{accident._id}}</td>
       <td>{{accident.num}}</td>
-      <td>{{accident.com}}</td>
-      <td>{{accident.contexte.atm}}, {{accident.contexte.lum}}, {{accident.contexte.surf}}</td>
       <td>{{accident.dep}}</td>
-      <td>{{accident.gravite}}</td>
+      <td>{{accident.com}}</td>
+      <td>{{accident.contexte.atm}},
+        <img *ngIf="accident.contexte.lum == '1'" src="../../../assets/icons/sun.svg" class="img-fluid"/>
+        <img *ngIf="accident.contexte.lum == '2'" src="../../../assets/icons/twilight.svg" class="img-fluid"/>
+        <img *ngIf="accident.contexte.lum == '3' || accident.contexte.lum == '4' || accident.contexte.lum == '5'" src="../../../assets/icons/moon.svg" class="img-fluid"/>
+
+        ,
+
+        {{accident.contexte.surf}}</td>
+      <td>
+        <img *ngIf="accident.gravite == '1'" src="../../../assets/icons/like.svg" class="img-fluid"/>
+        <img *ngIf="accident.gravite == '4' || accident.gravite == '3'" src="../../../assets/icons/accident.svg" class="img-fluid"/>
+        <img *ngIf="accident.gravite == '2'" src="../../../assets/icons/skull.svg" class="img-fluid"/>
+        </td>
       <td>{{accident.date}}</td>
       <!--<td>{{item.name}}</td>-->
       <!--<td>{{item.email}}</td>-->
