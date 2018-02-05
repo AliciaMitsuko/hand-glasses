@@ -1,4 +1,4 @@
-<mat-list>
+<!--<mat-list>
   <!--<h3 mat-subheader>Folders</h3>
   <mat-list-item *ngFor="let folder of folders">
     <mat-icon mat-list-icon>folder</mat-icon>
@@ -7,20 +7,23 @@
   </mat-list-item>
   <mat-divider></mat-divider>-->
   <!--<h3 mat-subheader>Notes</h3>-->
-  <mat-list-item *ngFor="let accident of accidentsList">
+<div class="list-incident">
+  <div *ngFor="let accident of accidentsList">
     <div class="row">
-      <div class="col-4">
+      <div class="col-2">
         <img [src]="gravToIcon(accident.gravite)" height="35"/>
       </div>
-      <div class="col-8">
+      <div class="col-10">
         <div class="row">
           <h4>Commune</h4>
         </div>
         <div class="row">
-          <p mat-line> dpt : {{accident.dep}}</p> &nbsp;
-          <p mat-line> {{accident.gravite }} </p>
+          <p class="col-4" > dpt : {{accident.dep}}</p>
+          <p class="col-4" > {{ lumToIcon(accident.contexte.lum) }} </p>
+          <p class="col-4" > {{accident.gravite }} </p>
         </div>
       </div>
     </div>
-  </mat-list-item>
-</mat-list>
+  </div>
+</div>
+<!--</mat-list>-->

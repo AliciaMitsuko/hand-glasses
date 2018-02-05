@@ -22,7 +22,7 @@ export class ListPageComponent implements OnInit {
   }
 
     gravToIcon(num: number) {
-        switch(num) {
+        switch (num) {
             case 1: {
                 return '../../assets/icons/like.svg';
             }
@@ -34,6 +34,25 @@ export class ListPageComponent implements OnInit {
             }
             default: {
                 return '../../assets/icons/question.svg';
+
+            }
+        }
+    }
+
+    lumToIcon(num: number) {
+        switch (num) {
+            case 1: {
+                return 'En journée';
+            }
+            case 2: {
+                return 'En soirée';
+            }
+            case 3  || 4 || 5 : {
+                return 'nuit';
+            }
+            default: {
+                // return 'indéfini';
+                return ' ';
 
             }
         }
