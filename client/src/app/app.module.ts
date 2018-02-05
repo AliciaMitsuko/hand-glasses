@@ -1,5 +1,5 @@
 import { FormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { TodoService } from './services/todo.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -19,6 +19,8 @@ import { AccidentService } from './services/accident.service';
 import {DataTableModule} from "angular2-datatable";
 import { TableComponent } from './admin/table/table.component';
 
+import {FilterPipe, SortByPipe} from './FilterPipe'
+
 const appRoutes: Routes = [
     { path: 'admin', component: AdminPageComponent },
     { path: 'home', component: HomePageComponent },
@@ -34,7 +36,8 @@ const appRoutes: Routes = [
     MapPageComponent,
     ListPageComponent,
     HomePageComponent,
-    TableComponent
+    TableComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
