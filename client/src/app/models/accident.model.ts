@@ -1,4 +1,4 @@
-import {gravEnum} from '../../environments/environment';
+
 import Contexte, {default as Situation} from "./situation.model";
 
 // import * as GeoJSON from "@types/geojson"
