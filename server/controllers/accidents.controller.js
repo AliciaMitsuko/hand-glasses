@@ -7,14 +7,15 @@ _this = this
 
 
 exports.convertCSVToAccidentLineAsync = async (req, res, next) => {
-    function readCSV (index) {
-        var id = req.params.id;
+    function readCSV (id) {
 
         return new Promise((resolve, reject) => {
             let options = { delimiter: ';', headers: true }
             let bool = true
-            let stream = fs.createReadStream('../resources/accidents_2016.csv')
+            // let stream = fs.createReadStream('../resources/accidents_2016.csv')
+            let stream = fs.createReadStream('../resources/accidents_good_2016.csv')
 
+            let index=2; // index 1 is the title so starts at index 2
             let csvStream = csv(options)
                 .on('data', (data) => {
                     if (bool && (index == id)) {
@@ -22,6 +23,7 @@ exports.convertCSVToAccidentLineAsync = async (req, res, next) => {
                         bool = false
                         resolve(data)
                     }
+                    index+=1
                 }).on('end', () => {
                         console.log('end')
                 }).on('error', (error) => { reject(error) })
@@ -35,12 +37,12 @@ exports.convertCSVToAccidentLineAsync = async (req, res, next) => {
     try {
         readCSV(id).then(
             (accident) => {
-            // console.log(accident);
-            this.createAccidentFromLine(accident, req, res, next)
-        },
-        (error) => {
-            console.log('error', error)
-        }).catch(function(e) {
+                // console.log(accident);
+                this.createAccidentFromLine(accident, req, res, next)
+            },
+            (error) => {
+                console.log('error', error)
+            }).catch(function(e) {
                 return res.status(400).json({ status: 400, message: e.message })
             }
         )
@@ -52,13 +54,24 @@ exports.convertCSVToAccidentLineAsync = async (req, res, next) => {
 exports.createAccidentFromLine = async function(data, req, res, next) {
 
     var accident = {
+        num: data.Num_Acc,
         gravite: data.grav,
         dep: data.dep,
         com: data.com,
         // contexte: new Contexte(data.surf, data.atm, data, lum, data.hrmn),
+        contexte: {surf: Number(data.surf), atm: Number(data.atm), lum: Number(data.lum), heure: data.hrmn},
         // geojson: new GeoJSON(data.lat, data.long),
-        heure: data.hrmn, // à mettre dans contexte ?
-        date: new Date(data.an, data.mois, data.jour)
+        geojson: {
+            type: "Point",
+            coordinates: [
+                data.long,
+                data.lat
+            ]
+        },
+        date: new Date('20'+data.an, data.mois, data.jour, data.hrmn.substring(0, 2), data.hrmn.substring(2, 4)),
+        an: Number(data.an),
+        mois: Number(data.mois),
+        jour: Number(data.jour)
     };
 
     try{
@@ -72,7 +85,7 @@ exports.createAccidentFromLine = async function(data, req, res, next) {
 exports.getAccidents = async function(req, res, next){
 
     var page = req.query.page ? req.query.page : 1
-    var limit = req.query.limit ? req.query.limit : 10; 
+    var limit = req.query.limit ? req.query.limit : 1000;
 
     console.log(page, limit)
 
