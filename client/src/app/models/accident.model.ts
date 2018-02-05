@@ -1,6 +1,6 @@
 import Contexte, {default as Situation} from "./situation.model";
 
-import * as GeoJSON from "@types/geojson"
+// import * as GeoJSON from "@types/geojson"
 
 class Accident {
     _id:string;
