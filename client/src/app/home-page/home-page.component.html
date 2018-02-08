@@ -1,11 +1,27 @@
-<div (window:resize)="onResize($event)" class="row">
-  <div class="col-sm-6" *ngIf="isShowMap">
+<div (window:resize)="onResize($event)" class="row page">
+
+
+  <!--<mat-sidenav-container class="side-nav">
+    <mat-sidenav #sidenav mode="side" [(opened)]="opened">
+      Sidenav content
+    </mat-sidenav>
+    <!--<mat-sidenav mode="side" opened>Sidenav content</mat-sidenav>-->
+    <!--<mat-sidenav-content>Main content</mat-sidenav-content>-->
+
+    <!--<mat-sidenav-content>
+      <button mat-button (click)="sidenav.toggle()">sidenav.toggle()</button>
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>-->
+
+
+  <div class="col-sm-6 col-md-6 no-padding-right" *ngIf="isShowMap">
     <app-map-page>
 
     </app-map-page>
   </div>
 
-  <div class="col-sm-6" *ngIf="isShowList">
+  <div class="col-sm-6 col-md-6" *ngIf="isShowList">
     <app-list-page>
 
     </app-list-page>

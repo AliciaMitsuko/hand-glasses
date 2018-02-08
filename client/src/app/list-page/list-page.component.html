@@ -16,7 +16,7 @@
     <div class="col-4" mat-sort-header="atm"> Météo </div>
   </div>
 
-  <div *ngFor="let accident of accidentsList">
+  <mat-card *ngFor="let accident of accidentsList">
     <div class="row">
       <div class="col-2">
         <img [src]="gravToIcon( accident.gravite )" height="35"/>
@@ -32,6 +32,6 @@
         </div>
       </div>
     </div>
-  </div>
+  </mat-card>
 </div>
 <!--</mat-list>-->

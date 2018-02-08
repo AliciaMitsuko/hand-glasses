@@ -23,7 +23,6 @@ export class ListPageComponent implements OnInit {
             });
     }
 
-
     gravToIcon(num: number) {
         switch (num) {
             case 1: {
@@ -85,7 +84,7 @@ export class ListPageComponent implements OnInit {
                 return '../../assets/icons/002-clouds.svg';
             }
             default: {
-                return '../../assets/icons/question.svg';
+                return /*'../../assets/icons/question.svg'*/;
 
             }
         }

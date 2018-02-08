@@ -21,7 +21,9 @@ import { TableComponent } from './admin/table/table.component';
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule, MatSortModule } from '@angular/material';
 import { MatIconModule } from '@angular/material/icon';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule } from '@angular/material/card';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 import {FilterPipe, SortByPipe} from './FilterPipe'
 
@@ -53,6 +55,8 @@ const appRoutes: Routes = [
     MatSortModule,
     DataTableModule,
     BrowserAnimationsModule,
+    MatCardModule,
+    MatSidenavModule,
     NgbModule.forRoot(),
     RouterModule.forRoot(
         appRoutes,
