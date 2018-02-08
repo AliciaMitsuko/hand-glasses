@@ -36,7 +36,7 @@ export class ListPageComponent implements OnInit {
                 return '../../assets/icons/003-medical.svg';
             }
             default: {
-                return '../../assets/icons/question.svg';
+                return /*'../../assets/icons/question.svg'*/;
 
             }
         }
@@ -56,6 +56,36 @@ export class ListPageComponent implements OnInit {
             default: {
                 // return 'indéfini';
                 return ' ';
+
+            }
+        }
+    }
+
+    atmToIcon(num: number) {
+        switch (num) {
+            case 1: {
+                return '../../assets/icons/004-sun.svg';
+            }
+            case 2 || 3: {
+                return '../../assets/icons/005-rain.svg';
+            }
+            case 4: {
+                return '../../assets/icons/003-snowflake.svg';
+            }
+            case 5: {
+                return '../../assets/icons/002-clouds.svg';
+            }
+            case 6: {
+                return '../../assets/icons/001-wind.svg';
+            }
+            case 7: {
+                return '../../assets/icons/004-sun.svg';
+            }
+            case 8: {
+                return '../../assets/icons/002-clouds.svg';
+            }
+            default: {
+                return '../../assets/icons/question.svg';
 
             }
         }
