@@ -3,17 +3,17 @@ var _ = require('lodash');
 var fs = require("fs");
 var csv = require("fast-csv");
 var q = require('q');
-_this = this
+_this = this;
 
 
 exports.convertCSVToAccidentLineAsync = async (req, res, next) => {
     function readCSV (id) {
 
         return new Promise((resolve, reject) => {
-            let options = { delimiter: ';', headers: true }
-            let bool = true
+            let options = { delimiter: ';', headers: true };
+            let bool = true;
             // let stream = fs.createReadStream('../resources/accidents_2016.csv')
-            let stream = fs.createReadStream('../resources/accidents_good_2016.csv')
+            let stream = fs.createReadStream('../resources/accidents_good_2016.csv');
 
             let index=2; // index 1 is the title so starts at index 2
             let csvStream = csv(options)
@@ -84,13 +84,87 @@ exports.createAccidentFromLine = async function(data, req, res, next) {
 
 exports.getAccidents = async function(req, res, next){
 
-    var page = req.query.page ? req.query.page : 1
+
+    var atm = req.query.atm ? req.query.atm : null;
+    var gravite = req.query.gravite ? req.query.gravite : null;
+    var lum = req.query.lum ? req.query.lum : null;
+    var surf = req.query.surf ? req.query.surf : null;
+    var position = req.query.position ? req.query.position : null;
+    var queryVariable={};
+
+    queryVariable['contexte.atm'] = atm;
+    queryVariable['gravite'] = gravite;
+    queryVariable['contexte.lum'] = lum;
+    queryVariable['contexte.surf'] = surf;
+    queryVariable['position'] = position;
+
+
+    var strName, strValue ;
+    var query = {};
+    for(strName in queryVariable)
+    {
+        strValue = queryVariable[strName] ;
+        if(strValue!=null){
+            query[strName]=strValue;
+        }
+    }
+
+    console.log("toto");
+    console.log(query);
+
+    var page = req.query.page ? req.query.page : 1;
     var limit = req.query.limit ? req.query.limit : 1000;
 
     console.log(page, limit)
 
     try{
-        var accidents = await AccidentService.getAccidents({}, page, limit)
+        var accidents = await AccidentService.getAccidents(query, page, limit)
+        return res.status(200).json({status: 200, data: accidents, message: "Succesfully Accidents Recieved"});
+    }catch(e){
+        return res.status(400).json({status: 400, message: e.message});
+    }
+}
+
+
+exports.getAccidentsByGravite = async function(req, res, next){
+
+
+    var atm = req.query.atm ? req.query.atm : null;
+    var gravite = req.query.gravite ? req.query.gravite : null;
+    var lum = req.query.lum ? req.query.lum : null;
+    var surf = req.query.surf ? req.query.surf : null;
+    var position = req.query.position ? req.query.position : null;
+    var queryVariable={};
+
+    queryVariable['contexte.atm'] = atm;
+    queryVariable['gravite'] = gravite;
+    queryVariable['contexte.lum'] = lum;
+    queryVariable['contexte.surf'] = surf;
+    queryVariable['position'] = position;
+
+
+    var strName, strValue ;
+    var query = {};
+    for(strName in queryVariable)
+    {
+        strValue = queryVariable[strName] ;
+        if(strValue!=null){
+            query[strName]=strValue;
+        }
+    }
+
+    console.log("toto");
+    console.log(query);
+
+
+
+    var page = req.query.page ? req.query.page : 1;
+    var limit = req.query.limit ? req.query.limit : 1000;
+
+    console.log(page, limit)
+
+    try{
+        var accidents = await AccidentService.getAccidentsByGravite(query, page, limit)
         return res.status(200).json({status: 200, data: accidents, message: "Succesfully Accidents Recieved"});
     }catch(e){
         return res.status(400).json({status: 400, message: e.message});

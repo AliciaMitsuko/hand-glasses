@@ -8,6 +8,22 @@ exports.getAccidents = async function(query, page, limit){
         page,
         limit
     }
+
+
+    try {
+        var accidents = await Accident.paginate(query, options)
+        return accidents;
+    } catch (e) {
+        throw Error('Error while Paginating Accidents')
+    }
+}
+
+exports.getAccidentsByGravite= async function(query, page, limit){
+    //var query = { "gravite": 1 };
+    var options = {
+        page,
+        limit
+    }
     try {
         var accidents = await Accident.paginate(query, options)
         return accidents;
