@@ -27,6 +27,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
 
 import {FilterPipe, SortByPipe} from './FilterPipe'
 
@@ -60,6 +61,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     MatCardModule,
     MatSidenavModule,
+    MatButtonModule,
     NgbModule.forRoot(),
     RouterModule.forRoot(
         appRoutes,

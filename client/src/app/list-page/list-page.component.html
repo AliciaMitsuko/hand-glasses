@@ -9,12 +9,15 @@
   <!--<h3 mat-subheader>Notes</h3>-->
 <div matSort (matSortChange)="sortData($event)" class="list-incident">
 
-  <div class="row">
-    <!-- header -->
-    <div class="col-4" mat-sort-header="gravite"> Gravité </div>
-    <div class="col-4" mat-sort-header="lum"> Moment </div>
-    <div class="col-4" mat-sort-header="atm"> Météo </div>
-  </div>
+  <mat-card class="filter">
+    <div class="row">
+      <!-- header -->
+      <div class="col-3" mat-sort-header="gravite"> Gravité </div>
+      <div class="col-3" mat-sort-header="lum"> Moment </div>
+      <div class="col-3" mat-sort-header="atm"> Météo </div>
+      <div class="col-3" mat-sort-header="atm"> Proximité </div>
+    </div>
+  </mat-card>
 
   <mat-card *ngFor="let accident of accidentsList">
     <div class="row">

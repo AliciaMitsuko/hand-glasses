@@ -1,11 +1,14 @@
 .changeViewButton {
-  position: absolute;
-  top: 1vh;
-  right: 2vw;
+  position: fixed;
+  top: 86vh;
+  //right: 3vw;
+  right: 30px;
 }
 
 .no-padding-right {
   padding-right: 0;
+  padding-left: 0;
+  height: 105vh;
 }
 
 .page {
@@ -21,8 +24,15 @@ body {
   position: absolute;
 }*/
 
-@media screen and (min-width: 575px) {
+
+@media (min-width: 768px) {
   .changeViewButton {
     display:none;
   }
 }
+
+/*@media screen and (min-width: 575px) {
+  .changeViewButton {
+    display:none;
+  }
+}*/
