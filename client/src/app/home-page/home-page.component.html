@@ -15,13 +15,13 @@
   </mat-sidenav-container>-->
 
 
-  <div class="col-sm-6 col-md-6 no-padding-right" *ngIf="isShowMap">
+  <div class="col-sm-6 col-md-6 no-padding-right" [hidden]="!isShowMap">
     <app-map-page>
 
     </app-map-page>
   </div>
 
-  <div class="col-sm-6 col-md-6" *ngIf="isShowList">
+  <div class="col-sm-6 col-md-6" [hidden]="!isShowList">
     <app-list-page>
 
     </app-list-page>
