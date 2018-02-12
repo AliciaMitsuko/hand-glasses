@@ -29,7 +29,9 @@ console.log("call the service")
         // geojson: new GeoJSON(accident.lat, accident.long),
         geojson: accident.geojson,
         heure: accident.heure, // à mettre dans contexte ?
-        date: accident.date
+        date: accident.date,
+        good: accident.good,
+        bad: accident.bad
     })
     console.log("[Service] createAccident");
 

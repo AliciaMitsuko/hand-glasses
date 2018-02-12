@@ -26,6 +26,16 @@ var AccidentSchema = new mongoose.Schema({
         type: Number,
         trim: true,
     },
+
+    good: {
+        type: Number,
+        trim: true,
+    },
+
+    bad: {
+        type: Number,
+        trim: true,
+    },
     // heure: String,
     date: Date,
     num: {

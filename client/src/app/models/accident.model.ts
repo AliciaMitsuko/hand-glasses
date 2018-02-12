@@ -12,6 +12,8 @@ class Accident {
     dep: number;
     com: number;
     num: number;
+    good: number;
+    bad: number;
 
     constructor(
     ){
