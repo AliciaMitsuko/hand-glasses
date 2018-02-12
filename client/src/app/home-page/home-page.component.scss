@@ -1,11 +1,13 @@
 .changeViewButton {
-  position: absolute;
-  top: 1vh;
-  right: 2vw;
+  position: fixed;
+  top: 86vh;
+  //right: 3vw;
+  right: 30px;
 }
 
 .no-padding-right {
   padding-right: 0;
+  height: 105vh;
 }
 
 .page {

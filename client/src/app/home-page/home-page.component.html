@@ -15,19 +15,21 @@
   </mat-sidenav-container>-->
 
 
-  <div class="col-sm-6 col-md-6 no-padding-right" [hidden]="!isShowMap">
+  <div class="col-md-6 no-padding-right" [hidden]="!isShowMap">
     <app-map-page>
 
     </app-map-page>
   </div>
 
-  <div class="col-sm-6 col-md-6" [hidden]="!isShowList">
+  <div class="col-md-6" [hidden]="!isShowList">
     <app-list-page>
 
     </app-list-page>
   </div>
 
-  <button class="changeViewButton" (click)="changeViewButton()">changeView</button>
+  <!--<button class="changeViewButton" (click)="changeViewButton()">changeView</button>-->
+  <button mat-fab class="changeViewButton" color="primary" (click)="changeViewButton()" [hidden]="!isShowList">Carte</button>
+  <button mat-fab class="changeViewButton" color="primary" (click)="changeViewButton()" [hidden]="!isShowMap">Liste</button>
 </div>
 
 

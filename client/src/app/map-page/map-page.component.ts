@@ -49,7 +49,7 @@ export class MapPageComponent implements OnInit {
 
         /// Add map controls
         const nav = new mapboxgl.NavigationControl();
-        this.map.addControl(nav, 'bottom-right');
+        this.map.addControl(nav, 'bottom-left');
 
         //// Add Marker on Click
         this.map.on('click', (event) => {
