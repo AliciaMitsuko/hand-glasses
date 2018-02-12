@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AccidentService} from '../services/accident.service';
 import Accident from '../models/accident.model';
 import {Sort} from '@angular/material';
+import {IconService} from "../services/icon.service";
 
 @Component({
     selector: 'app-list-page',
@@ -13,7 +14,9 @@ export class ListPageComponent implements OnInit {
     public accidentsList: Accident[];
     private sortedData;
 
-    constructor(private accidentService: AccidentService) { }
+    constructor(
+      private accidentService: AccidentService,
+      private iconService: IconService) { }
 
     ngOnInit() {
         this.accidentService.getAccidents()
@@ -23,72 +26,17 @@ export class ListPageComponent implements OnInit {
             });
     }
 
-    gravToIcon(num: number) {
-        switch (num) {
-            case 1: {
-                return '../../assets/icons/005-care.svg';
-            }
-            case 2: {
-                return '../../assets/icons/001-medical-2.svg';
-            }
-            case 3  || 4 : {
-                return '../../assets/icons/003-medical.svg';
-            }
-            default: {
-                return /*'../../assets/icons/question.svg'*/;
+  atmToIcon(num: number) {
+    return this.iconService.atmToIcon(num);
+  }
 
-            }
-        }
-    }
+  lumToIcon(num: number) {
+    return this.iconService.lumToIcon(num);
+  }
 
-    lumToIcon(num: number) {
-        switch (num) {
-            case 1: {
-                return '../../assets/icons/day.svg';
-            }
-            case 2: {
-                return '../../assets/icons/evening.svg';
-            }
-            case 3  || 4 || 5 : {
-                return '../../assets/icons/moon2.svg';
-            }
-            default: {
-                // return 'indéfini';
-                return ' ';
-
-            }
-        }
-    }
-
-    atmToIcon(num: number) {
-        switch (num) {
-            case 1: {
-                return '../../assets/icons/004-sun.svg';
-            }
-            case 2 || 3: {
-                return '../../assets/icons/005-rain.svg';
-            }
-            case 4: {
-                return '../../assets/icons/003-snowflake.svg';
-            }
-            case 5: {
-                return '../../assets/icons/002-clouds.svg';
-            }
-            case 6: {
-                return '../../assets/icons/001-wind.svg';
-            }
-            case 7: {
-                return '../../assets/icons/004-sun.svg';
-            }
-            case 8: {
-                return '../../assets/icons/002-clouds.svg';
-            }
-            default: {
-                return /*'../../assets/icons/question.svg'*/;
-
-            }
-        }
-    }
+  gravToIcon(num: number) {
+    return this.iconService.gravToIcon(num);
+  }
 
 
     sortData(sort: Sort) {

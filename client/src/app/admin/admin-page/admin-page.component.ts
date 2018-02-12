@@ -3,6 +3,7 @@ import { TodoService } from '../../services/todo.service';
 import ToDo from '../../models/todo.model';
 import Accident from "../../models/accident.model";
 import {AccidentService} from "../../services/accident.service";
+import {DataService} from "../../services/data.service";
 
 @Component({
   selector: 'app-admin-edit',
@@ -12,6 +13,7 @@ import {AccidentService} from "../../services/accident.service";
 export class AdminPageComponent implements OnInit {
 
     constructor(
+        private dataService: DataService,
         private todoService: TodoService,
         private accidentService: AccidentService
     ) { }
@@ -33,10 +35,21 @@ export class AdminPageComponent implements OnInit {
       this.accidentService.getAccidents()
         .subscribe(accidents => {
           this.accidentsList = accidents
+          this.dataService.changeAccidentList(accidents); // update accidentList to component which are subscribed
           console.log(accidents)
         })
+
+
     }
 
+  getAccidentsGrav(grav :number) {
+    console.log("ts: getAccidentsGrav")
+    this.accidentService.getAccidents()
+      .subscribe(accidents => {
+        this.accidentsList = accidents
+        this.dataService.changeAccidentList(accidents); // update accidentList to component which are subscribed
+      })
+  }
 
     create() {
         this.todoService.createTodo(this.newTodo)
