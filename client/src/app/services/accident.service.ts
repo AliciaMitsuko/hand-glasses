@@ -35,6 +35,20 @@ export class AccidentService {
     })
   }
 
+  getAccidentsGrav(num: number): Observable<Accident[]>{
+    return this.http.get(this.accidentUrl+"?gravite="+num)
+      .map(res  => {
+        return res["data"].docs as Accident[];
+      })
+  }
+
+  getAccidentsLum(num: number): Observable<Accident[]>{
+    return this.http.get(this.accidentUrl+"?lum="+num)
+      .map(res  => {
+        return res["data"].docs as Accident[];
+      })
+  }
+
   editAccident(accident:Accident){
     let editUrl = `${this.accidentUrl}`
     return this.http.put(editUrl, accident);

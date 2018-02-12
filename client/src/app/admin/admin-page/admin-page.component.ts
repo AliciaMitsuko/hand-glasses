@@ -25,6 +25,7 @@ export class AdminPageComponent implements OnInit {
 
     accidentsList: Accident[];
 
+  selected = 'option2';
   ngOnInit(): void {
         this.todoService.getToDos()
             .subscribe(todos => {
@@ -39,12 +40,20 @@ export class AdminPageComponent implements OnInit {
           console.log(accidents)
         })
 
-
-    }
+   }
 
   getAccidentsGrav(grav :number) {
     console.log("ts: getAccidentsGrav")
-    this.accidentService.getAccidents()
+    this.accidentService.getAccidentsGrav(grav)
+      .subscribe(accidents => {
+        this.accidentsList = accidents
+        this.dataService.changeAccidentList(accidents); // update accidentList to component which are subscribed
+      })
+  }
+
+  getAccidentsLum(lum :number) {
+    console.log("ts: getAccidentsGrav")
+    this.accidentService.getAccidentsLum(lum)
       .subscribe(accidents => {
         this.accidentsList = accidents
         this.dataService.changeAccidentList(accidents); // update accidentList to component which are subscribed

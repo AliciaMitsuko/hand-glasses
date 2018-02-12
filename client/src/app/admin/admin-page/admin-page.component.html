@@ -1,7 +1,26 @@
+
 <div class="row">
   <!--<img src="../../../assets/icons/like.svg" class="img-fluid"/>-->
-  <img (click)="getAccidentsGrav(3)" src="../../../assets/icons/accident.svg" class="img-fluid"/>
-  <img (click)="getAccidentsGrav(1)" src="../../../assets/icons/skull.svg" class="img-fluid"/>
+  <img (click)="getAccidentsGrav(3)" src="../../../assets/icons/003-medical.svg" class="img-fluid"/>
+  <img (click)="getAccidentsGrav(1)" src="../../../assets/icons/005-care.svg" class="img-fluid"/>
+  <img (click)="getAccidentsLum(1)" src="../../../assets/icons/day.svg" class="img-fluid"/>
+  <img (click)="getAccidentsLum(2)" src="../../../assets/icons/evening.svg" class="img-fluid"/>
+</div>
+
+<div class="row">
+  <p>Bonjour</p>
+  <mat-form-field>
+    <mat-select [(value)]="selected">
+      <mat-option>None</mat-option>
+      <mat-option value="option1">Option 1</mat-option>
+      <mat-option value="option2">Option 2</mat-option>
+      <mat-option value="option3">Option 3</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <p>You selected: {{selected}}</p>
+</div>
+
+<div class="row">
   <app-table></app-table>
 </div>
 <!--<div class="row">-->

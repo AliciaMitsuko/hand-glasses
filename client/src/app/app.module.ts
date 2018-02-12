@@ -24,8 +24,9 @@ import { TableComponent } from './admin/table/table.component';
 import { MatListModule } from '@angular/material/list';
 import {
   MatTableModule, MatSortModule, MAT_DATE_LOCALE, NativeDateAdapter, DateAdapter,
-  MAT_DATE_FORMATS
+  MAT_DATE_FORMATS, MatNativeDateModule
 } from '@angular/material';
+
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
@@ -35,6 +36,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material';
 import { MatInputModule } from '@angular/material';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatSelectModule} from '@angular/material/select';
 
 import {FilterPipe, SortByPipe} from './FilterPipe'
 
@@ -85,6 +87,8 @@ const MY_DATE_FORMATS = {
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
+    MatSelectModule,
+    MatNativeDateModule,
     NgbModule.forRoot(),
     RouterModule.forRoot(
         appRoutes,
@@ -97,9 +101,9 @@ const MY_DATE_FORMATS = {
     AccidentService,
     DataService,
     IconService,
-    {provide: DateAdapter, useClass: NativeDateAdapter},
-    {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
-    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}
+    // {provide: DateAdapter, useClass: NativeDateAdapter},
+    // {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
+    // {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}
   ],
   bootstrap: [AppComponent]
 })
