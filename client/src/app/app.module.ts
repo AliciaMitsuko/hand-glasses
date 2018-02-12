@@ -22,12 +22,19 @@ import {IconService} from "./services/icon.service";
 import {DataTableModule} from "angular2-datatable";
 import { TableComponent } from './admin/table/table.component';
 import { MatListModule } from '@angular/material/list';
-import { MatTableModule, MatSortModule } from '@angular/material';
+import {
+  MatTableModule, MatSortModule, MAT_DATE_LOCALE, NativeDateAdapter, DateAdapter,
+  MAT_DATE_FORMATS
+} from '@angular/material';
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
+
+import { MatFormFieldModule } from '@angular/material';
+import { MatInputModule } from '@angular/material';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 import {FilterPipe, SortByPipe} from './FilterPipe'
 
@@ -37,6 +44,19 @@ const appRoutes: Routes = [
     { path: '404', component: PageNotFoundComponent },
     { path: '**', component: HomePageComponent }
 ];
+
+const MY_DATE_FORMATS = {
+  parse: {
+    dateInput: {month: 'short', year: 'numeric', day: 'numeric'}
+  },
+  display: {
+    // dateInput: { month: 'short', year: 'numeric', day: 'numeric' },
+    dateInput: 'input',
+    monthYearLabel: {year: 'numeric', month: 'short'},
+    dateA11yLabel: {year: 'numeric', month: 'long', day: 'numeric'},
+    monthYearA11yLabel: {year: 'numeric', month: 'long'},
+  }
+};
 
 @NgModule({
   declarations: [
@@ -62,6 +82,9 @@ const appRoutes: Routes = [
     MatCardModule,
     MatSidenavModule,
     MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
     NgbModule.forRoot(),
     RouterModule.forRoot(
         appRoutes,
@@ -73,8 +96,13 @@ const appRoutes: Routes = [
     MapService,
     AccidentService,
     DataService,
-    IconService
+    IconService,
+    {provide: DateAdapter, useClass: NativeDateAdapter},
+    {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}
   ],
   bootstrap: [AppComponent]
 })
+
+
 export class AppModule { }
