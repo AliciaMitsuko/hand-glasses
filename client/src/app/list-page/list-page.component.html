@@ -20,21 +20,29 @@
   </mat-card>
 
   <mat-card *ngFor="let accident of accidentsList">
-    <div class="row">
-      <div class="col-2">
-        <img [src]="gravToIcon( accident.gravite )" height="35"/>
-      </div>
-      <div class="col-10">
-        <div class="row">
-          <h4>Commune</h4>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-2">
+          <img [src]="gravToIcon( accident.gravite )" height="35"/>
         </div>
-        <div class="row">
-          <p class="col-4" > dpt : {{ accident.dep }}</p>
-          <p class="col-4" > <img [src]="lumToIcon( accident.contexte.lum )" height="30"> </p>
-          <p class="col-4" > <img [src]="atmToIcon( accident.contexte.atm )" height="30"> </p>
+        <div class="col-10">
+          <div class="row">
+            <h4>Commune</h4>
+          </div>
+          <div class="row">
+            <p class="col-4" > dpt : {{ accident.dep }}</p>
+            <p class="col-4" > <img [src]="lumToIcon( accident.contexte.lum )" height="30"> </p>
+            <p class="col-4" > <img [src]="atmToIcon( accident.contexte.atm )" height="30"> </p>
+          </div>
         </div>
       </div>
-    </div>
+    </mat-card-content>
+
+      <div class="row">
+        <button mat-button class="col-6">Dangeureux</button>
+        <button mat-button class="col-6">Sure</button>
+      </div>
+
   </mat-card>
 </div>
 <!--</mat-list>-->
