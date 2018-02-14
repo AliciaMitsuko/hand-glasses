@@ -24,7 +24,8 @@ import { TableComponent } from './admin/table/table.component';
 import { MatListModule } from '@angular/material/list';
 import {
   MatTableModule, MatSortModule, MAT_DATE_LOCALE, NativeDateAdapter, DateAdapter,
-  MAT_DATE_FORMATS, MatNativeDateModule
+  MAT_DATE_FORMATS, MatNativeDateModule, MatToolbarModule, MatTabsModule, MatSlideToggleModule, MatMenuModule,
+  MatCheckboxModule, MatDialogModule
 } from '@angular/material';
 
 import { MatIconModule } from '@angular/material/icon';
@@ -38,7 +39,9 @@ import { MatInputModule } from '@angular/material';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSelectModule} from '@angular/material/select';
 
-import {FilterPipe, SortByPipe} from './FilterPipe'
+import { ChartsModule } from 'ng2-charts/ng2-charts';
+import {FilterPipe, SortByPipe} from './FilterPipe';
+import { ChartComponent } from './admin/chart/chart.component'
 
 const appRoutes: Routes = [
     { path: 'admin', component: AdminPageComponent },
@@ -47,18 +50,18 @@ const appRoutes: Routes = [
     { path: '**', component: HomePageComponent }
 ];
 
-const MY_DATE_FORMATS = {
-  parse: {
-    dateInput: {month: 'short', year: 'numeric', day: 'numeric'}
-  },
-  display: {
-    // dateInput: { month: 'short', year: 'numeric', day: 'numeric' },
-    dateInput: 'input',
-    monthYearLabel: {year: 'numeric', month: 'short'},
-    dateA11yLabel: {year: 'numeric', month: 'long', day: 'numeric'},
-    monthYearA11yLabel: {year: 'numeric', month: 'long'},
-  }
-};
+// const MY_DATE_FORMATS = {
+//   parse: {
+//     dateInput: {month: 'short', year: 'numeric', day: 'numeric'}
+//   },
+//   display: {
+//     // dateInput: { month: 'short', year: 'numeric', day: 'numeric' },
+//     dateInput: 'input',
+//     monthYearLabel: {year: 'numeric', month: 'short'},
+//     dateA11yLabel: {year: 'numeric', month: 'long', day: 'numeric'},
+//     monthYearA11yLabel: {year: 'numeric', month: 'long'},
+//   }
+// };
 
 @NgModule({
   declarations: [
@@ -69,7 +72,8 @@ const MY_DATE_FORMATS = {
     ListPageComponent,
     HomePageComponent,
     TableComponent,
-    FilterPipe
+    FilterPipe,
+    ChartComponent
   ],
   imports: [
     BrowserModule,
@@ -81,14 +85,34 @@ const MY_DATE_FORMATS = {
     MatSortModule,
     DataTableModule,
     BrowserAnimationsModule,
-    MatCardModule,
-    MatSidenavModule,
+
+    // charts
+    ChartsModule,
+
+    // Material
     MatButtonModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSlideToggleModule,
+    MatTabsModule,
+    MatToolbarModule,
+
+    // MatCardModule,
+    // MatSidenavModule,
+    // MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
     MatSelectModule,
     MatNativeDateModule,
+
     NgbModule.forRoot(),
     RouterModule.forRoot(
         appRoutes,

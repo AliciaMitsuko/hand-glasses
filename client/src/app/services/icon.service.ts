@@ -18,14 +18,15 @@ export class IconService {
         return '../../assets/icons/003-medical.svg';
       }
       default: {
-        return /*'../../assets/icons/question.svg'*/;
+        return '../../assets/icons/nothing.svg';
 
       }
     }
   }
 
   lumToIcon(num: number) {
-    switch (num) {
+    let myNum = "" + num
+    switch (parseInt(myNum)) {
       case 1: {
         return '../../assets/icons/day.svg';
       }
@@ -37,8 +38,7 @@ export class IconService {
       }
       default: {
         // return 'indéfini';
-        return ' ';
-
+        return '../../assets/icons/nothing.svg';
       }
     }
   }
@@ -67,7 +67,7 @@ export class IconService {
         return '../../assets/icons/002-clouds.svg';
       }
       default: {
-        return /*'../../assets/icons/question.svg'*/;
+        return '../../assets/icons/nothing.svg';
 
       }
     }
@@ -76,7 +76,7 @@ export class IconService {
   surfToIcon(num: number) {
     switch(num) {
       default: {
-        return '../../../assets/icons/question.svg'
+        return '../../../assets/icons/nothing.svg'
 
       }
     }

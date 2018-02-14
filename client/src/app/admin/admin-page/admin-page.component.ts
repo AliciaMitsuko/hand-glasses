@@ -25,7 +25,7 @@ export class AdminPageComponent implements OnInit {
 
     accidentsList: Accident[];
 
-  selected = 'option2';
+  selected = 'Plein jour';
   ngOnInit(): void {
         this.todoService.getToDos()
             .subscribe(todos => {
