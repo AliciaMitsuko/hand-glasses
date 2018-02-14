@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import Accident from "../models/accident.model";
+import {AccidentService} from "../services/accident.service";
 
 @Component({
   selector: 'app-home-page',
@@ -11,10 +13,17 @@ export class HomePageComponent implements OnInit {
   public isShowMap = true;
   public isShowList = true;
 
-  constructor() {
+  public accidentsList: Accident[];
+
+  constructor(private accidentService: AccidentService,) {
   }
 
   ngOnInit() {
+      this.accidentService.getAccidents()
+          .subscribe(accidents => {
+              this.accidentsList = accidents;
+              console.log(accidents);
+          });
   }
 
   onResize(event) {

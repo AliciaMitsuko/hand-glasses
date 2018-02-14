@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import { MapService } from '../map.service';
 import { GeoJson, FeatureCollection } from '../map';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import Accident from "../models/accident.model";
 
 @Component({
   selector: 'app-map-page',
@@ -10,6 +11,8 @@ import 'mapbox-gl/dist/mapbox-gl.css';
   styleUrls: ['./map-page.component.scss']
 })
 export class MapPageComponent implements OnInit {
+
+    @Input() accidentsList: Accident[];
 
     map: mapboxgl.Map;
     style = 'mapbox://styles/mapbox/outdoors-v9';
@@ -22,7 +25,7 @@ export class MapPageComponent implements OnInit {
     constructor(private mapService: MapService) {
     }
     ngOnInit() {
-        //this.markers = this.mapService.getMarkers()
+        // this.markers = this.mapService.getMarkers()
         this.initializeMap();
     }
     private initializeMap() {
@@ -55,7 +58,7 @@ export class MapPageComponent implements OnInit {
         this.map.on('click', (event) => {
             const coordinates = [event.lngLat.lng, event.lngLat.lat];
             const newMarker   = new GeoJson(coordinates, { message: this.message });
-            //this.mapService.createMarker(newMarker)
+            // this.mapService.createMarker(newMarker)
         });
 
         /// Add realtime firebase data on map load
@@ -97,7 +100,7 @@ export class MapPageComponent implements OnInit {
     }
     /// Helpers
     removeMarker(marker) {
-        //this.mapService.removeMarker(marker.$key)
+        // this.mapService.removeMarker(marker.$key)
     }
     flyTo(data: GeoJson) {
         this.map.flyTo({

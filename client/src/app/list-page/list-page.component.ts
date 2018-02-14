@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {AccidentService} from '../services/accident.service';
 import Accident from '../models/accident.model';
 import {Sort} from '@angular/material';
@@ -11,19 +11,14 @@ import {IconService} from "../services/icon.service";
 })
 export class ListPageComponent implements OnInit {
 
-    public accidentsList: Accident[];
+    @Input() accidentsList: Accident[];
+
     private sortedData;
 
     constructor(
-      private accidentService: AccidentService,
       private iconService: IconService) { }
 
     ngOnInit() {
-        this.accidentService.getAccidents()
-            .subscribe(accidents => {
-                this.accidentsList = accidents;
-                console.log(accidents);
-            });
     }
 
   atmToIcon(num: number) {
