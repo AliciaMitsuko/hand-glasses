@@ -2,36 +2,21 @@
 
   <div (window:resize)="onResize($event)" class="row page">
 
-
-    <!--<mat-sidenav-container class="side-nav">
-      <mat-sidenav #sidenav mode="side" [(opened)]="opened">
-        Sidenav content
-      </mat-sidenav>
-      <!--<mat-sidenav mode="side" opened>Sidenav content</mat-sidenav>-->
-      <!--<mat-sidenav-content>Main content</mat-sidenav-content>-->
-
-      <!--<mat-sidenav-content>
-        <button mat-button (click)="sidenav.toggle()">sidenav.toggle()</button>
-      </mat-sidenav-content>
-
-    </mat-sidenav-container>-->
-
-
     <div class="col-md-6 no-padding-right" [hidden]="!isShowMap">
-      <app-map-page>
+      <app-map-page [accidentsList]="accidentsList">
 
       </app-map-page>
     </div>
 
     <div class="col-md-6" [hidden]="!isShowList">
-      <app-list-page>
+      <app-list-page [accidentsList]="accidentsList">
 
       </app-list-page>
     </div>
 
-    <!--<button class="changeViewButton" (click)="changeViewButton()">changeView</button>-->
     <button mat-fab class="changeViewButton" color="primary" (click)="changeViewButton()" [hidden]="!isShowList">Carte</button>
     <button mat-fab class="changeViewButton" color="primary" (click)="changeViewButton()" [hidden]="!isShowMap">Liste</button>
+
   </div>
 </div>
 
