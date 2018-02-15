@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
-import { MapService } from '../map.service';
 import { GeoJson, FeatureCollection } from '../map';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Accident from '../models/accident.model';
 import {LngLat, Map} from 'mapbox-gl';
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-map-page',
@@ -54,7 +54,7 @@ export class MapPageComponent implements OnInit {
     source: any;
     markers: any;
 
-    constructor(private mapService: MapService) {
+    constructor() {
     }
 
     ngOnInit() {
@@ -78,6 +78,7 @@ export class MapPageComponent implements OnInit {
     }
     buildMap() {
 
+        mapboxgl.accessToken = environment.mapbox.accessToken;
         this.map = new Map({
             container: 'map',
             style: this.style,

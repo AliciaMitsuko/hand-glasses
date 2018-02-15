@@ -14,10 +14,9 @@ import { MapPageComponent } from './map-page/map-page.component';
 import { ListPageComponent } from './list-page/list-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 
-import { MapService } from './map.service';
 import { AccidentService } from './services/accident.service';
-import {DataService} from "./services/data.service";
-import {IconService} from "./services/icon.service";
+import {DataService} from './services/data.service';
+import {IconService} from './services/icon.service';
 
 import {DataTableModule} from "angular2-datatable";
 import { TableComponent } from './admin/table/table.component';
@@ -121,7 +120,6 @@ const appRoutes: Routes = [
   ],
   providers: [
     TodoService,
-    MapService,
     AccidentService,
     DataService,
     IconService,
