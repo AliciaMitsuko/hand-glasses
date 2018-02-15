@@ -45,7 +45,6 @@
 <!--</div>-->
 
 <div class="row">
-
   <div class="col-lg-6 offset-2">
 <div class="panel panel-default">
   <div class="panel-heading">Accident information</div>
@@ -103,6 +102,8 @@
         <ul>
         <li>
         <img style="width: 20%" [src]="atmToIcon(accident.contexte.atm)" class="img-fluid"/>
+          {{accident.contexte.atm}}
+
         </li>
         <li>
         <img style="width: 20%" [src]="lumToIcon(accident.contexte.lum)" class="img-fluid"/>
@@ -129,6 +130,7 @@
       </td>
       <td>
         <img style="width: 50%" [src]="gravToIcon(accident.gravite)" class="img-fluid"/>
+        {{accident.gravite}}
         </td>
       <td>
         {{accident.date | date: 'dd/MM/yyyy hh:mm'}}

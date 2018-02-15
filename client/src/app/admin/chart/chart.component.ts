@@ -10,8 +10,9 @@ import Accident from "../../models/accident.model";
 export class ChartComponent implements OnInit {
   accidentsList: Accident[];
 
-  private atmCount:number[];
-  private gravCount:{data: number[], label: string};
+  // private atmCount:number[];
+  private gravCount:{data: number[], label: string}[];
+  private gravCountNormLeg:{data: number[], label: string}[];
   private lumCount:number[];
 
   constructor(
@@ -24,16 +25,71 @@ export class ChartComponent implements OnInit {
     this.lumCount = [0,0,0];
 
     this.dataService.accidentsList.subscribe(message => {
-      this.accidentsList = message
-      this.updateLumCount(this.accidentsList);
+      this.accidentsList = message;
+      this.updateLumCount(message);
+      this.updateGravParAtmNormLeg(message);
+      this.updateGravParAtm(message);
 
     })
-
-
   }
 
-  updateGravParAtm(accidents: Accident[]) {
+  updateGravParAtmNormLeg(accidents: Accident[]) {
+    let legerCount = [0,0,0]
+    let mortCount = [0,0,0]
+    let hopitalCount = [0,0,0]
+    for (let a of accidents) {
+      if (a.gravite == 1) {
+        if (a.contexte.atm <= 2) {
+          legerCount[a.contexte.atm-1]++;
+        }
+      } else if (a.gravite == 2) {
+        if (a.contexte.atm <= 2) {
+          mortCount[a.contexte.atm-1]++;
+        }
+      } else if (a.gravite > 2) { // 3 || 4
+        if (a.contexte.atm <= 2) {
+          hopitalCount[a.contexte.atm-1]++;
+        }
+      }
+    }
 
+    this.gravCountNormLeg = [
+      {data: legerCount, label: 'Blessé leger'},
+      {data: mortCount, label: 'Hospitalisé'},
+      {data: hopitalCount, label: 'Mort'}]
+
+    this.barChartData = this.gravCountNormLeg;
+  }
+
+    // pas très scalable
+  updateGravParAtm(accidents: Accident[]) {
+    let legerCount = [0,0,0,0,0,0]
+    let mortCount = [0,0,0,0,0,0]
+    let hopitalCount = [0,0,0,0,0,0]
+
+    for (let a of accidents) {
+      if (a.gravite == 1) {
+        if (2 < a.contexte.atm && a.contexte.atm <= 8) {
+          legerCount[a.contexte.atm-3]++;
+        }
+      } else if (a.gravite == 2) {
+        if (2 < a.contexte.atm && a.contexte.atm <= 8) {
+          mortCount[a.contexte.atm-3]++;
+        }
+      } else if (a.gravite > 2) { // 3 || 4
+        if (2 < a.contexte.atm && a.contexte.atm <= 8) {
+          hopitalCount[a.contexte.atm-3]++;
+        }
+      }
+    }
+
+    this.gravCount = [
+      {data: legerCount, label: 'Blessé leger'},
+      {data: mortCount, label: 'Hospitalisé'},
+      {data: hopitalCount, label: 'Mort'}]
+
+    this.radarChartData = this.gravCount;
+    console.log(this.radarChartData);
 
   }
 
@@ -58,7 +114,7 @@ export class ChartComponent implements OnInit {
     }
 
     this.lineChartData = [
-      {data: this.lumCount, label: 'Series D'}
+      {data: this.lumCount, label: 'Luminosité'}
     ];
 
     this.doughnutChartData = this.lumCount;
@@ -71,7 +127,7 @@ export class ChartComponent implements OnInit {
     {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'},
     {data: [1,2, 3, 9, 100, 27, 40], label: 'Series D'}
   ];
-  public lineChartLabels:Array<any> = ['Plein jour', 'Crépuscule/Aube', 'Nuit'];
+  public lineChartLabels:Array<any> = ['Plein jour', 'Crépusc./Aube', 'Nuit'];
   public lineChartOptions:any = {
     responsive: true
   };
@@ -104,17 +160,6 @@ export class ChartComponent implements OnInit {
   public lineChartLegend:boolean = true;
   public lineChartType:string = 'line';
 
-  // public randomize():void {
-  //   let _lineChartData:Array<any> = new Array(this.lineChartData.length);
-  //   for (let i = 0; i < this.lineChartData.length; i++) {
-  //     _lineChartData[i] = {data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label};
-  //     for (let j = 0; j < this.lineChartData[i].data.length; j++) {
-  //       _lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
-  //     }
-  //   }
-  //   this.lineChartData = _lineChartData;
-  // }
-
   // events
   public chartClicked(e:any):void {
     console.log(e);
@@ -130,13 +175,18 @@ export class ChartComponent implements OnInit {
   public doughnutChartType:string = 'doughnut';
 
   // Radar
-  public radarChartLabels:string[] = ['Normale', 'Pluie', 'Neige', 'Brouillard', 'Vent', 'Temps éblouissant', 'Temps couvert'];
+  public radarChartLabels:string[] = [/*'Normale','Pluie légère',*/ 'Pluie forte', 'Neige', 'Brouillard', 'Vent', 'Temps éblouissant', 'Temps couvert'];
 
-  public radarChartData:any = [
-    {data: [65, 59, 90, 81, 56, 55, 40], label: 'Blessé leger'},
-    {data: [28, 48, 40, 19, 96, 27, 100], label: 'Hospitalisé'},
-    {data: [28, 8, 4, 9, 96, 27, 100], label: 'Mort'}
-  ];
+  public radarChartData:any = [];
   public radarChartType:string = 'radar';
 
+  public barChartOptions:any = {
+    scaleShowVerticalLines: false,
+    responsive: true
+  };
+  public barChartLabels:string[] = ['Normale', 'Pluie legère'];
+  public barChartType:string = 'bar';
+  public barChartLegend:boolean = true;
+
+  public barChartData:any[] = [];
 }
