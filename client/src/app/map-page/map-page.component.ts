@@ -46,6 +46,7 @@ export class MapPageComponent implements OnInit {
     // map: mapboxgl.Map;
     // style = 'mapbox://styles/mapbox/outdoors-v9';
     style = 'mapbox://styles/mapbox/light-v9';
+    // style = 'mapbox://styles/jonahadkins/cim3kbhey0091cwm21d1dvsgo';
     lat = 48.86;
     lng = 2.33;
     message = '';
@@ -68,7 +69,7 @@ export class MapPageComponent implements OnInit {
                 this.lng = position.coords.longitude;
 
                 this.map.flyTo({
-                    center: [this.lng, this.lat]
+                    center: [-74.50, 40]
                 });
 
             });
@@ -118,42 +119,62 @@ export class MapPageComponent implements OnInit {
     }
 
     showMarkers() {
-        this.map.addLayer({
-            'id': 'points',
-            'type': 'symbol',
+        /*this.map.addLayer({
+            'id': 'population',
+            'type': 'circle',
             'source': {
-                'type': 'geojson',
-                'data': {
-                    'type': 'FeatureCollection',
-                    'features': [{
-                        'type': 'Feature',
-                        'geometry': {
-                            'type': 'Point',
-                            'coordinates': [this.lng, this.lat]
-                        },
-                        'properties': {
-                            'title': 'Mapbox DC',
-                            'icon': 'monument'
-                        }
-                    }, {
-                        'type': 'Feature',
-                        'geometry': {
-                            'type': 'Point',
-                            'coordinates': [-122.414, 37.776]
-                        },
-                        'properties': {
-                            'title': 'Mapbox SF',
-                            'icon': 'harbor'
-                        }
-                    }]
-                }
+                type: 'vector',
+                url: 'mapbox://examples.8fgz4egr'
             },
-            'layout': {
-                'icon-image': '{icon}-15',
-                'text-field': '{title}',
-                'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
-                'text-offset': [0, 0.6],
-                'text-anchor': 'top'
+            'source-layer': 'sf2010',
+            'paint': {
+                // make circles larger as the user zooms from z12 to z22
+                'circle-radius': {
+                    'base': 1.75,
+                    'stops': [[12, 2], [22, 180]]
+                },
+                // color circles by ethnicity, using a match expression
+                // https://www.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
+                'circle-color': [
+                    'match',
+                    ['get', 'ethnicity'],
+                    'White', '#fbb03b',
+                    'Black', '#223b53',
+                    'Hispanic', '#e55e5e',
+                    'Asian', '#3bb2d0',
+                    /* other */ '#ccc';
+                /*]
+            }
+        });*/
+
+        this.map.addSource('source_circle_500', {
+            'type': 'geojson',
+            'data': {
+                'type': 'FeatureCollection',
+                'features': [{
+                    'type': 'Feature',
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [-74.50, 40]
+                    }
+                }]
+            }
+        });
+
+        this.map.addLayer({
+            'id': 'circle500',
+            'type': 'circle',
+            'source': 'source_circle_500',
+            'paint': {
+                'circle-radius': {
+                    stops: [
+                        [5, 1],
+                        [15, 30]
+                    ],
+                    base: 2
+                },
+                'circle-color': 'red',
+                'circle-opacity': 0.6
             }
         });
     }
