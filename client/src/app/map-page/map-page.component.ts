@@ -4,7 +4,7 @@ import { GeoJson, FeatureCollection } from '../map';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Accident from '../models/accident.model';
 import {LngLat, Map} from 'mapbox-gl';
-import {environment} from "../../environments/environment";
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-map-page',
