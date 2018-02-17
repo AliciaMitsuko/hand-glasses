@@ -8,6 +8,22 @@ exports.getAccidents = async function(query, page, limit){
         page,
         limit
     }
+
+
+    try {
+        var accidents = await Accident.paginate(query, options)
+        return accidents;
+    } catch (e) {
+        throw Error('Error while Paginating Accidents')
+    }
+}
+
+exports.getAccidentsByGravite= async function(query, page, limit){
+    //var query = { "gravite": 1 };
+    var options = {
+        page,
+        limit
+    }
     try {
         var accidents = await Accident.paginate(query, options)
         return accidents;
@@ -29,7 +45,9 @@ console.log("call the service")
         // geojson: new GeoJSON(accident.lat, accident.long),
         geojson: accident.geojson,
         heure: accident.heure, // à mettre dans contexte ?
-        date: accident.date
+        date: accident.date,
+        good: accident.good,
+        bad: accident.bad
     })
     console.log("[Service] createAccident");
 

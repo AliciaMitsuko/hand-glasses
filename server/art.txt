@@ -1,30 +1,30 @@
 ---
 
-MEAN App tutorial with Angular 4 (Part 1)
+MEAN App tutorial with Angular 4 (Partï¿½1)
 
 
-The popular MEAN Stack is now much more powerful with the Upgraded Angular 4. With the superb performance of NodeJS at the Backend and Angular 4 at the Frontend and MongoDB as the Database?—?The Combination is too powerful to beat.
+The popular MEAN Stack is now much more powerful with the Upgraded Angular 4. With the superb performance of NodeJS at the Backend and Angular 4 at the Frontend and MongoDB as the Database?ï¿½?The Combination is too powerful to beat.
 We are going to make an MEAN App with Angular 4. The App is going to be a very simple Todo App. The first part is about developing the NodeJS Bakcend, The second Part will contain the Angular App.
 Also from the get go we are going to use some good practices like using controllers, services to discipline our code instead of mashing all of them together.
 Lets setup the environment
 
 
-First go here?—?https://nodejs.org/en/download/ and Install NodeJS.
-Download and Install MongoDB?—?https://www.mongodb.com/download-center#community
-Download a good Text Editor or IDE. I Personally prefer Visual Studio Code?—?https://code.visualstudio.com/download
+First go here?ï¿½?https://nodejs.org/en/download/ and Install NodeJS.
+Download and Install MongoDB?ï¿½?https://www.mongodb.com/download-center#community
+Download a good Text Editor or IDE. I Personally prefer Visual Studio Code?ï¿½?https://code.visualstudio.com/download
 
-Now the environment Setup is done. Let’s get into the command line.
+Now the environment Setup is done. Letï¿½s get into the command line.
 First we need to install ExpressJS. The most popular NodeJS Framework.
 npm install -g express express-generator
-This will install ExpressJS and the ExpressJS Official generator packages. Now let’s generate the Application using the Express Generator.
-express --view=ejs todoapp
+This will install ExpressJS and the ExpressJS Official generator packages. Now letï¿½s generate the Application using the Express Generator.
+express --view=ejs server
 Now the express App is generated. Go inside the directory.
-cd todoapp
+cd server
 npm install
 All the necessary packages will be installed.
-At first let’s install all the necessary packages we will be using throughout this app.
+At first letï¿½s install all the necessary packages we will be using throughout this app.
 npm install -g bluebird mongoose mongoose-paginate nodemon
-Our current directory structure is?—?
+Our current directory structure is?ï¿½?
 /routes
 /bin
 /public
@@ -39,7 +39,7 @@ Edit the Package.json files start script from node to nodemon.
 
 
 
-Another important point?—?We won’t be using callbacks, We even won’t be using traditional Promises. We are going to use the great async-await feature introduced in NodeJS 7.6.
+Another important point?ï¿½?We wonï¿½t be using callbacks, We even wonï¿½t be using traditional Promises. We are going to use the great async-await feature introduced in NodeJS 7.6.
 Anatomy of an Async Function
 
 
@@ -53,7 +53,7 @@ Start MongoDB. Now Add mongoose support to the app.js file.
 
 
 
-We are going going to use bluebird promise library. Let’s add bluebird.
+We are going going to use bluebird promise library. Letï¿½s add bluebird.
 
 
 
@@ -62,11 +62,11 @@ We are going going to use bluebird promise library. Let’s add bluebird.
 ---
 
 Architecture
-The Database Connection is done. Before adding the model we need to clear up about the architecture of the Application. We are going to have several layers. 
-Data?—?This Layer is the MongoDB Models or Mongoose Models
-Services?—?This layer is going to execute atomic CRUD operations on the models
-Controller?—?This Layer is going to control the request body parsing, validating, checking , responding and Error returning actions.
-API?—?This layer is a very simple mapping layer. Where specific api endpoints will be mapped to the Controller Functions.
+The Database Connection is done. Before adding the model we need to clear up about the architecture of the Application. We are going to have several layers.ï¿½
+Data?ï¿½?This Layer is the MongoDB Models or Mongoose Models
+Services?ï¿½?This layer is going to execute atomic CRUD operations on the models
+Controller?ï¿½?This Layer is going to control the request body parsing, validating, checkingï¿½, responding and Error returning actions.
+API?ï¿½?This layer is a very simple mapping layer. Where specific api endpoints will be mapped to the Controller Functions.
 
 
 
@@ -75,18 +75,18 @@ API?—?This layer is a very simple mapping layer. Where specific api endpoints wi
 Data Layer
 
 
-Let’s add the Model. 
+Letï¿½s add the Model.ï¿½
 Create a file /models/todo.model.js
 
 
 
-We’ve made the necessary properties for the Schema and then create a Model from that Schema . We’ve used mongoose-paginate Package, so that in the future pagination would be much easier. The Data layer is done. The simplicity of mongoose is that awesome. 
+Weï¿½ve made the necessary properties for the Schema and then create a Model from that Schemaï¿½. Weï¿½ve used mongoose-paginate Package, so that in the future pagination would be much easier. The Data layer is done. The simplicity of mongoose is that awesome.ï¿½
 
 
 ---
 
 Service Layer
-We need to create the services that will actually access the Mongoose Models. Let’s create Services Directory and todo.service.js file.
+We need to create the services that will actually access the Mongoose Models. Letï¿½s create Services Directory and todo.service.js file.
 /services/todo.service.js
 
 
@@ -107,7 +107,7 @@ Make a new directory named /controllers and place todos.controller.js there
 ---
 
 API Layer
-Let’s start to actually make some API endpoints. First make a directory /api Inside the /routes folder.
+Letï¿½s start to actually make some API endpoints. First make a directory /api Inside the /routes folder.
 mkdir routes/api
 Create a file todos.route.js Inside the api directory.
 /routes/api/todos.route.js
@@ -124,16 +124,16 @@ Use this route inside the App.js file, so that the matching routes can go inside
 
 
 
-Now the Todo API is complete. Start the api by either nodemon ./bin/www Or npm startCommand.
-> nodemon ./bin/www
+Now the Todo API is complete. Start the api by either nodemonï¿½./bin/www Or npm startCommand.
+> nodemonï¿½./bin/www
 [nodemon] 1.11.0
 [nodemon] to restart at any time, enter `rs`
 [nodemon] watching: *.*
-[nodemon] starting `node ./bin/www`
-Succesfully Connected to the Mongodb Database at URL : mongodb://127.0.0.1:27017/todoapp
+[nodemon] starting `nodeï¿½./bin/www`
+Succesfully Connected to the Mongodb Database at URLï¿½: mongodb://127.0.0.1:27017/server
 
 
-Now bring up Postman and Let’s test the API.
+Now bring up Postman and Letï¿½s test the API.
 
 
 /POST
@@ -148,5 +148,5 @@ Now bring up Postman and Let’s test the API.
 /DELETE
 
 
-We can see that every requests are working properly. So Our Todo API is complete. We can do a lot of improvements on it. But for now It’s going to be enough.
+We can see that every requests are working properly. So Our Todo API is complete. We can do a lot of improvements on it. But for now Itï¿½s going to be enough.
 In the next part we will start the Angular 4 Frontend.

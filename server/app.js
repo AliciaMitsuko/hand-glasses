@@ -21,9 +21,9 @@ var DB_PATH = 'mongodb://polytech-admin:Ge8GzZmD7Bw5@ds033966.mlab.com:33966/han
 mongoose.connect(DB_PATH)
 .then(()=> { console.log(`Succesfully Connected to the Mongodb Database  at URL :` + DB_PATH)})
 .catch(()=> { console.log(`Error Connecting to the Mongodb Database at URL :`+ DB_PATH)})
-// mongoose.connect('mongodb://127.0.0.1:27017/todoapp', { useMongoClient: true})
-// .then(()=> { console.log(`Succesfully Connected to the Mongodb Database  at URL : mongodb://127.0.0.1:27017/todoapp`)})
-// .catch(()=> { console.log(`Error Connecting to the Mongodb Database at URL : mongodb://127.0.0.1:27017/todoapp`)})
+// mongoose.connect('mongodb://127.0.0.1:27017/server', { useMongoClient: true})
+// .then(()=> { console.log(`Succesfully Connected to the Mongodb Database  at URL : mongodb://127.0.0.1:27017/server`)})
+// .catch(()=> { console.log(`Error Connecting to the Mongodb Database at URL : mongodb://127.0.0.1:27017/server`)})
 
 
 

@@ -1,0 +1,29 @@
+.mat-list, .list-incident {
+  overflow: hidden;
+  overflow-y: scroll;
+  height: 100vh;
+}
+
+.cdk-visually-hidden {
+  display: none;
+}
+
+mat-card {
+  margin-bottom: 12px;
+  background-color: white;
+}
+
+.filter {
+  top:-10px;
+}
+
+.cdk-visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}

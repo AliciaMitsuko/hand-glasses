@@ -1,0 +1,38 @@
+.changeViewButton {
+  position: fixed;
+  top: 86vh;
+  //right: 3vw;
+  right: 30px;
+}
+
+.no-padding-right {
+  padding-right: 0;
+  padding-left: 0;
+  height: 105vh;
+}
+
+.page {
+  background-color: lightgray;
+}
+
+body {
+  background-color: lightgray;
+}
+
+/*.side-nav {
+  width: 8vw;
+  position: absolute;
+}*/
+
+
+@media (min-width: 768px) {
+  .changeViewButton {
+    display:none;
+  }
+}
+
+/*@media screen and (min-width: 575px) {
+  .changeViewButton {
+    display:none;
+  }
+}*/

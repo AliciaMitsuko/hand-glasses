@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
-import { MapService } from '../map.service';
 import { GeoJson, FeatureCollection } from '../map';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import Accident from '../models/accident.model';
+import {LngLat, Map} from 'mapbox-gl';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-map-page',
@@ -11,94 +13,170 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 })
 export class MapPageComponent implements OnInit {
 
-    map: mapboxgl.Map;
-    style = 'mapbox://styles/mapbox/outdoors-v9';
-    // lat = 37.75;
-    lat = 42.3667987;
-    // lng = -122.41;
-    lng = -71.0679953;
+    public geojson = {
+        type: 'FeatureCollection',
+        features: [{
+            type: 'Feature',
+            geometry: {
+                type: 'Point',
+                coordinates: [-77.032, 38.913]
+            },
+            properties: {
+                title: 'Mapbox',
+                description: 'Washington, D.C.'
+            }
+        },
+            {
+                type: 'Feature',
+                geometry: {
+                    type: 'Point',
+                    coordinates: [-122.414, 37.776]
+                },
+                properties: {
+                    title: 'Mapbox',
+                    description: 'San Francisco, California'
+                }
+            }]
+    };
+
+    @Input() accidentsList: Accident[];
+
+    map: Map;
+
+    // map: mapboxgl.Map;
+    // style = 'mapbox://styles/mapbox/outdoors-v9';
+    style = 'mapbox://styles/mapbox/light-v9';
+    // style = 'mapbox://styles/jonahadkins/cim3kbhey0091cwm21d1dvsgo';
+    lat = 48.86;
+    lng = 2.33;
     message = '';
     // data
     source: any;
     markers: any;
-    constructor(private mapService: MapService) {
+
+    constructor() {
     }
+
     ngOnInit() {
-        //this.markers = this.mapService.getMarkers()
         this.initializeMap();
     }
+
     private initializeMap() {
         /// locate the user
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(position => {
                 this.lat = position.coords.latitude;
                 this.lng = position.coords.longitude;
+
                 this.map.flyTo({
-                    center: [this.lng, this.lat]
-                })
+                    center: [-74.50, 40]
+                });
+
             });
         }
-        this.buildMap()
+        this.buildMap();
     }
     buildMap() {
-        this.map = new mapboxgl.Map({
+
+        mapboxgl.accessToken = environment.mapbox.accessToken;
+        this.map = new Map({
             container: 'map',
             style: this.style,
             zoom: 13,
             center: [this.lng, this.lat]
         });
+
         /// Add map controls
-        this.map.addControl(new mapboxgl.NavigationControl());
-        //// Add Marker on Click
-        this.map.on('click', (event) => {
-            const coordinates = [event.lngLat.lng, event.lngLat.lat]
-            const newMarker   = new GeoJson(coordinates, { message: this.message })
-            //this.mapService.createMarker(newMarker)
-        })
+        const nav = new mapboxgl.NavigationControl();
+        this.map.addControl(nav, 'bottom-left');
+
+        // Add geolocate control to the map.
+        this.map.addControl(new mapboxgl.GeolocateControl({
+            positionOptions: {
+                enableHighAccuracy: true
+            },
+            trackUserLocation: true
+        }));
+
+        // Show user location
+        //
+
         /// Add realtime firebase data on map load
         this.map.on('load', (event) => {
-            /// register source
-            this.map.addSource('firebase', {
-                type: 'geojson',
-                data: {
-                    type: 'FeatureCollection',
-                    features: []
-                }
-            });
-            /// get source
-            this.source = this.map.getSource('firebase')
-            /// subscribe to realtime database and set data source
-            /*this.markers.subscribe(markers => {
-                let data = new FeatureCollection(markers)
-                this.source.setData(data)
-            })*/
-            /// create map layers with realtime data
-            this.map.addLayer({
-                id: 'firebase',
-                source: 'firebase',
-                type: 'symbol',
-                layout: {
-                    'text-field': '{message}',
-                    'text-size': 24,
-                    'text-transform': 'uppercase',
-                    'icon-image': 'rocket-15',
-                    'text-offset': [0, 1.5]
-                },
-                paint: {
-                    'text-color': '#f16624',
-                    'text-halo-color': '#fff',
-                    'text-halo-width': 2
-                }
-            })
-        })
+
+           this.showMarkers();
+        });
     }
+
     /// Helpers
     removeMarker(marker) {
-        //this.mapService.removeMarker(marker.$key)
+        // this.mapService.removeMarker(marker.$key)
     }
+
     flyTo(data: GeoJson) {
         this.map.flyTo({
             center: data.geometry.coordinates
-        })
+        });
+    }
+
+    showMarkers() {
+        /*this.map.addLayer({
+            'id': 'population',
+            'type': 'circle',
+            'source': {
+                type: 'vector',
+                url: 'mapbox://examples.8fgz4egr'
+            },
+            'source-layer': 'sf2010',
+            'paint': {
+                // make circles larger as the user zooms from z12 to z22
+                'circle-radius': {
+                    'base': 1.75,
+                    'stops': [[12, 2], [22, 180]]
+                },
+                // color circles by ethnicity, using a match expression
+                // https://www.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
+                'circle-color': [
+                    'match',
+                    ['get', 'ethnicity'],
+                    'White', '#fbb03b',
+                    'Black', '#223b53',
+                    'Hispanic', '#e55e5e',
+                    'Asian', '#3bb2d0',
+                    /* other */ '#ccc';
+                /*]
+            }
+        });*/
+
+        this.map.addSource('source_circle_500', {
+            'type': 'geojson',
+            'data': {
+                'type': 'FeatureCollection',
+                'features': [{
+                    'type': 'Feature',
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [-74.50, 40]
+                    }
+                }]
+            }
+        });
+
+        this.map.addLayer({
+            'id': 'circle500',
+            'type': 'circle',
+            'source': 'source_circle_500',
+            'paint': {
+                'circle-radius': {
+                    stops: [
+                        [5, 1],
+                        [15, 30]
+                    ],
+                    base: 2
+                },
+                'circle-color': 'red',
+                'circle-opacity': 0.6
+            }
+        });
     }
 }

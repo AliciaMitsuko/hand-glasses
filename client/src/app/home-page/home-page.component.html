@@ -1,18 +1,24 @@
-<div class="row">
-  <div class="col-sm-6">
-    <app-map-page>
+<div class="container-fluid">
 
-    </app-map-page>
+  <div (window:resize)="onResize($event)" class="row page">
+
+    <div class="col-md-6 no-padding-right" [hidden]="!isShowMap">
+      <app-map-page [accidentsList]="accidentsList">
+
+      </app-map-page>
+    </div>
+
+    <div class="col-md-6" [hidden]="!isShowList">
+      <app-list-page [accidentsList]="accidentsList">
+
+      </app-list-page>
+    </div>
+
+    <button mat-fab class="changeViewButton" color="primary" (click)="changeViewButton()" [hidden]="!isShowList">Carte</button>
+    <button mat-fab class="changeViewButton" color="primary" (click)="changeViewButton()" [hidden]="!isShowMap">Liste</button>
+
   </div>
-
-  <div class="col-sm-6">
-    <app-list-page>
-
-    </app-list-page>
-  </div>
-
 </div>
-
 
 
 
