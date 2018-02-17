@@ -18,12 +18,13 @@ var mongoose = require('mongoose')
 mongoose.Promise = bluebird
 var DB_PATH = 'mongodb://polytech-admin:Ge8GzZmD7Bw5@ds033966.mlab.com:33966/hand-glasses'
 
-mongoose.connect(DB_PATH, { useMongoClient: true})
+mongoose.connect(DB_PATH)
 .then(()=> { console.log(`Succesfully Connected to the Mongodb Database  at URL :` + DB_PATH)})
 .catch(()=> { console.log(`Error Connecting to the Mongodb Database at URL :`+ DB_PATH)})
 // mongoose.connect('mongodb://127.0.0.1:27017/todoapp', { useMongoClient: true})
 // .then(()=> { console.log(`Succesfully Connected to the Mongodb Database  at URL : mongodb://127.0.0.1:27017/todoapp`)})
 // .catch(()=> { console.log(`Error Connecting to the Mongodb Database at URL : mongodb://127.0.0.1:27017/todoapp`)})
+
 
 
 app.use(function(req, res, next) {
@@ -49,7 +50,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/api', api);
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

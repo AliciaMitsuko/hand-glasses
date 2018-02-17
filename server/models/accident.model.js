@@ -3,14 +3,9 @@ var mongoosePaginate = require('mongoose-paginate')
 
 
 var AccidentSchema = new mongoose.Schema({
-    // geojson: GeoJSON,
     geojson: {
-        'type': {
-            type: String
-        },
-        'coordinates': {
-            type: [Number, Number]
-        }
+      type: {type: String, default: 'Point'},
+      coordinates: {type: [Number], default: [0, 0]}
     },
     contexte: {surf: Number, atm: Number, lum: Number, heure: String},
     gravite: {
@@ -35,7 +30,14 @@ var AccidentSchema = new mongoose.Schema({
     }
 })
 
+AccidentSchema.virtual('categoryId').get(function() {
+    return this._id;
+});
+
+AccidentSchema.index({geojson : '2dsphere'});
+
 AccidentSchema.plugin(mongoosePaginate)
+
 const Accident = mongoose.model('Accident', AccidentSchema)
 
 module.exports = Accident;
