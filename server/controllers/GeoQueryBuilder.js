@@ -1,13 +1,11 @@
-exports.GeoQueryBuilder = class GeoQueryBuilder {
-
-  buildNearQuery(geoJson, distance){
+exports.buildNearQuery = function(geoJson, distance){
 
     if(!geoJson || !distance){
       throw "missing parameters for near query";
     }
 
-    if(isNaN(distance)){
-      throw "distance is not a number";
+    if(isNaN(distance) || (distance <= 0)){
+      throw "invalid distance";
     }
 
     var query = {
@@ -20,9 +18,9 @@ exports.GeoQueryBuilder = class GeoQueryBuilder {
        }
     };
     return query;
-  }
+  };
 
-  buildWithinQuery(geoJson){
+  exports.buildWithinQuery = function(geoJson){
     if(!geoJson){
       throw "missing geoJSON for within query";
     }
@@ -36,11 +34,11 @@ exports.GeoQueryBuilder = class GeoQueryBuilder {
        }
     };
     return query;
-  }
+  };
 
-  buildIntersectQuery(geoJson){
+  exports.buildIntersectQuery = function(geoJson){
     if(!geoJson){
-      throw "missing geoJSON for within query";
+      throw "missing geoJSON for intersect query";
     }
 
     var query = {
@@ -52,6 +50,4 @@ exports.GeoQueryBuilder = class GeoQueryBuilder {
        }
     };
     return query;
-  }
-
-};
+  };
