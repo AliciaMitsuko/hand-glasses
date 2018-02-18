@@ -191,8 +191,7 @@ export class MapPageComponent implements OnInit {
                         'type': 'Feature',
                         'geometry': {
                             'type': 'Point',
-                            'coordinates': [this.accidentsList[_i]['geojson'].coordinates[0]
-                                , this.accidentsList[_i]['geojson'].coordinates[1]]
+                            'coordinates': [this.accidentsList[_i]['geojson'].type]
                         }
                     }]
                 }
@@ -201,7 +200,7 @@ export class MapPageComponent implements OnInit {
             this.map.addLayer({
                 'id': this.accidentsList[_i].num,
                 'type': 'circle',
-                'source': 'source_circle_500',
+                'source': this.accidentsList[_i].num,
                 'paint': {
                     'circle-radius': {
                         stops: [
