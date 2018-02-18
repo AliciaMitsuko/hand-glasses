@@ -17,34 +17,6 @@ import {MapService} from '../services/map.service';
 })
 export class MapPageComponent implements OnInit {
 
-    /*public geojson = {
-        type: 'FeatureCollection',
-        features: [{
-            type: 'Feature',
-            geometry: {
-                type: 'Point',
-                coordinates: [-77.032, 38.913]
-            },
-            properties: {
-                title: 'Mapbox',
-                description: 'Washington, D.C.'
-            }
-        },
-            {
-                type: 'Feature',
-                geometry: {
-                    type: 'Point',
-                    coordinates: [-122.414, 37.776]
-                },
-                properties: {
-                    title: 'Mapbox',
-                    description: 'San Francisco, California'
-                }
-            }]
-    };*/
-
-
-
     public accidentsList: Accident[];
     private subscription: Subscription;
     private geojson;
@@ -52,6 +24,7 @@ export class MapPageComponent implements OnInit {
     // The distance in km before checkin for new accident
     // This is also the standard zone distance to get accident list
     private bufferDistance = 10;
+    private nearAccidentList: Accident[] = [];
 
     // We store the last coordinates corresponding tp the last API call
     private lastLatCheck = 0;
@@ -75,8 +48,7 @@ export class MapPageComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.dataService.accidentsListMap.subscribe(message => { this.accidentsList = message; /*this.showMarkers();*/ });
-        console.log(this.mapService.getAllAccidentGeoJson());
+        this.dataService.accidentsListMap.subscribe(message => { this.accidentsList = message; });
 
         this.subscription = this.mapService.getMessage().subscribe(message => { this.map.flyTo({center: [message.text[0], message.text[1]]}); });
 
@@ -87,10 +59,6 @@ export class MapPageComponent implements OnInit {
                 this.showMarkers();
                 // this.dataService.changeAccidentList(accidents); // update accidentList to component which are subscribed
             });
-
-        // this.geojson = this.mapService.getAllAccidentGeoJson();
-
-        console.log(this.geojson);
 
         this.initializeMap();
     }
@@ -201,14 +169,37 @@ export class MapPageComponent implements OnInit {
     }
 
     checkAreaForAccident() {
-        if (this.calculateDistance(this.lat, this.lng, this.lastLatCheck, this.lastLngCheck) > 10 ) {
+
+        if (this.calculateDistance(this.lat, this.lastLatCheck, this.lng, this.lastLngCheck) > this.bufferDistance ) {
+
             // If the user moved more than 10km from the last API call, then we call again to refresh our nearby accident list
-            // http://localhost:3000/api/dangers/?lat=43.6157&long=7.0719&distance=25
-            // Then we store it as class variable
+            this.mapService.getAccidentWithinPerimeter(this.lat, this.lng, this.bufferDistance * 1000).
+            subscribe(resp => {
+                this.nearAccidentList = resp;
+
+                // We check if we got an accident within the 50m
+                // We go through the class var which contains the nearby accident and pop an alert if one is close
+                for (const accident of this.nearAccidentList) {
+                    if (this.calculateDistance(this.lat, accident.geojson.coordinates[1].valueOf(), this.lng, accident.geojson.coordinates[0].valueOf()) < 0.1) {
+                        alert('close');
+                    }
+                }
+            });
+
+
+
+        } else {
+            // We check if we got an accident within the 50m
+            // We go through the class var which contains the nearby accident and pop an alert if one is close
+            for (const accident of this.nearAccidentList) {
+                if (this.calculateDistance(this.lat, accident.geojson.coordinates[1].valueOf(), this.lng, accident.geojson.coordinates[0].valueOf()) < 0.1) {
+                    alert('close');
+                }
+
+
+            }
         }
 
-        // We check if we got an accident within the 50m
-        // We go through the class var which contains the nearby accident and pop an alert if one is close
 
     }
 
