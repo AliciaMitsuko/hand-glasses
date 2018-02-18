@@ -22,7 +22,7 @@ exports.getNearbyDangers = async function(req, res, next){
     return res.status(200).json({status: 200, data: proximityFrom});
   }
   catch(err){
-    return res.status(404).json({status: 404, message: "Problem getting nearby accidents.\nStackTrace : " + err.message});
+    return res.status(500).json({status: 500, message: "Problem getting nearby accidents.\nStackTrace : " + JSON.stringify(err)});
   }
 };
 
@@ -43,7 +43,7 @@ exports.getDangersWithin = async function(req, res, next){
     return res.status(200).json({status: 200, data: withinAccidents});
   }
   catch(err){
-    return res.status(404).json({status: 404, message: "Problem getting accidents within.\nStackTrace : " + err.message});
+    return res.status(500).json({status: 500, message: "Problem getting accidents within.\nStackTrace : " + JSON.stringify(err)});
   }
 };
 
@@ -68,6 +68,6 @@ exports.getCrossedDangers = async function(req, res, next){
     return res.status(200).json({status: 200, data: intersectAccidents});
   }
   catch(err){
-    return res.status(404).json({status: 404, message: "Problem getting intersected accidents.\nStackTrace : " + err.message});
+    return res.status(500).json({status: 500, message: "Problem getting intersected accidents.\nStackTrace : " + JSON.stringify(err)});
   }
 };
