@@ -3,6 +3,7 @@ import {AccidentService} from '../services/accident.service';
 import Accident from '../models/accident.model';
 import {Sort} from '@angular/material';
 import {IconService} from "../services/icon.service";
+import {DataService} from "../services/data.service";
 
 @Component({
     selector: 'app-list-page',
@@ -11,14 +12,15 @@ import {IconService} from "../services/icon.service";
 })
 export class ListPageComponent implements OnInit {
 
-    @Input() accidentsList: Accident[];
+    public accidentsList: Accident[];
 
     private sortedData;
 
     constructor(
-      private iconService: IconService) { }
+      private iconService: IconService, private dataService: DataService) { }
 
     ngOnInit() {
+        this.dataService.accidentsListMap.subscribe(message => this.accidentsList = message);
     }
 
   atmToIcon(num: number) {

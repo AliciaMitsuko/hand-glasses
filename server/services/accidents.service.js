@@ -8,14 +8,23 @@ exports.getAccidents = async function(query, page, limit){
         page,
         limit
     }
-
-
     try {
         var accidents = await Accident.paginate(query, options)
         return accidents;
     } catch (e) {
         throw Error('Error while Paginating Accidents')
     }
+}
+
+exports.getAllAccidents = async function(){
+  try{
+    var accidents = await Accident.find().catch(e => {
+      console.log('e');
+    });
+    return accidents;
+  } catch(e) {
+    throw Error('Error while getting all accidents');
+  }
 }
 
 exports.getAccidentsByGravite= async function(query, page, limit){
@@ -94,7 +103,7 @@ exports.updateAccident = async function(accident){
 }
 
 exports.deleteAccident = async function(id){
-    
+
     try{
         var deleted = await Accident.remove({_id: id})
         if(deleted.result.n === 0){

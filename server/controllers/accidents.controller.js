@@ -3,6 +3,7 @@ var _ = require('lodash');
 var fs = require("fs");
 var csv = require("fast-csv");
 var q = require('q');
+var AccidentsTransformer = require('./AccidentsTransformer');
 _this = this;
 
 
@@ -225,7 +226,7 @@ exports.createAccident = async function(req, res, next){
 exports.updateAccident = async function(req, res, next){
 
     if(!req.body._id){
-        return res.status(400).json({status: 400., message: "Id must be present"})
+        return res.status(400).json({status: 400, message: "Id must be present"})
     }
 
     var id = req.body._id;
@@ -243,7 +244,7 @@ exports.updateAccident = async function(req, res, next){
         var updatedAccident = await AccidentService.updateAccident(accident)
         return res.status(200).json({status: 200, data: updatedAccident, message: "Succesfully Updated Tod"})
     }catch(e){
-        return res.status(400).json({status: 400., message: e.message})
+        return res.status(400).json({status: 400, message: e.message})
     }
 }
 
@@ -259,3 +260,15 @@ exports.removeAccident = async function(req, res, next){
     }
 
 }
+
+
+
+exports.getAllAccidentsFeatureList = async function(req, res, next){
+    try{
+      var accidents = await AccidentService.getAllAccidents();
+      var convertedAccident = (new AccidentsTransformer.AccidentsTransformer()).convertMultipleAccident(accidents);
+      return res.status(200).json({status: 200, data: convertedAccident});
+    }catch(e){
+      return res.status(500).json({status: 500, message: JSON.stringify(e)});
+    }
+};
