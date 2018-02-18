@@ -26,11 +26,18 @@ export class MapService {
         return this.subject.asObservable();
     }
 
+    getAccidentWithinPerimeter(lat: number, lng: number, distance: number): Observable<any> {
+        return this.http.get('http://localhost:3000/api/dangers?lat=' + lat + '&long=' + lng + '&distance=' + distance)
+            .map(res => {
+                console.log(res);
+                return res['data'];
+            });
+    }
+
     getAllAccidentGeoJson(): Observable<any> {
         return this.http.get('http://localhost:3000/api/accidents/all')
             .map(res => {
                 return res['data'];
-            // return data;
         });
     }
 

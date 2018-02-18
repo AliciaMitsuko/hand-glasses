@@ -11,103 +11,81 @@ import {DataService} from "../../services/data.service";
   styleUrls: ['./admin-page.component.scss']
 })
 export class AdminPageComponent implements OnInit {
+  accidentsList: Accident[];
 
+  // gravite=1&atm=1&lum=5&surf=1
+
+  stringGrav="";
+  stringAtm="";
+  stringLum="";
+  stringSurf="";
     constructor(
         private dataService: DataService,
-        private todoService: TodoService,
         private accidentService: AccidentService
     ) { }
 
-    public newTodo: ToDo = new ToDo()
-
-    todosList: ToDo[];
-    editTodos: ToDo[] = [];
-
-    accidentsList: Accident[];
-
-  selected = 'Plein jour';
   ngOnInit(): void {
-        // this.todoService.getToDos()
-        //     .subscribe(todos => {
-        //         this.todosList = todos
-        //         console.log(todos)
-        //     })
-
-      this.accidentService.getAccidents()
-        .subscribe(accidents => {
-          this.accidentsList = accidents
-          this.dataService.changeAccidentList(accidents); // update accidentList to component which are subscribed
-          console.log(accidents)
-        })
+      this.getAccidents();
 
    }
 
-  getAccidentsGrav(grav :number) {
-    console.log("ts: getAccidentsGrav")
-    this.accidentService.getAccidentsGrav(grav)
+  getAccidents() {
+    this.accidentService.getAccidents()
+      .subscribe(accidents => {
+        this.accidentsList = accidents
+        this.dataService.changeAccidentList(accidents); // update accidentList to component which are subscribed
+        console.log(accidents)
+      })
+  }
+
+  getAccidentsParam() {
+      let stringParam = this.stringGrav+this.stringAtm+this.stringLum+this.stringSurf;
+    this.accidentService.getAccidentsParams(stringParam)
       .subscribe(accidents => {
         this.accidentsList = accidents
         this.dataService.changeAccidentList(accidents); // update accidentList to component which are subscribed
       })
+  }
+
+  getAccidentsGrav(grav :number) {
+    this.stringGrav = "&gravite="+grav;
+
+    this.getAccidentsParam();
   }
 
   getAccidentsLum(lum :number) {
-    console.log("ts: getAccidentsGrav")
-    this.accidentService.getAccidentsLum(lum)
-      .subscribe(accidents => {
-        this.accidentsList = accidents
-        this.dataService.changeAccidentList(accidents); // update accidentList to component which are subscribed
-      })
+    this.stringLum = "&lum="+lum;
+
+    this.getAccidentsParam();
   }
 
-    create() {
-        this.todoService.createTodo(this.newTodo)
-            .subscribe((res) => {
-                this.todosList.push(res.data)
-                this.newTodo = new ToDo()
-            })
-    }
+  getAccidentsAtm(atm :number) {
+    this.stringAtm = "&atm="+atm;
 
-    editTodo(todo: ToDo) {
-        console.log(todo)
-        if(this.todosList.includes(todo)){
-            if(!this.editTodos.includes(todo)){
-                this.editTodos.push(todo)
-            }else{
-                this.editTodos.splice(this.editTodos.indexOf(todo), 1)
-                this.todoService.editTodo(todo).subscribe(res => {
-                    console.log('Update Succesful')
-                }, err => {
-                    this.editTodo(todo)
-                    console.error('Update Unsuccesful')
-                })
-            }
-        }
-    }
+    this.getAccidentsParam();
+  }
 
-    doneTodo(todo:ToDo){
-        todo.status = 'Done'
-        this.todoService.editTodo(todo).subscribe(res => {
-            console.log('Update Succesful')
-        }, err => {
-            this.editTodo(todo)
-            console.error('Update Unsuccesful')
-        })
-    }
+  getAccidentsSurf(surf :number) {
+    this.stringSurf = "&surf="+surf;
 
-    submitTodo(event, todo:ToDo){
-        if(event.keyCode ==13){
-            this.editTodo(todo)
-        }
-    }
+    this.getAccidentsParam();
+  }
 
-    deleteTodo(todo: ToDo) {
-        this.todoService.deleteTodo(todo._id).subscribe(res => {
-            this.todosList.splice(this.todosList.indexOf(todo), 1);
-        })
-    }
+  resetFilter() {
+    this.stringGrav="";
+    this.stringAtm="";
+    this.stringLum="";
+    this.stringSurf="";
+
+    this.getAccidents();
+
+  }
 
 
-    title = 'app';
 
+    selectedIndex: number = 1;
+
+  setIndex(index: number) {
+   this.selectedIndex = index;
+  }
 }

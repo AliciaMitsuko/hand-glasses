@@ -17,34 +17,6 @@ import {MapService} from '../services/map.service';
 })
 export class MapPageComponent implements OnInit {
 
-    /*public geojson = {
-        type: 'FeatureCollection',
-        features: [{
-            type: 'Feature',
-            geometry: {
-                type: 'Point',
-                coordinates: [-77.032, 38.913]
-            },
-            properties: {
-                title: 'Mapbox',
-                description: 'Washington, D.C.'
-            }
-        },
-            {
-                type: 'Feature',
-                geometry: {
-                    type: 'Point',
-                    coordinates: [-122.414, 37.776]
-                },
-                properties: {
-                    title: 'Mapbox',
-                    description: 'San Francisco, California'
-                }
-            }]
-    };*/
-
-
-
     public accidentsList: Accident[];
     private subscription: Subscription;
     private geojson;
@@ -52,6 +24,7 @@ export class MapPageComponent implements OnInit {
     // The distance in km before checkin for new accident
     // This is also the standard zone distance to get accident list
     private bufferDistance = 10;
+    private nearAccidentList: Accident[] = [];
 
     // We store the last coordinates corresponding tp the last API call
     private lastLatCheck = 0;
@@ -75,10 +48,9 @@ export class MapPageComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.dataService.accidentsListMap.subscribe(message => { this.accidentsList = message; /*this.showMarkers();*/ });
-        console.log(this.mapService.getAllAccidentGeoJson());
+        this.dataService.accidentsListMap.subscribe(message => { this.accidentsList = message; });
 
-        this.subscription = this.mapService.getMessage().subscribe(message => { console.log(message); });
+        this.subscription = this.mapService.getMessage().subscribe(message => { this.map.flyTo({center: [message.text[0], message.text[1]]}); });
 
         this.mapService.getAllAccidentGeoJson().
             subscribe(resp => {
@@ -87,10 +59,6 @@ export class MapPageComponent implements OnInit {
                 this.showMarkers();
                 // this.dataService.changeAccidentList(accidents); // update accidentList to component which are subscribed
             });
-
-        // this.geojson = this.mapService.getAllAccidentGeoJson();
-
-        console.log(this.geojson);
 
         this.initializeMap();
     }
@@ -177,67 +145,7 @@ export class MapPageComponent implements OnInit {
 
 
     showMarkers() {
-        /*this.map.addLayer({
-            'id': 'population',
-            'type': 'circle',
-            'source': {
-                type: 'vector',
-                url: 'mapbox://examples.8fgz4egr'
-            },
-            'source-layer': 'sf2010',
-            'paint': {
-                // make circles larger as the user zooms from z12 to z22
-                'circle-radius': {
-                    'base': 1.75,
-                    'stops': [[12, 2], [22, 180]]
-                },
-                // color circles by ethnicity, using a match expression
-                // https://www.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
-                'circle-color': [
-                    'match',
-                    ['get', 'ethnicity'],
-                    'White', '#fbb03b',
-                    'Black', '#223b53',
-                    'Hispanic', '#e55e5e',
-                    'Asian', '#3bb2d0',
-                    /* other */ '#ccc';
-                /*]
-            }
-        });*/
 
-        /*for (let _i = 0; _i < this.accidentsList.length; _i++) {*/
-
-            /*this.map.addSource('test', {
-                'type': 'geojson',
-                'data': this.geojson
-            });*/
-
-            /*this.map.addLayer({
-                'id': 'geojson',
-                'type': 'circle',
-                'source': this.geojson,
-                'paint': {
-                    'circle-radius': {
-                        stops: [
-                            [5, 1],
-                            [15, 30]
-                        ],
-                        base: 2
-                    },
-                    'circle-color': 'red',
-                    'circle-opacity': 0.6
-                }
-            });*/
-
-        /*let layers = this.map.getStyle().layers;
-        // Find the index of the first symbol layer in the map style
-        let firstSymbolId;
-        for (let i = 0; i < layers.length; i++) {
-            if (layers[i].type === 'symbol') {
-                firstSymbolId = layers[i].id;
-                break;
-            }
-        }*/
         this.map.addLayer({
             'id': 'urban-areas-fill',
             'type': 'circle',
@@ -249,35 +157,49 @@ export class MapPageComponent implements OnInit {
                 'visibility': 'visible'
             },
             'paint': {
-                'circle-radius': 8,
+                'circle-radius': {
+                    'base': 1.75,
+                    'stops': [[12, 2], [22, 180]]
+                },
                 'circle-color': 'rgba(55,148,179,1)'
             }
         });
-
-        /*this.geojson.features.forEach(function(marker) {
-
-            // create a HTML element for each feature
-            const el = document.createElement('div');
-            el.className = 'marker';
-
-            // make a marker for each feature and add to the map
-            new mapboxgl.Marker(el)
-                .setLngLat(marker.geometry.coordinates)
-                .addTo(Map);
-        });*/
 
 
     }
 
     checkAreaForAccident() {
-        if (this.calculateDistance(this.lat, this.lng, this.lastLatCheck, this.lastLngCheck) > 10 ) {
+
+        if (this.calculateDistance(this.lat, this.lastLatCheck, this.lng, this.lastLngCheck) > this.bufferDistance ) {
+
             // If the user moved more than 10km from the last API call, then we call again to refresh our nearby accident list
-            // http://localhost:3000/api/dangers/?lat=43.6157&long=7.0719&distance=25
-            // Then we store it as class variable
+            this.mapService.getAccidentWithinPerimeter(this.lat, this.lng, this.bufferDistance * 1000).
+            subscribe(resp => {
+                this.nearAccidentList = resp;
+
+                // We check if we got an accident within the 50m
+                // We go through the class var which contains the nearby accident and pop an alert if one is close
+                for (const accident of this.nearAccidentList) {
+                    if (this.calculateDistance(this.lat, accident.geojson.coordinates[1].valueOf(), this.lng, accident.geojson.coordinates[0].valueOf()) < 0.1) {
+                        alert('close');
+                    }
+                }
+            });
+
+
+
+        } else {
+            // We check if we got an accident within the 50m
+            // We go through the class var which contains the nearby accident and pop an alert if one is close
+            for (const accident of this.nearAccidentList) {
+                if (this.calculateDistance(this.lat, accident.geojson.coordinates[1].valueOf(), this.lng, accident.geojson.coordinates[0].valueOf()) < 0.1) {
+                    alert('close');
+                }
+
+
+            }
         }
 
-        // We check if we got an accident within the 50m
-        // We go through the class var which contains the nearby accident and pop an alert if one is close
 
     }
 

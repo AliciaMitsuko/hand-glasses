@@ -1,125 +1,46 @@
-
-<div class="row">
-  <!--<img src="../../../assets/icons/like.svg" class="img-fluid"/>-->
-  <img (click)="getAccidentsGrav(3)" src="../../../assets/icons/003-medical.svg" class="img-fluid"/>
-  <img (click)="getAccidentsGrav(1)" src="../../../assets/icons/005-care.svg" class="img-fluid"/>
-  <img (click)="getAccidentsLum(1)" src="../../../assets/icons/day.svg" class="img-fluid"/>
-  <img (click)="getAccidentsLum(2)" src="../../../assets/icons/evening.svg" class="img-fluid"/>
-</div>
-
 <div class="container">
-  <app-chart></app-chart>
+  <br/><br/>
+  <ul class="nav nav-tabs nav-fill">
+    <li  class="nav-item"
+         (click)="setIndex(1)">
+      <a class="nav-link" [class.active]="selectedIndex === 1">Tableau</a>
+    </li>
+    <li  class="nav-item" [class.active]="selectedIndex === 2"
+         (click)="setIndex(2)">
+      <a class="nav-link" [class.active]="selectedIndex === 2">Graphs</a>
+    </li>
+  </ul>
 </div>
+<br/><br/><br/><br/>
+<div class="container" >
+  <div class="row">
+    <div class="col-lg-10">
+      <app-chart [hidden]="selectedIndex !== 1"></app-chart>
+      <app-table [hidden]="selectedIndex !== 2"></app-table>
 
-<div class="container">
-  <app-table></app-table>
+    </div>
+    <div class="col-lg-2">
+      <b>Recherche rapide</b>
+      <p>Gravité</p>
+      <div class="text-center">
+        <img style="height:8vh" (click)="getAccidentsGrav(3)" src="../../../assets/icons/006-injured.svg" class="img-fluid"/><br/>
+        <img style="height:8vh" (click)="getAccidentsGrav(1)" src="../../../assets/icons/004-heart.svg" class="img-fluid"/><br/>
+      </div>
+      <p>Période</p>
+      <div class="text-center">
+        <img style="height:8vh" (click)="getAccidentsLum(1)" src="../../../assets/icons/004-sun.svg" class="img-fluid"/><br/>
+        <img style="height:8vh" (click)="getAccidentsLum(2)" src="../../../assets/icons/day.svg" class="img-fluid"/>
+      </div>
+      <p>Cond. atm.</p>
+      <div class="text-center">
+        <img style="height:8vh" (click)="getAccidentsAtm(4)" src="../../../assets/icons/003-snowflake.svg" class="img-fluid"/><br/>
+        <img style="height:8vh" (click)="getAccidentsAtm(6)" src="../../../assets/icons/001-wind.svg" class="img-fluid"/><br/>
+      </div>
+      <p>Surface</p>
+      <div class="text-center">
+        <img style="height:8vh" (click)="getAccidentsSurf(4)" src="../../../assets/icons/flood.svg" class="img-fluid"/><br/>
+      </div>
+      <button class="btn btn-info" (click)="resetFilter()">Reinitialiser</button>
+    </div>
+  </div>
 </div>
-<!--<div class="row">-->
-  <!--<div class="col-md-2"></div>-->
-  <!--<div class="col-md-8">-->
-
-    <!--<div class="todos" *ngIf="todosList">-->
-      <!--<table class="table">-->
-        <!--<thead class="h">-->
-        <!--<tr class="h">-->
-          <!--<th class="h">Title</th>-->
-          <!--<th class="h">Description</th>-->
-          <!--<th class="h">Date</th>-->
-          <!--<th class="h">Status</th>-->
-          <!--<th class="h">Options</th>-->
-        <!--</tr>-->
-        <!--</thead>-->
-        <!--<tbody>-->
-        <!--<tr class="todo" (dblclick)="editTodo(todo)" *ngFor="let todo of todosList">-->
-
-          <!--<ng-container *ngIf="!editTodos.includes(todo); else editTD">-->
-            <!--<td>{{todo.title}}</td>-->
-            <!--<td>{{todo.description}}</td>-->
-            <!--<td>{{todo.date | date}}</td>-->
-            <!--<td>{{todo.status}}</td>-->
-          <!--</ng-container>-->
-
-          <!--<ng-template #editTD>-->
-            <!--<td><input type="text" name="title" id="title" (keypress)="submitTodo($event, todo)" [(ngModel)]="todo.title" placeholder="Title" class="form-control"></td>-->
-            <!--<td><input type="text" name="description" id="description" (keypress)="submitTodo($event, todo)" [(ngModel)]="todo.description" placeholder="Description"-->
-                       <!--class="form-control"></td>-->
-            <!--<td>{{todo.date | date}}</td>-->
-            <!--<td>-->
-              <!--<input type="text" name="status" id="status" (keypress)="submitTodo($event, todo)" [(ngModel)]="todo.status" placeholder="Status" class="form-control">-->
-            <!--</td>-->
-          <!--</ng-template>-->
-
-          <!--<td class="o">-->
-            <!--<button class="btn btn-success" (click)="doneTodo(todo)">-->
-              <!--<i  class="fa fa-check"></i>-->
-            <!--</button>-->
-            <!--<button class="btn btn-primary" (click)="editTodo(todo)">-->
-              <!--<i  class="fa fa-pencil"></i>-->
-            <!--</button>-->
-            <!--<button class="btn btn-danger" (click)="deleteTodo(todo)">-->
-              <!--<i  class="fa fa-trash"></i>-->
-            <!--</button>-->
-          <!--</td>-->
-
-        <!--</tr>-->
-        <!--</tbody>-->
-      <!--</table>-->
-    <!--</div>-->
-
-
-    <!--<form>-->
-      <!--<div class="form-row">-->
-
-        <!--<div class="col-md-5">-->
-          <!--<input type="text" name="title" id="title" [(ngModel)]="newTodo.title" placeholder="Title" class="form-control">-->
-        <!--</div>-->
-        <!--<div class="col-md-5">-->
-          <!--<input name="description" id="description" [(ngModel)]="newTodo.description" placeholder="Description" class="form-control"-->
-                 <!--id="description">-->
-        <!--</div>-->
-        <!--<div class="col-md-2">-->
-          <!--<button type="submit" class="btn btn-primary" (click)="create()">Add</button>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</form>-->
-  <!--</div>-->
-  <!--<div class="col-md-2">-->
-
-  <!--</div>-->
-<!--</div>-->
-
-<!--<div class="row">-->
-  <!--<div class="col-md-2"></div>-->
-  <!--<div class="col-md-8">-->
-
-    <!--<div class="todos" *ngIf="accidentsList">-->
-      <!--<table class="table">-->
-        <!--<thead class="h">-->
-        <!--<tr class="h">-->
-          <!--<th class="h">Id</th>-->
-          <!--<th class="h">Num</th>-->
-          <!--<th class="h">Comm</th>-->
-          <!--<th class="h">Contexte</th>-->
-          <!--<th class="h">Dep</th>-->
-          <!--<th class="h">Gravite</th>-->
-          <!--<th class="h">Date</th>-->
-        <!--</tr>-->
-        <!--</thead>-->
-        <!--<tbody>-->
-        <!--<tr class="todo" (dblclick)="editTodo(accident)" *ngFor="let accident of accidentsList">-->
-
-          <!--<ng-container>-->
-            <!--<td>{{accident._id}}</td>-->
-            <!--<td>{{accident.num}}</td>-->
-            <!--<td>{{accident.com}}</td>-->
-            <!--<td>{{accident.contexte.atm}}, {{accident.contexte.lum}}, {{accident.contexte.surf}}</td>-->
-            <!--<td>{{accident.dep}}</td>-->
-            <!--<td>{{accident.gravite}}</td>-->
-            <!--<td>{{accident.date}}</td>-->
-          <!--</ng-container>-->
-        <!--</tr>-->
-        <!--</tbody>-->
-      <!--</table>-->
-    <!--</div>-->
-<!--</div>-->
-<!--</div>-->
