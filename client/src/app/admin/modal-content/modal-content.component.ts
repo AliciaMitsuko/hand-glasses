@@ -5,6 +5,8 @@ import {DataService} from "../../services/data.service";
 import {current} from "codelyzer/util/syntaxKind";
 import Accident from "../../models/accident.model";
 import {AccidentService} from "../../services/accident.service";
+import {Observable} from "rxjs/Observable";
+import {IconService} from "../../services/icon.service";
 
 @Component({
   selector: 'app-modal-content',
@@ -15,6 +17,10 @@ export class ModalContentComponent implements OnInit {
   idModal: number;
 
   message:string;
+  countAtm:Observable<number[]>;
+  countLum:Observable<number[]>;
+  countSurf:Observable<number[]>;
+  countGrav:Observable<number[]>;
 
   accidentToEdit: Accident;
   accidentsList: Accident[];
@@ -22,9 +28,14 @@ export class ModalContentComponent implements OnInit {
   constructor(
     public activeModal: NgbActiveModal,
     private dataService: DataService,
+    private iconService: IconService,
     private accidentService: AccidentService
 ) {
     this.idModal = 0;
+    this.countGrav = Observable.range(1, 4).toArray();
+    this.countAtm = Observable.range(1, 9).toArray();
+    this.countLum = Observable.range(1, 5).toArray();
+    this.countSurf = Observable.range(1, 9).toArray();
   }
 
   ngOnInit(): void {
@@ -48,6 +59,8 @@ export class ModalContentComponent implements OnInit {
 
 
   deleteAccident(accident: Accident) {
+
+    // je ne sais pas pourquoi il retourne une erreur... mais ca supprime bien
     this.accidentService.deleteAccident(accident._id).subscribe(res => {
 
       // this.accidentsList.splice(this.accidentsList.indexOf(accident), 1);
@@ -60,5 +73,10 @@ export class ModalContentComponent implements OnInit {
 
     this.activeModal.close();
   }
+
+  atmToString(num: number) {return this.iconService.atmToString(num);}
+  lumToString(num: number) {return this.iconService.lumToString(num);}
+  surfToString(num: number) {return this.iconService.surfToString(num);}
+  gravToString(num: number) {return this.iconService.gravToString(num);}
 
 }

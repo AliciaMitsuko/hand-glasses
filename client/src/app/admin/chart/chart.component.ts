@@ -34,13 +34,13 @@ export class ChartComponent implements OnInit {
   }
 
   updateGravParAtmNormLeg(accidents: Accident[]) {
-    let legerCount = [0,0,0]
+    let indemneCount = [0,0,0]
     let mortCount = [0,0,0]
     let hopitalCount = [0,0,0]
     for (let a of accidents) {
       if (a.gravite == 1) {
         if (a.contexte.atm <= 2) {
-          legerCount[a.contexte.atm-1]++;
+          indemneCount[a.contexte.atm-1]++;
         }
       } else if (a.gravite == 2) {
         if (a.contexte.atm <= 2) {
@@ -54,23 +54,23 @@ export class ChartComponent implements OnInit {
     }
 
     this.gravCountNormLeg = [
-      {data: legerCount, label: 'Blessé leger'},
-      {data: mortCount, label: 'Hospitalisé'},
-      {data: hopitalCount, label: 'Mort'}]
+      {data: indemneCount, label: 'Indemne'},
+      {data: mortCount, label: 'Tué'},
+      {data: hopitalCount, label: 'Blessé'}]
 
     this.barChartData = this.gravCountNormLeg;
   }
 
     // pas très scalable
   updateGravParAtm(accidents: Accident[]) {
-    let legerCount = [0,0,0,0,0,0]
+    let indemneCount = [0,0,0,0,0,0]
     let mortCount = [0,0,0,0,0,0]
     let hopitalCount = [0,0,0,0,0,0]
 
     for (let a of accidents) {
       if (a.gravite == 1) {
         if (2 < a.contexte.atm && a.contexte.atm <= 8) {
-          legerCount[a.contexte.atm-3]++;
+          indemneCount[a.contexte.atm-3]++;
         }
       } else if (a.gravite == 2) {
         if (2 < a.contexte.atm && a.contexte.atm <= 8) {
@@ -84,9 +84,9 @@ export class ChartComponent implements OnInit {
     }
 
     this.gravCount = [
-      {data: legerCount, label: 'Blessé leger'},
-      {data: mortCount, label: 'Hospitalisé'},
-      {data: hopitalCount, label: 'Mort'}]
+      {data: indemneCount, label: 'Indemne'},
+      {data: mortCount, label: 'Tué'},
+      {data: hopitalCount, label: 'Blessé'}]
 
     this.radarChartData = this.gravCount;
     console.log(this.radarChartData);

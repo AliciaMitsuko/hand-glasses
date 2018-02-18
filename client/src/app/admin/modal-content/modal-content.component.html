@@ -6,26 +6,91 @@
     </button>
   </div>
 <div class="modal-body">
-  <ul>
-    <li>{{accidentToEdit.num}}</li>
-    <li>{{accidentToEdit.dep}}</li>
-    <li>{{accidentToEdit.com}}</li>
-    <li>
-      {{accidentToEdit.contexte.atm}}
-    </li>
-    <li>
-      {{accidentToEdit.contexte.lum}}
-    </li>
-    <li>
-      {{accidentToEdit.contexte.surf}}
-    </li>
-    <li>
-      {{accidentToEdit.gravite}}
-    </li>
-    <li>
+  <div class="row">
+    <div class="col-lg-7"></div>
+    <div class="col-lg-5">
       {{accidentToEdit.date | date: 'dd/MM/yyyy hh:mm'}}
-    <li>
-  </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="form-group">
+        <label><b>Numéro de département</b></label>
+        <input type="text" [(ngModel)]="accidentToEdit.num" placeholder="Numero de département" class="form-control">
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <label><b>Numéro de commune</b></label>
+      <div class="form-group">
+        <input type="text" [(ngModel)]="accidentToEdit.com" placeholder="Numero de commune" class="form-control">
+      </div>
+    </div>
+  </div>
+  <!--<td><input type="text" name="title" id="title" (keypress)="submitTodo($event, todo)" [(ngModel)]="todo.title" placeholder="Title" class="form-control"></td>-->
+  <!--<td><input type="text" name="description" id="description" (keypress)="submitTodo($event, todo)" [(ngModel)]="todo.description" placeholder="Description"-->
+  <!--class="form-control"></td>-->
+  <!--<td>{{todo.date | date}}</td>-->
+  <!--<td>-->
+  <!--<input type="text" name="status" id="status" (keypress)="submitTodo($event, todo)" [(ngModel)]="todo.status" placeholder="Status" class="form-control">-->
+  <!--</td>-->
+    <!--<li>{{accidentToEdit.num}}</li>-->
+    <!--<li>{{accidentToEdit.dep}}</li>-->
+    <!--<li>{{accidentToEdit.com}}</li>-->
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="form-group">
+        <label><b>Conditions</b></label>
+        <select class="form-control" [(ngModel)]="accidentToEdit.contexte.atm">
+          <option *ngFor="let i of countAtm | async" [value]="+i">{{atmToString(i)}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="form-group">
+        <label><b>Luminosité</b></label>
+        <select class="form-control" [(ngModel)]="accidentToEdit.contexte.lum">
+          <option *ngFor="let i of countLum | async" [value]="+i">{{lumToString(i)}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="form-group">
+        <label><b>Etat de la surface</b></label>
+        <select class="form-control" [(ngModel)]="accidentToEdit.contexte.surf">
+          <option *ngFor="let i of countSurf | async" [value]="+i">{{surfToString(i)}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-lg-6">
+    <div class="form-group">
+      <label><b>Gravité</b></label>
+      <select class="form-control" [(ngModel)]="accidentToEdit.gravite">
+        <option *ngFor="let i of countGrav | async" [value]="+i">{{gravToString(i)}}</option>
+      </select>
+    </div>
+  </div>
+  </div>
+  <!--<ul>-->
+    <!--<li>-->
+      <!--{{accidentToEdit.contexte.atm}}-->
+    <!--</li>-->
+    <!--<li>-->
+      <!--{{accidentToEdit.contexte.lum}}-->
+    <!--</li>-->
+    <!--<li>-->
+      <!--{{accidentToEdit.contexte.surf}}-->
+    <!--</li>-->
+    <!--<li>-->
+      <!--{{accidentToEdit.gravite}}-->
+    <!--</li>-->
+    <!--<li>-->
+      <!--{{accidentToEdit.date | date: 'dd/MM/yyyy hh:mm'}}-->
+    <!--<li>-->
+  <!--</ul>-->
 </div>
 <div class="modal-footer">
   <button class="btn btn-danger" (click)="deleteAccident(accidentToEdit)">Supprimer</button>
