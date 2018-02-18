@@ -201,7 +201,7 @@ export class MapPageComponent implements OnInit {
             this.map.addLayer({
                 'id': this.accidentsList[_i].num,
                 'type': 'circle',
-                'source': 'source_circle_500',
+                'source': this.accidentsList[_i].num,
                 'paint': {
                     'circle-radius': {
                         stops: [

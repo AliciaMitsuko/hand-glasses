@@ -21,6 +21,7 @@ import {IconService} from './services/icon.service';
 import {DataTableModule} from "angular2-datatable";
 import { TableComponent } from './admin/table/table.component';
 import { MatListModule } from '@angular/material/list';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {
   MatTableModule, MatSortModule, MAT_DATE_LOCALE, NativeDateAdapter, DateAdapter,
   MAT_DATE_FORMATS, MatNativeDateModule, MatToolbarModule, MatTabsModule, MatSlideToggleModule, MatMenuModule,
@@ -102,6 +103,7 @@ const appRoutes: Routes = [
     MatSlideToggleModule,
     MatTabsModule,
     MatToolbarModule,
+    MatProgressSpinnerModule,
 
     // MatCardModule,
     // MatSidenavModule,
