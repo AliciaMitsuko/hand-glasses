@@ -13,9 +13,11 @@ exports.AccidentsTransformer = class AccidentsTransformer {
 
   convertMultipleAccident(accidents){
     try{
-      var res = [];
+      var res = {};
+      res.type = "FeatureCollection";
+      res.features = [];
       for(var a in accidents){
-        res.push(this.convertOneAccident(accidents[a]));
+        res.features.push(this.convertOneAccident(accidents[a]));
       }
       return res;
     }catch(e){
