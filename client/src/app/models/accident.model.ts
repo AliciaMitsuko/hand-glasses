@@ -1,11 +1,20 @@
 
-import Contexte, {default as Situation} from "./situation.model";
+import Contexte, {default as Situation} from './situation.model';
 
-// import * as GeoJSON from "@types/geojson"
+import {
+    BBox,
+    Feature, FeatureCollection, GeometryCollection, LineString,
+    MultiLineString, MultiPoint, MultiPolygon, Point, Polygon, GeometryObject
+} from 'geojson';
 
 class Accident {
     _id: string;
-    // coords: GeoJSON.; // coordinates:'lat lon' type: 'point' (si lat, lon vide, complete par adr et gps)
+    // coords: {longitude: number, latitude: number};
+    geojson: {
+        type: string,
+        coordinates: Number[]
+    };  // coordinates:'lat lon' type: 'point' (si lat, lon vide, complete par adr et gps)
+
     date: Date; // jour, mois, an, heure
     contexte: Contexte; // atm, lum, surf
     gravite: number;
@@ -15,12 +24,12 @@ class Accident {
     good: number;
     bad: number;
 
-    constructor(
-    ){
+    constructor() {
       this.date = new Date();
       this.contexte = new Situation();
       this.gravite = 1;
-      // this.coords = new
+      /*this.coords.latitude = 0;
+      this.coords.longitude = 0;*/
       this.dep = 1;
       this.com = 4;
     }

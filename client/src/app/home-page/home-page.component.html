@@ -2,20 +2,24 @@
 
   <div (window:resize)="onResize($event)" class="row page">
 
-    <div class="col-md-6 no-padding-right" [hidden]="!isShowMap">
-      <app-map-page [accidentsList]="accidentsList">
+    <!--<mat-spinner>-->
 
-      </app-map-page>
-    </div>
+      <div class="col-md-6 no-padding-right" [hidden]="!isShowMap">
+        <app-map-page [accidentsList]="accidentsList">
 
-    <div class="col-md-6" [hidden]="!isShowList">
-      <app-list-page [accidentsList]="accidentsList">
+        </app-map-page>
+      </div>
 
-      </app-list-page>
-    </div>
+      <div class="col-md-6" [hidden]="!isShowList">
+        <app-list-page [accidentsList]="accidentsList">
 
-    <button mat-fab class="changeViewButton" color="primary" (click)="changeViewButton()" [hidden]="!isShowList">Carte</button>
-    <button mat-fab class="changeViewButton" color="primary" (click)="changeViewButton()" [hidden]="!isShowMap">Liste</button>
+        </app-list-page>
+      </div>
+
+      <button mat-fab class="changeViewButton" color="primary" (click)="changeViewButton()" [hidden]="!isShowList">Carte</button>
+      <button mat-fab class="changeViewButton" color="primary" (click)="changeViewButton()" [hidden]="!isShowMap">Liste</button>
+
+    <!--</mat-spinner>-->
 
   </div>
 </div>

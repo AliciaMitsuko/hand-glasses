@@ -5,6 +5,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import Accident from '../models/accident.model';
 import {LngLat, Map} from 'mapbox-gl';
 import {environment} from '../../environments/environment';
+import {forEach} from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-map-page',
@@ -41,14 +42,23 @@ export class MapPageComponent implements OnInit {
 
     @Input() accidentsList: Accident[];
 
-    map: Map;
+    // The distance in km before checkin for new accident
+    // This is also the standard zone distance to get accident list
+    private bufferDistance = 10;
+
+    // We store the last coordinates corresponding tp the last API call
+    private lastLatCheck = 0;
+    private lastLngCheck = 0;
+
+
+    public map: Map;
 
     // map: mapboxgl.Map;
     // style = 'mapbox://styles/mapbox/outdoors-v9';
-    style = 'mapbox://styles/mapbox/light-v9';
+    private style = 'mapbox://styles/mapbox/light-v9';
     // style = 'mapbox://styles/jonahadkins/cim3kbhey0091cwm21d1dvsgo';
-    lat = 48.86;
-    lng = 2.33;
+    private lat = 48.86;
+    private lng = 2.33;
     message = '';
     // data
     source: any;
@@ -64,13 +74,33 @@ export class MapPageComponent implements OnInit {
     private initializeMap() {
         /// locate the user
         if (navigator.geolocation) {
+
+            // Go to current user location the first time we got his location
             navigator.geolocation.getCurrentPosition(position => {
                 this.lat = position.coords.latitude;
                 this.lng = position.coords.longitude;
 
                 this.map.flyTo({
-                    center: [-74.50, 40]
+                    center: [this.lng, this.lat]
                 });
+
+
+            });
+
+            // We move his cursor when he moves
+            navigator.geolocation.watchPosition(position => {
+                this.lat = position.coords.latitude;
+                this.lng = position.coords.longitude;
+
+                // We keep the map centered on the user
+                this.map.flyTo({
+                    center: [this.lng, this.lat]
+                });
+
+                // We check if he is close to an accident area
+                this.checkAreaForAccident();
+
+                // alert('position changed');
 
             });
         }
@@ -105,6 +135,7 @@ export class MapPageComponent implements OnInit {
         this.map.on('load', (event) => {
 
            this.showMarkers();
+
         });
     }
 
@@ -148,35 +179,62 @@ export class MapPageComponent implements OnInit {
             }
         });*/
 
-        this.map.addSource('source_circle_500', {
-            'type': 'geojson',
-            'data': {
-                'type': 'FeatureCollection',
-                'features': [{
-                    'type': 'Feature',
-                    'geometry': {
-                        'type': 'Point',
-                        'coordinates': [-74.50, 40]
-                    }
-                }]
-            }
-        });
+        for (let _i = 0; _i < this.accidentsList.length; _i++) {
 
-        this.map.addLayer({
-            'id': 'circle500',
-            'type': 'circle',
-            'source': 'source_circle_500',
-            'paint': {
-                'circle-radius': {
-                    stops: [
-                        [5, 1],
-                        [15, 30]
-                    ],
-                    base: 2
-                },
-                'circle-color': 'red',
-                'circle-opacity': 0.6
-            }
-        });
+            console.log(this.accidentsList[_i]);
+
+            this.map.addSource(this.accidentsList[_i].num, {
+                'type': 'geojson',
+                'data': {
+                    'type': 'FeatureCollection',
+                    'features': [{
+                        'type': 'Feature',
+                        'geometry': {
+                            'type': 'Point',
+                            'coordinates': [this.accidentsList[_i]['geojson'].type]
+                        }
+                    }]
+                }
+            });
+
+            this.map.addLayer({
+                'id': this.accidentsList[_i].num,
+                'type': 'circle',
+                'source': this.accidentsList[_i].num,
+                'paint': {
+                    'circle-radius': {
+                        stops: [
+                            [5, 1],
+                            [15, 30]
+                        ],
+                        base: 2
+                    },
+                    'circle-color': 'red',
+                    'circle-opacity': 0.6
+                }
+            });
+        }
+
+
+    }
+
+    checkAreaForAccident() {
+        if (this.calculateDistance(this.lat, this.lng, this.lastLatCheck, this.lastLngCheck) > 10 ) {
+            // If the user moved more than 10km from the last API call, then we call again to refresh our nearby accident list
+            // http://localhost:3000/api/dangers/?lat=43.6157&long=7.0719&distance=25
+            // Then we store it as class variable
+        }
+
+        // We check if we got an accident within the 50m
+        // We go through the class var which contains the nearby accident and pop an alert if one is close
+
+    }
+
+    calculateDistance(lat1: number, lat2: number, long1: number, long2: number) {
+        const p = 0.017453292519943295;    // Math.PI / 180
+        const c = Math.cos;
+        const a = 0.5 - c((lat1 - lat2) * p) / 2 + c(lat2 * p) * c((lat1) * p) * (1 - c(((long1 - long2) * p))) / 2;
+        const dis = (12742 * Math.asin(Math.sqrt(a))); // 2 * R; R = 6371 km
+        return dis;
     }
 }
