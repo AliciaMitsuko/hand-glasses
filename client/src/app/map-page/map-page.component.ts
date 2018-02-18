@@ -191,8 +191,8 @@ export class MapPageComponent implements OnInit {
                         'type': 'Feature',
                         'geometry': {
                             'type': 'Point',
-                            'coordinates': [this.accidentsList[_i].coords.longitude
-                                , this.accidentsList[_i].coords.latitude]
+                            'coordinates': [this.accidentsList[_i]['geojson'].coordinates[0]
+                                , this.accidentsList[_i]['geojson'].coordinates[1]]
                         }
                     }]
                 }

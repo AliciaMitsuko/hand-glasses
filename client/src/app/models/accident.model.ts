@@ -10,9 +10,9 @@ import {
 class Accident {
     _id: string;
     // coords: {longitude: number, latitude: number};
-    coords: {
-        type: {type: String, default: 'Point'},
-        coordinates: {type: [Number], default: [0, 0]}
+    geojson: {
+        type: string,
+        coordinates: Number[]
     };  // coordinates:'lat lon' type: 'point' (si lat, lon vide, complete par adr et gps)
 
     date: Date; // jour, mois, an, heure
