@@ -12,4 +12,6 @@ router.delete('/:id',AccidentController.removeAccident)
 
 router.get('/generate/:id', AccidentController.convertCSVToAccidentLineAsync)
 
+router.get('/all', AccidentController.getAllAccidentsFeatureList);
+
 module.exports = router;
