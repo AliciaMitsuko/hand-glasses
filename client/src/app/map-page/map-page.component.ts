@@ -243,7 +243,7 @@ export class MapPageComponent implements OnInit {
             'type': 'fill',
             'source': {
                 'type': 'geojson',
-                'data': this.geojson.data
+                'data': this.geojson
             },
             'layout': {},
             'paint': {
