@@ -16,6 +16,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { AccidentService } from './services/accident.service';
 import {DataService} from './services/data.service';
 import {IconService} from './services/icon.service';
+import {MapService} from './services/map.service';
 
 /** Plug in **/
 import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -134,6 +135,7 @@ const appRoutes: Routes = [
     AccidentService,
     DataService,
     IconService,
+    MapService,
     // {provide: DateAdapter, useClass: NativeDateAdapter},
     // {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
     // {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}

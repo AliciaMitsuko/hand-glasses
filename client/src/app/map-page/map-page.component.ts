@@ -7,6 +7,8 @@ import {LngLat, Map} from 'mapbox-gl';
 import {environment} from '../../environments/environment';
 import {forEach} from '@angular/router/src/utils/collection';
 import {DataService} from "../services/data.service";
+import {Subscription} from "rxjs/Subscription";
+import {MapService} from '../services/map.service';
 
 @Component({
   selector: 'app-map-page',
@@ -15,7 +17,7 @@ import {DataService} from "../services/data.service";
 })
 export class MapPageComponent implements OnInit {
 
-    public geojson = {
+    /*public geojson = {
         type: 'FeatureCollection',
         features: [{
             type: 'Feature',
@@ -39,11 +41,13 @@ export class MapPageComponent implements OnInit {
                     description: 'San Francisco, California'
                 }
             }]
-    };
+    };*/
 
 
 
-     public accidentsList: Accident[];
+    public accidentsList: Accident[];
+    private subscription: Subscription;
+    private geojson;
 
     // The distance in km before checkin for new accident
     // This is also the standard zone distance to get accident list
@@ -67,13 +71,30 @@ export class MapPageComponent implements OnInit {
     source: any;
     markers: any;
 
-    constructor(private dataService: DataService) {
+    constructor(private dataService: DataService,  private mapService: MapService) {
     }
 
     ngOnInit() {
-        this.dataService.accidentsListMap.subscribe(message => this.accidentsList = message);
+        this.dataService.accidentsListMap.subscribe(message => { this.accidentsList = message; /*this.showMarkers();*/ });
+        console.log(this.mapService.getAllAccidentGeoJson());
+
+        this.subscription = this.mapService.getMessage().subscribe(message => { console.log(message); });
+
+        this.mapService.getAllAccidentGeoJson().
+            subscribe(resp => {
+                this.geojson = resp;
+                console.log(this.geojson);
+                // this.dataService.changeAccidentList(accidents); // update accidentList to component which are subscribed
+            });
+
+        // this.geojson = this.mapService.getAllAccidentGeoJson();
+
+        console.log(this.geojson);
+
         this.initializeMap();
     }
+
+
 
     private initializeMap() {
         /// locate the user
@@ -137,9 +158,7 @@ export class MapPageComponent implements OnInit {
 
         /// Add realtime firebase data on map load
         this.map.on('load', (event) => {
-
            this.showMarkers();
-
         });
     }
 
@@ -153,6 +172,8 @@ export class MapPageComponent implements OnInit {
             center: data.geometry.coordinates
         });
     }
+
+
 
     showMarkers() {
         /*this.map.addLayer({
@@ -183,29 +204,17 @@ export class MapPageComponent implements OnInit {
             }
         });*/
 
-        for (let _i = 0; _i < this.accidentsList.length; _i++) {
+        /*for (let _i = 0; _i < this.accidentsList.length; _i++) {*/
 
-            console.log(this.accidentsList[_i]);
-
-            this.map.addSource(this.accidentsList[_i].num, {
+            /*this.map.addSource('test', {
                 'type': 'geojson',
-                'data': {
-                    'type': 'FeatureCollection',
-                    'features': [{
-                        'type': 'Feature',
-                        'geometry': {
-                            'type': 'Point', //this.accidentsList[_i]['geojson'].type,
-                            'coordinates': [this.accidentsList[_i]['geojson'].coordinates[0]
-                                , this.accidentsList[_i]['geojson'].coordinates[1]]
-                        }
-                    }]
-                }
-            });
+                'data': this.geojson
+            });*/
 
-            this.map.addLayer({
-                'id': this.accidentsList[_i].num,
+            /*this.map.addLayer({
+                'id': 'geojson',
                 'type': 'circle',
-                'source': this.accidentsList[_i].num,
+                'source': this.geojson,
                 'paint': {
                     'circle-radius': {
                         stops: [
@@ -217,8 +226,49 @@ export class MapPageComponent implements OnInit {
                     'circle-color': 'red',
                     'circle-opacity': 0.6
                 }
-            });
+            });*/
+
+        let layers = this.map.getStyle().layers;
+        // Find the index of the first symbol layer in the map style
+        let firstSymbolId;
+        for (let i = 0; i < layers.length; i++) {
+            if (layers[i].type === 'symbol') {
+                firstSymbolId = layers[i].id;
+                break;
+            }
         }
+        this.map.addLayer({
+            'id': 'urban-areas-fill',
+            'type': 'fill',
+            'source': {
+                'type': 'geojson',
+                'data': this.geojson.data
+            },
+            'layout': {},
+            'paint': {
+                'fill-color': '#f08',
+                'fill-opacity': 0.4
+            }
+            // This is the important part of this example: the addLayer
+            // method takes 2 arguments: the layer as an object, and a string
+            // representing another layer's name. if the other layer
+            // exists in the stylesheet already, the new layer will be positioned
+            // right before that layer in the stack, making it possible to put
+            // 'overlays' anywhere in the layer stack.
+            // Insert the layer beneath the first symbol layer.
+        }, firstSymbolId);
+
+        /*this.geojson.features.forEach(function(marker) {
+
+            // create a HTML element for each feature
+            const el = document.createElement('div');
+            el.className = 'marker';
+
+            // make a marker for each feature and add to the map
+            new mapboxgl.Marker(el)
+                .setLngLat(marker.geometry.coordinates)
+                .addTo(Map);
+        });*/
 
 
     }
