@@ -26,12 +26,22 @@ export class ListPageComponent implements OnInit {
 
     addGood(accident: Accident) {
         accident.good += 1;
-        this.accidentService.editAccident(accident);
+        this.accidentService.editAccident(accident).subscribe(res => {
+            console.log('Update Succesful');
+        }, err => {
+
+            console.error('Update Unsuccesful');
+        });
     }
 
     addBad(accident: Accident) {
         accident.bad += 1;
-        this.accidentService.editAccident(accident);
+        this.accidentService.editAccident(accident).subscribe(res => {
+            console.log('Update Succesful');
+        }, err => {
+
+            console.error('Update Unsuccesful');
+        });
     }
 
     goToMap(geojson: Array<number>) {
