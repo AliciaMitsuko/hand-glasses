@@ -35,19 +35,26 @@ export class AccidentService {
     })
   }
 
-  getAccidentsGrav(num: number): Observable<Accident[]>{
-    return this.http.get(this.accidentUrl+"?gravite="+num)
+  getAccidentsParams(params: string): Observable<Accident[]>{
+    return this.http.get(this.accidentUrl+"?"+params)
       .map(res  => {
         return res["data"].docs as Accident[];
       })
   }
 
-  getAccidentsLum(num: number): Observable<Accident[]>{
-    return this.http.get(this.accidentUrl+"?lum="+num)
-      .map(res  => {
-        return res["data"].docs as Accident[];
-      })
-  }
+  // getAccidentsGrav(num: number): Observable<Accident[]>{
+  //   return this.http.get(this.accidentUrl+"?gravite="+num)
+  //     .map(res  => {
+  //       return res["data"].docs as Accident[];
+  //     })
+  // }
+  //
+  // getAccidentsLum(num: number): Observable<Accident[]>{
+  //   return this.http.get(this.accidentUrl+"?lum="+num)
+  //     .map(res  => {
+  //       return res["data"].docs as Accident[];
+  //     })
+  // }
 
   editAccident(accident:Accident){
     let editUrl = `${this.accidentUrl}`

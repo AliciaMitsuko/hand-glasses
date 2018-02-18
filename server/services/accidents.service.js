@@ -51,9 +51,7 @@ console.log("call the service")
         dep: Number(accident.dep),
         com: Number(accident.com),
         contexte: accident.contexte,
-        // geojson: new GeoJSON(accident.lat, accident.long),
         geojson: accident.geojson,
-        heure: accident.heure, // à mettre dans contexte ?
         date: accident.date,
         good: accident.good,
         bad: accident.bad
@@ -87,10 +85,15 @@ exports.updateAccident = async function(accident){
 
     console.log(oldAccident)
 
-    oldAccident.title = accident.title
-    oldAccident.description = accident.description
-    oldAccident.status = accident.status
-
+    oldAccident.num = accident.num; // can't replace
+    oldAccident.gravite = Number(accident.gravite);
+    oldAccident.dep = Number(accident.dep);
+    oldAccident.com = Number(accident.com);
+    oldAccident.contexte = accident.contexte;
+    oldAccident.geojson = accident.geojson;
+    oldAccident.date = accident.date;
+    oldAccident.good = accident.good;
+    oldAccident.bad = accident.bad;
 
     console.log(oldAccident)
 

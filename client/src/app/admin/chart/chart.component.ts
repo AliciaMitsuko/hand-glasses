@@ -127,7 +127,7 @@ export class ChartComponent implements OnInit {
     {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'},
     {data: [1,2, 3, 9, 100, 27, 40], label: 'Series D'}
   ];
-  public lineChartLabels:Array<any> = ['Plein jour', 'Crépusc./Aube', 'Nuit'];
+  public lineChartLabels:Array<any> = ['Plein jour', 'Crép./Aube', 'Nuit'];
   public lineChartOptions:any = {
     responsive: true
   };
@@ -184,7 +184,7 @@ export class ChartComponent implements OnInit {
     scaleShowVerticalLines: false,
     responsive: true
   };
-  public barChartLabels:string[] = ['Normale', 'Pluie legère'];
+  public barChartLabels:string[] = ['Cond. normale', 'Pluie legère'];
   public barChartType:string = 'bar';
   public barChartLegend:boolean = true;
 

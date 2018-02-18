@@ -70,9 +70,9 @@ exports.createAccidentFromLine = async function(data, req, res, next) {
             ]
         },
         date: new Date('20'+data.an, data.mois, data.jour, data.hrmn.substring(0, 2), data.hrmn.substring(2, 4)),
-        an: Number(data.an),
-        mois: Number(data.mois),
-        jour: Number(data.jour),
+        // an: Number(data.an),
+        // mois: Number(data.mois),
+        // jour: Number(data.jour),
         good: 0,
         bad: 0
     };
@@ -112,7 +112,7 @@ exports.getAccidents = async function(req, res, next){
         }
     }
 
-    console.log("toto");
+    // console.log("toto");
     console.log(query);
 
     var page = req.query.page ? req.query.page : 1;
@@ -122,7 +122,7 @@ exports.getAccidents = async function(req, res, next){
 
     try{
         var accidents = await AccidentService.getAccidents(query, page, limit)
-        return res.status(200).json({status: 200, data: accidents, message: "Succesfully Accidents Recieved"});
+        return res.status(200).json({status: 200, data: accidents, message: "Succesfully Accidents Received"});
     }catch(e){
         return res.status(400).json({status: 400, message: e.message});
     }
@@ -135,7 +135,6 @@ exports.getAccidentsById = async function(req, res, next){
     var queryVariable={};
 
     queryVariable['_id'] = id;
-
 
     var strName, strValue ;
     var query = {};
@@ -156,15 +155,13 @@ exports.getAccidentsById = async function(req, res, next){
 
     try{
         var accidents = await AccidentService.getAccidents(query, page, limit)
-        return res.status(200).json({status: 200, data: accidents, message: "Succesfully Accidents Recieved"});
+        return res.status(200).json({status: 200, data: accidents, message: "Succesfully Accidents Received"});
     }catch(e){
         return res.status(400).json({status: 400, message: e.message});
     }
 }
 
 exports.getAccidentsByGravite = async function(req, res, next){
-
-
     var atm = req.query.atm ? req.query.atm : null;
     var gravite = req.query.gravite ? req.query.gravite : null;
     var lum = req.query.lum ? req.query.lum : null;
@@ -189,10 +186,7 @@ exports.getAccidentsByGravite = async function(req, res, next){
         }
     }
 
-    console.log("toto");
     console.log(query);
-
-
 
     var page = req.query.page ? req.query.page : 1;
     var limit = req.query.limit ? req.query.limit : 1000;
@@ -201,12 +195,13 @@ exports.getAccidentsByGravite = async function(req, res, next){
 
     try{
         var accidents = await AccidentService.getAccidentsByGravite(query, page, limit)
-        return res.status(200).json({status: 200, data: accidents, message: "Succesfully Accidents Recieved"});
+        return res.status(200).json({status: 200, data: accidents, message: "Succesfully Accidents Received"});
     }catch(e){
         return res.status(400).json({status: 400, message: e.message});
     }
 }
 
+// Not used !
 exports.createAccident = async function(req, res, next){
     var accident = {
         gravite: req.body.gravite,
@@ -235,14 +230,20 @@ exports.updateAccident = async function(req, res, next){
 
     var accident = {
         id,
-        title: req.body.title ? req.body.title : null,
-        description: req.body.description ? req.body.description : null,
-        status: req.body.status ? req.body.status : null
+        num: req.body.num ? req.body.num : null,
+        gravite: req.body.gravite ? req.body.gravite : null,
+        dep: req.body.dep ? req.body.dep : null,
+        com: req.body.com ? req.body.com : null,
+        contexte: req.body.contexte ? req.body.contexte : null,
+        geojson: req.body.geojson ? req.body.geojson : null,
+        date: req.body.date ? req.body.date : null,
+        good: req.body.good ? req.body.good : null,
+        bad: req.body.bad ? req.body.bad : null
     }
 
     try{
         var updatedAccident = await AccidentService.updateAccident(accident)
-        return res.status(200).json({status: 200, data: updatedAccident, message: "Succesfully Updated Tod"})
+        return res.status(200).json({status: 200, data: updatedAccident, message: "Succesfully Updated Accident"})
     }catch(e){
         return res.status(400).json({status: 400, message: e.message})
     }

@@ -45,9 +45,9 @@
 <!--</div>-->
 
 <div class="row">
-  <div class="col-lg-6 offset-2">
+  <div class="col-lg-6 offset-1">
 <div class="panel panel-default">
-  <div class="panel-heading">Accident information</div>
+  <div class="panel-heading">Information sur les accidents</div>
 
   <!--<table class="table table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable"-->
   <table class="table table-striped" [mfData]="accidentsList | filter: filterQuery" #mf="mfDataTable"
@@ -66,11 +66,14 @@
       <th style="width: 10%">
         <mfDefaultSorter by="com">Com</mfDefaultSorter>
       </th>
-      <th style="width: 30%">
+      <th style="width: 20%">
+        <mfDefaultSorter by="coords">Coords</mfDefaultSorter>
+      </th>
+      <th style="width: 40%; padding-right: 3vw;padding-left: 3vw;">
         <mfDefaultSorter by="contexte">Contexte</mfDefaultSorter>
       </th>
       <th style="width: 10%">
-        <mfDefaultSorter by="gravite">Gravite</mfDefaultSorter>
+        <mfDefaultSorter by="gravite">Gravité</mfDefaultSorter>
       </th>
       <th style="width: 10%">
         <mfDefaultSorter by="date">Date</mfDefaultSorter>
@@ -93,72 +96,27 @@
     <!--<tr *ngFor="let accident of accidentsList">-->
       <!--<td>{{accident._id}}</td>-->
       <td>{{accident.num}}</td>
-      <td>{{accident.dep}} ({{accident['geojson'].coordinates[0]}}, {{accident['geojson'].coordinates[1]}})</td>
+      <td>{{accident.dep}}</td>
       <td>{{accident.com}}</td>
+      <td>({{accident['geojson'].coordinates[0]}}, {{accident['geojson'].coordinates[1]}})</td>
       <td>
         <ul>
         <li>
-        <img style="width: 20%" [src]="atmToIcon(accident.contexte.atm)" class="img-fluid"/>
-          {{accident.contexte.atm}}
-
+          <img style="width: 30%;" [src]="atmToIcon(accident.contexte.atm)" class="img-fluid"/>
         </li>
         <li>
-        <img style="width: 20%" [src]="lumToIcon(accident.contexte.lum)" class="img-fluid"/>
-          <!--<mat-form-field>-->
-            <!--<mat-select [(value)]="accident.contexte.lum">-->
-              <!--<mat-option value="1"><img style="height: 50px" src="../../../assets/icons/day.svg" class="img-fluid"/></mat-option>-->
-              <!--<mat-option value="2"><img style="height: 50px" src="../../../assets/icons/evening.svg" class="img-fluid"/></mat-option>-->
-              <!--<mat-option value="3"><img style="height: 50px" src="../../../assets/icons/moon2.svg" class="img-fluid"/></mat-option>-->
-            <!--</mat-select>-->
-          <!--</mat-form-field>-->
-
-          <!--<div class="form-group">-->
-            <!--<select class="form-control" [(ngModel)]="accident.contexte.lum">-->
-              <!--<option [value]="+1"><img style="background-image:url('../../../assets/icons/day.svg'); height: 50px" src="../../../assets/icons/day.svg" class="img-fluid"/></option>-->
-              <!--<option [value]="+2"><img style="background-image:url('../../../assets/icons/evening.svg'); height: 50px" src="../../../assets/icons/evening.svg" class="img-fluid"/></option>-->
-              <!--<option [value]="+3"><img style="background-image:url('../../../assets/icons/moon2.svg'); height: 50px" src="../../../assets/icons/moon2.svg" class="img-fluid"/></option>-->
-            <!--</select>-->
-          <!--</div>-->
+          <img style="width: 30%;" [src]="lumToIcon(accident.contexte.lum)" class="img-fluid"/>
         </li>
         <li>
-        <img style="width: 20%" [src]="surfToIcon(accident.contexte.surf)" class="img-fluid"/>
+          <img style="width: 30%;" [src]="surfToIcon(accident.contexte.surf)" class="img-fluid"/>
         </li>
         </ul>
       </td>
       <td>
-        <img style="width: 50%" [src]="gravToIcon(accident.gravite)" class="img-fluid"/>
-        {{accident.gravite}}
+        <img style="width: 70%" [src]="gravToIcon(accident.gravite)" class="img-fluid"/>
         </td>
       <td>
         {{accident.date | date: 'dd/MM/yyyy hh:mm'}}
-        <!--<mat-form-field>-->
-          <!--<input matInput [matDatepicker]="picker" placeholder="Choose a date">-->
-          <!--<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
-          <!--<mat-datepicker #picker></mat-datepicker>-->
-        <!--</mat-form-field>-->
-
-        <!--<form class="form-inline">-->
-          <!--<div class="form-group">-->
-            <!--<div class="input-group">-->
-              <!--<input class="form-control"-->
-                     <!--name="dp" [(ngModel)]="accident.newDate" ngbDatepicker #d="ngbDatepicker">-->
-              <!--<div class="input-group-append">-->
-                <!--<button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">-->
-                  <!--<img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>-->
-                <!--</button>-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</form>-->
-
-        <!--<hr/>-->
-        <!--<pre>Model: {{ accident.newDate | json }}</pre>-->
-        <!--<pre>Model:{{ accident.newDate.day}}/{{ accident.newDate.month}}/{{ accident.newDate.year}}</pre>-->
-      <!--</td>-->
-      <!--<td>{{item.name}}</td>-->
-      <!--<td>{{item.email}}</td>-->
-      <!--<td class="text-right">{{item.age}}</td>-->
-      <!--<td>{{item.city | uppercase}}</td>-->
       <td>
         <!--<button (click)="remove(item)" class="btn btn-danger">x</button>-->
         <!--<button class="btn btn-danger">x</button>-->

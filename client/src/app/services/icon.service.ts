@@ -10,13 +10,13 @@ export class IconService {
     let myNum = "" + num
     switch (parseInt(myNum)) {
       case 1: {
-        return '../../assets/icons/005-care.svg';
+        return '../../assets/icons/004-heart.svg';
       }
       case 2: {
         return '../../assets/icons/001-medical-2.svg';
       }
-      case 3  || 4 : {
-        return '../../assets/icons/003-medical.svg';
+      case 3 || 4 : {
+        return '../../assets/icons/006-injured.svg';
       }
       default: {
         return '../../assets/icons/nothing.svg';
@@ -51,13 +51,13 @@ export class IconService {
     let myNum = "" + num
     switch (parseInt(myNum)) {
       case 1: {
-        return '../../assets/icons/day.svg';
+        return '../../assets/icons/004-sun.svg';
       }
       case 2: {
-        return '../../assets/icons/evening.svg';
+        return '../../assets/icons/day.svg'; // dawn / twilight
       }
       case 3  || 4 || 5 : {
-        return '../../assets/icons/moon2.svg';
+        return '../../assets/icons/evening.svg';
       }
       default: {
         // return 'indéfini';
@@ -86,16 +86,17 @@ export class IconService {
       }
       default: {
         // return 'indéfini';
-        return '../../assets/icons/nothing.svg';
+        return 'Autre';
       }
     }
   }
 
   atmToIcon(num: number) {
-    switch (num) {
-      case 1: {
-        return '../../assets/icons/004-sun.svg';
-      }
+    let myNum = "" + num
+    switch (parseInt(myNum)) {
+      // case 1: {
+      //   return '../../assets/icons/004-sun.svg';
+      // }
       case 2 || 3: {
         return '../../assets/icons/005-rain.svg';
       }
@@ -109,7 +110,7 @@ export class IconService {
         return '../../assets/icons/001-wind.svg';
       }
       case 7: {
-        return '../../assets/icons/004-sun.svg';
+        return '../../assets/icons/sun.svg';
       }
       case 8: {
         return '../../assets/icons/002-clouds.svg';
@@ -122,7 +123,8 @@ export class IconService {
   }
 
   atmToString(num: number) {
-    switch (num) {
+    let myNum = "" + num
+    switch (parseInt(myNum)) {
       case 1: {
         return 'Normale';
       }
@@ -156,6 +158,9 @@ export class IconService {
 
   surfToIcon(num: number) {
     switch(num) {
+      case 4: {
+        return '../../../assets/icons/flood.svg';
+      }
       default: {
         return '../../../assets/icons/nothing.svg'
 
@@ -164,7 +169,8 @@ export class IconService {
   }
 
   surfToString(num: number) {
-    switch (num) {
+    let myNum = "" + num
+    switch (parseInt(myNum)) {
       case 1: {
         return 'Normale';
       }
@@ -191,7 +197,6 @@ export class IconService {
       }
       default: {
         return 'Autre';
-
       }
     }
   }

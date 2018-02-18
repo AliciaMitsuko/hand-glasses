@@ -47,12 +47,12 @@ export class ModalContentComponent implements OnInit {
     this.activeModal.close();
   }
   editAccident(accident: Accident) {
-    // this.accidentService.editAccident(accident).subscribe(res => {
-    //   console.log('Update Succesful')
-    // }, err => {
-    //   this.editAccident(accident)
-    //   console.error('Update Unsuccesful')
-    // })
+    this.accidentService.editAccident(accident).subscribe(res => {
+      console.log('Update Succesful')
+    }, err => {
+      this.editAccident(accident)
+      console.error('Update Unsuccesful')
+    })
 
     this.activeModal.close();
   }
