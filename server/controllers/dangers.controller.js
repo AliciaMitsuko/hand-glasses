@@ -1,5 +1,5 @@
 var DangerService = require('../services/dangers.service');
-var QueryBuilder = require('./GeoQueryBuilder');
+var GeoQueryBuilder = require('./GeoQueryBuilder');
 
 exports.getNearbyDangers = async function(req, res, next){
   try{
@@ -24,7 +24,9 @@ exports.getNearbyDangers = async function(req, res, next){
     if(isNaN(distance)){
       return res.status(400).json({status: 400, message: "distance (in meters) must be a number "});
     }
-    var query = (new QueryBuilder.GeoQueryBuilder()).buildNearQuery(geoJson, distance);
+    console.log('before query');
+    var query = GeoQueryBuilder.buildNearQuery(geoJson, distance);
+    console.log('after query');
     var proximityFrom = await DangerService.geoLocateDangers(query, page, limit);
     return res.status(200).json({status: 200, data: proximityFrom});
   }
@@ -41,7 +43,7 @@ exports.getDangersWithin = async function(req, res, next){
     return res.status(400).json({status: 400, message: "geoJSON needed in request body for Within geo spatial request"});
   }
   var geoJson = req.body.geoJson;
-  var query = (new QueryBuilder.GeoQueryBuilder()).buildWithinQuery(geoJson);
+  var query = GeoQueryBuilder.buildWithinQuery(geoJson);
   try{
     var withinAccidents = await DangerService.geoLocateDangers(query, page, limit);
     return res.status(200).json({status: 200, data: withinAccidents});
@@ -58,7 +60,7 @@ exports.getCrossedDangers = async function(req, res, next){
     return res.status(400).json({status: 400, message: "geoJSON needed in request body for intersect geo spatial request"});
   }
   var geoJson = req.body.geoJson;
-  var query = (new QueryBuilder.GeoQueryBuilder()).buildIntersectQuery(geoJson);
+  var query = GeoQueryBuilder.buildIntersectQuery(geoJson);
   try{
     var intersectAccidents = await DangerService.geoLocateDangers(query, page, limit);
     return res.status(200).json({status: 200, data: intersectAccidents});
