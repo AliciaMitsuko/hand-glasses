@@ -6,6 +6,7 @@ import Accident from '../models/accident.model';
 export class DataService {
 
   private accidentsListSource = new BehaviorSubject<Accident[]>([]);
+  private accidentsListSourceMap = new BehaviorSubject<Accident[]>([]);
   accidentsList = this.accidentsListSource.asObservable();
   accidentsListMap = this.accidentsListSourceMap.asObservable();
 
