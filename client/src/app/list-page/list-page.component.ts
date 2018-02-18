@@ -18,10 +18,20 @@ export class ListPageComponent implements OnInit {
     private sortedData;
 
     constructor(
-        private iconService: IconService, private dataService: DataService, private mapService: MapService) { }
+        private iconService: IconService, private dataService: DataService, private mapService: MapService, private accidentService: AccidentService) { }
 
     ngOnInit() {
         this.dataService.accidentsListMap.subscribe(message => this.accidentsList = message);
+    }
+
+    addGood(accident: Accident) {
+        accident.good += 1;
+        this.accidentService.editAccident(accident);
+    }
+
+    addBad(accident: Accident) {
+        accident.bad += 1;
+        this.accidentService.editAccident(accident);
     }
 
     goToMap(geojson: Array<number>) {
@@ -68,6 +78,12 @@ export class ListPageComponent implements OnInit {
 
     compare(a, b, isAsc) {
         return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+    }
+
+    displayAccidentInfo(amount: number) {
+        if (amount > 0) {
+            return amount;
+        }
     }
 
 }
