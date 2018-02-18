@@ -16,10 +16,6 @@ $to: rgb(4, 141, 254);
   height:40vh;
 }
 
-.container-top {
-  width: 3vw;
-}
-
 .modal-header {
   @include gradient($to, $from);
   color: white;
@@ -40,116 +36,9 @@ img {
 }
 
 ul {
-  list-style-type: none;
-  //margin: 0;
-  padding: 10px;
-}
-
-li {
-  /*margin-top: 5px;*/
-  margin-bottom: 10px;
-  padding: 10px 0px 10px 0px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  background-color: white;
-}
-
-$square-size:60px;
-.circle-badge {
-  height: $square-size;
-  width: $square-size;
-  line-height:$square-size;
-  text-align: center;
-  border-radius: 50px;
-  background: #1ACAC0;
-  color:white;
-  margin-left:auto;
-  margin-right:auto;
+  list-style:none;
 }
 
 .shadow {
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-}
-
-.card-info, .card__meta a {
-  color: #3299BB !important;
-  display: inline-flex;
-  vertical-align: middle;
-  line-height: 2;
-  font-size: 1rem;
-}
-.card__meta i.small {
-  font-size: 1.5rem;
-}
-.card .card-content .card-title {
-  line-height: 34px;
-  border-radius: 0;
-  border-width: 0;
-  /* border-radius: 0.25rem; */
-}
-.card__date {
-  background: #08c;
-  position: absolute;
-  top: 6px;
-  right: 6px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  color: #fff;
-  text-align: center;
-  line-height: 13px;
-  font-weight: bold;
-  padding-top: 7px;
-}
-.card__date__day {
-  display: block;
-  font-size: 14px;
-}
-.card__date__month {
-  display: block;
-  font-size: 10px;
-  text-transform: uppercase;
-}
-
-.card .card-content .card-title {
-  color: #0D8080 !important;
-  line-height: 18px;
-}
-
-.card .card-title {
-
-  font-size: 18px;
-  font-weight: 400;
-}
-
-.card .card-content p{
-  color: #1E1E1E;
-  font-size: 13px;
-}
-
-.collapsible{
-  background: #fff;
-}
-
-.card-row {
-  margin-bottom: 4px;
-  margin-top: 4px;
-}
-.card-action i {
-  vertical-align: text-bottom;
-  font-size: 21px;
-}
-
-
-//nav ul>li>a, nav .brand-logo  {
-//  color: #fff;
-//}
-
-//#container {
-//  padding: 20px 10px;
-//}
-
-.card {
-  border: 0px solid rgba(0, 0, 0, 0.125);
-  border-radius: 0rem;
-  margin-bottom:2vh;
 }

@@ -3,6 +3,8 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {DataService} from "../../services/data.service";
 
 import {current} from "codelyzer/util/syntaxKind";
+import Accident from "../../models/accident.model";
+import {AccidentService} from "../../services/accident.service";
 
 @Component({
   selector: 'app-modal-content',
@@ -14,19 +16,49 @@ export class ModalContentComponent implements OnInit {
 
   message:string;
 
-  counter= {};
-
+  accidentToEdit: Accident;
+  accidentsList: Accident[];
 
   constructor(
     public activeModal: NgbActiveModal,
-    private data: DataService
+    private dataService: DataService,
+    private accidentService: AccidentService
 ) {
-    this.counter= {};
     this.idModal = 0;
   }
 
   ngOnInit(): void {
+    this.dataService.accidentToEdit.subscribe(message => this.accidentToEdit = message)
+    this.dataService.accidentsList.subscribe(message => this.accidentsList = message) // moche :(
+  }
 
+  close() {
+    this.activeModal.close();
+  }
+  editAccident(accident: Accident) {
+    // this.accidentService.editAccident(accident).subscribe(res => {
+    //   console.log('Update Succesful')
+    // }, err => {
+    //   this.editAccident(accident)
+    //   console.error('Update Unsuccesful')
+    // })
+
+    this.activeModal.close();
+  }
+
+
+  deleteAccident(accident: Accident) {
+    this.accidentService.deleteAccident(accident._id).subscribe(res => {
+
+      // this.accidentsList.splice(this.accidentsList.indexOf(accident), 1);
+      // this.dataService.changeAccidentList(this.accidentsList);
+      //
+      // this.activeModal.close();
+    })
+    this.accidentsList.splice(this.accidentsList.indexOf(accident), 1);
+    this.dataService.changeAccidentList(this.accidentsList);
+
+    this.activeModal.close();
   }
 
 }

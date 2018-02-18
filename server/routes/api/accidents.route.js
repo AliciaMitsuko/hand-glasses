@@ -5,6 +5,7 @@ var router = express.Router()
 var AccidentController = require('../../controllers/accidents.controller');
 
 router.get('/', AccidentController.getAccidents)
+router.get('/id/:id', AccidentController.getAccidentsById)
 router.get('/gravite', AccidentController.getAccidentsByGravite)
 router.post('/', AccidentController.createAccident)
 router.put('/', AccidentController.updateAccident)

@@ -128,6 +128,39 @@ exports.getAccidents = async function(req, res, next){
     }
 }
 
+exports.getAccidentsById = async function(req, res, next){
+
+
+    var id = req.params.id;
+    var queryVariable={};
+
+    queryVariable['_id'] = id;
+
+
+    var strName, strValue ;
+    var query = {};
+    for(strName in queryVariable)
+    {
+        strValue = queryVariable[strName] ;
+        if(strValue!=null){
+            query[strName]=strValue;
+        }
+    }
+
+    console.log(query);
+
+    var page = req.query.page ? req.query.page : 1;
+    var limit = req.query.limit ? req.query.limit : 1000;
+
+    console.log(page, limit)
+
+    try{
+        var accidents = await AccidentService.getAccidents(query, page, limit)
+        return res.status(200).json({status: 200, data: accidents, message: "Succesfully Accidents Recieved"});
+    }catch(e){
+        return res.status(400).json({status: 400, message: e.message});
+    }
+}
 
 exports.getAccidentsByGravite = async function(req, res, next){
 
