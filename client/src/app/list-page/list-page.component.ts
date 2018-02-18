@@ -15,6 +15,9 @@ export class ListPageComponent implements OnInit {
 
     public accidentsList: Accident[];
 
+    private hasAlreadyVotedGood: Accident[] = [];
+    private hasAlreadyVotedBad: Accident[] = [];
+
     private sortedData;
 
     constructor(
@@ -25,23 +28,32 @@ export class ListPageComponent implements OnInit {
     }
 
     addGood(accident: Accident) {
-        accident.good += 1;
-        this.accidentService.editAccident(accident).subscribe(res => {
-            console.log('Update Succesful');
-        }, err => {
 
-            console.error('Update Unsuccesful');
-        });
+        if (!this.hasAlreadyVotedGood.includes(accident)) {
+            accident.good += 1;
+            this.accidentService.editAccident(accident).subscribe(res => {
+                this.hasAlreadyVotedGood.push(accident);
+                console.log('Update Succesful');
+            }, err => {
+
+                console.error('Update Unsuccesful');
+            });
+        }
     }
 
     addBad(accident: Accident) {
-        accident.bad += 1;
-        this.accidentService.editAccident(accident).subscribe(res => {
-            console.log('Update Succesful');
-        }, err => {
 
-            console.error('Update Unsuccesful');
-        });
+        if (!this.hasAlreadyVotedBad.includes(accident)) {
+            accident.bad += 1;
+            this.accidentService.editAccident(accident).subscribe(res => {
+                this.hasAlreadyVotedBad.push(accident);
+                console.log('Update Succesful');
+            }, err => {
+
+                console.error('Update Unsuccesful');
+            });
+        }
+
     }
 
     goToMap(geojson: Array<number>) {
