@@ -39,8 +39,8 @@
     </mat-card-content>
 
       <div class="row">
-        <button mat-button class="col-6">Dangeureux</button>
-        <button mat-button class="col-6">Sure</button>
+        <button mat-button class="col-6" (click)="addBad(accident)" > {{ displayAccidentInfo( accident.bad ) }} Dangeureux</button>
+        <button mat-button class="col-6" (click)="addGood(accident)" > {{ displayAccidentInfo( accident.good ) }} Sure</button>
       </div>
 
   </mat-card>
