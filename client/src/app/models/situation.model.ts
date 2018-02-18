@@ -1,11 +1,10 @@
 class Situation {
-    _id:string;
+    _id: string;
     atm: number;
     lum: number;
     surf: number;
 
-    constructor(
-    ){
+    constructor() {
         this.atm = 0;
         this.lum = 0;
         this.surf = 0;

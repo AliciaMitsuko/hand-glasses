@@ -181,7 +181,9 @@ export class MapPageComponent implements OnInit {
 
         for (let _i = 0; _i < this.accidentsList.length; _i++) {
 
-            /*this.map.addSource(this.accidentsList[_i].num, {
+            console.log(this.accidentsList[_i]);
+
+            this.map.addSource(this.accidentsList[_i].num, {
                 'type': 'geojson',
                 'data': {
                     'type': 'FeatureCollection',
@@ -189,9 +191,8 @@ export class MapPageComponent implements OnInit {
                         'type': 'Feature',
                         'geometry': {
                             'type': 'Point',
-                            'coordinates': [this.accidentsList[_i].geojson.coordinates
-                                [0], this.accidentsList[_i].geojson.coordinates
-                                [1]]
+                            'coordinates': [this.accidentsList[_i].coords.longitude
+                                , this.accidentsList[_i].coords.latitude]
                         }
                     }]
                 }
@@ -212,7 +213,7 @@ export class MapPageComponent implements OnInit {
                     'circle-color': 'red',
                     'circle-opacity': 0.6
                 }
-            });*/
+            });
         }
 
 
