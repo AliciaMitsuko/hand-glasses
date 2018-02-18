@@ -24,9 +24,7 @@ exports.getNearbyDangers = async function(req, res, next){
     if(isNaN(distance)){
       return res.status(400).json({status: 400, message: "distance (in meters) must be a number "});
     }
-    console.log('before query');
     var query = GeoQueryBuilder.buildNearQuery(geoJson, distance);
-    console.log('after query');
     var proximityFrom = await DangerService.geoLocateDangers(query, page, limit);
     return res.status(200).json({status: 200, data: proximityFrom});
   }
