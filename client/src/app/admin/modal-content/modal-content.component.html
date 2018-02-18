@@ -1,11 +1,35 @@
 <div class="modalComponent">
   <div class="modal-header">
+    <h4 class="modal-title">Modification de l'accident {{accidentToEdit.num}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
 <div class="modal-body">
-
+  <ul>
+    <li>{{accidentToEdit.num}}</li>
+    <li>{{accidentToEdit.dep}}</li>
+    <li>{{accidentToEdit.com}}</li>
+    <li>
+      {{accidentToEdit.contexte.atm}}
+    </li>
+    <li>
+      {{accidentToEdit.contexte.lum}}
+    </li>
+    <li>
+      {{accidentToEdit.contexte.surf}}
+    </li>
+    <li>
+      {{accidentToEdit.gravite}}
+    </li>
+    <li>
+      {{accidentToEdit.date | date: 'dd/MM/yyyy hh:mm'}}
+    <li>
+  </ul>
 </div>
-
 <div class="modal-footer">
+  <button class="btn btn-danger" (click)="deleteAccident(accidentToEdit)">Supprimer</button>
+  <button class="btn btn-info" (click)="editAccident(accidentToEdit)">Sauvegarder</button>
 </div>
 
 </div>
