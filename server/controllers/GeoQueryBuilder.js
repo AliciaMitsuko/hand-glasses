@@ -38,7 +38,7 @@ exports.GeoQueryBuilder = class GeoQueryBuilder {
     return query;
   }
 
-  buildIntersectQuery(geoJSON){
+  buildIntersectQuery(geoJson){
     if(!geoJson){
       throw "missing geoJSON for within query";
     }

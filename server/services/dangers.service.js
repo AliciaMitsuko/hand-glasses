@@ -1,6 +1,6 @@
 var Accident = require('../models/accident.model');
 
-exports.getNearbyDangers = async function(query, page, limit){
+exports.geoLocateDangers = async function(query, page, limit){
   try{
     var options = {
       page,
