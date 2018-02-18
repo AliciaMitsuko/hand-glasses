@@ -23,7 +23,7 @@ export class HomePageComponent implements OnInit {
       this.accidentService.getAccidents()
           .subscribe(accidents => {
               this.accidentsList = accidents;
-              this.dataService.changeAccidentList(accidents);
+              this.dataService.changeAccidentListMap(accidents);
               console.log(accidents);
           });
   }
