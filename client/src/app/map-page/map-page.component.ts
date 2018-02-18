@@ -190,7 +190,7 @@ export class MapPageComponent implements OnInit {
                     'features': [{
                         'type': 'Feature',
                         'geometry': {
-                            'type': 'Point',
+                            'type': 'Point', //this.accidentsList[_i]['geojson'].type,
                             'coordinates': [this.accidentsList[_i]['geojson'].coordinates[0]
                                 , this.accidentsList[_i]['geojson'].coordinates[1]]
                         }
