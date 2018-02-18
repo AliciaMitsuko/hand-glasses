@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import Accident from "../models/accident.model";
-import {AccidentService} from "../services/accident.service";
+import Accident from '../models/accident.model';
+import {AccidentService} from '../services/accident.service';
+import {DataService} from '../services/data.service';
 
 @Component({
   selector: 'app-home-page',
@@ -15,13 +16,14 @@ export class HomePageComponent implements OnInit {
 
   public accidentsList: Accident[];
 
-  constructor(private accidentService: AccidentService,) {
+  constructor(private accidentService: AccidentService, private dataService: DataService) {
   }
 
   ngOnInit() {
       this.accidentService.getAccidents()
           .subscribe(accidents => {
               this.accidentsList = accidents;
+              this.dataService.changeAccidentListMap(accidents);
               console.log(accidents);
           });
   }

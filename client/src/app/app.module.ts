@@ -7,7 +7,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AdminPageComponent } from './admin/admin-page/admin-page.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { MapPageComponent } from './map-page/map-page.component';
@@ -17,6 +16,11 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { AccidentService } from './services/accident.service';
 import {DataService} from './services/data.service';
 import {IconService} from './services/icon.service';
+
+/** Plug in **/
+import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {ModalComponent} from "./admin/modal/modal.component";
+import { ModalContentComponent } from './admin/modal-content/modal-content.component';
 
 import {DataTableModule} from "angular2-datatable";
 import { TableComponent } from './admin/table/table.component';
@@ -73,7 +77,9 @@ const appRoutes: Routes = [
     HomePageComponent,
     TableComponent,
     FilterPipe,
-    ChartComponent
+    ChartComponent,
+    ModalComponent,
+    ModalContentComponent,
   ],
   imports: [
     BrowserModule,
@@ -119,6 +125,9 @@ const appRoutes: Routes = [
         appRoutes,
         { enableTracing: true } // <-- debugging purposes only
     )
+  ],
+  entryComponents: [
+    ModalContentComponent
   ],
   providers: [
     TodoService,

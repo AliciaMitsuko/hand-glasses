@@ -1,11 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
-import { GeoJson, FeatureCollection } from '../map';
+import { GeoJson, FeatureCollection } from './map';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Accident from '../models/accident.model';
 import {LngLat, Map} from 'mapbox-gl';
 import {environment} from '../../environments/environment';
 import {forEach} from '@angular/router/src/utils/collection';
+import {DataService} from "../services/data.service";
 
 @Component({
   selector: 'app-map-page',
@@ -40,7 +41,9 @@ export class MapPageComponent implements OnInit {
             }]
     };
 
-    @Input() accidentsList: Accident[];
+
+
+     public accidentsList: Accident[];
 
     // The distance in km before checkin for new accident
     // This is also the standard zone distance to get accident list
@@ -64,10 +67,11 @@ export class MapPageComponent implements OnInit {
     source: any;
     markers: any;
 
-    constructor() {
+    constructor(private dataService: DataService) {
     }
 
     ngOnInit() {
+        this.dataService.accidentsListMap.subscribe(message => this.accidentsList = message);
         this.initializeMap();
     }
 
@@ -190,8 +194,9 @@ export class MapPageComponent implements OnInit {
                     'features': [{
                         'type': 'Feature',
                         'geometry': {
-                            'type': 'Point',
-                            'coordinates': [this.accidentsList[_i]['geojson'].type]
+                            'type': 'Point', //this.accidentsList[_i]['geojson'].type,
+                            'coordinates': [this.accidentsList[_i]['geojson'].coordinates[0]
+                                , this.accidentsList[_i]['geojson'].coordinates[1]]
                         }
                     }]
                 }
