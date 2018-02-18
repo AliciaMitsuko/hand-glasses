@@ -24,6 +24,7 @@
     "serve-favicon": "^2.4.5"
   },
   "devDependencies": {
-    "jest": "^22.3.0"
+    "jest": "^22.3.0",
+    "supertest": "^3.0.0"
   }
 }
