@@ -30,7 +30,6 @@ export class MapService {
         return this.http.get('http://localhost:3000/api/accidents/all')
             .map(res => {
                 return res['data'];
-            // return data;
         });
     }
 

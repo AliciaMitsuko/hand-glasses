@@ -19,8 +19,8 @@
     </div>
   </mat-card>
 
-  <mat-card *ngFor="let accident of accidentsList" (click)="goToMap(accident.geojson.coordinates)">
-    <mat-card-content>
+  <mat-card *ngFor="let accident of accidentsList">
+    <mat-card-content (click)="goToMap(accident.geojson.coordinates)">
       <div class="row">
         <div class="col-2">
           <img [src]="gravToIcon( accident.gravite )" height="35"/>

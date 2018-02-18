@@ -78,7 +78,7 @@ export class MapPageComponent implements OnInit {
         this.dataService.accidentsListMap.subscribe(message => { this.accidentsList = message; /*this.showMarkers();*/ });
         console.log(this.mapService.getAllAccidentGeoJson());
 
-        this.subscription = this.mapService.getMessage().subscribe(message => { console.log(message); });
+        this.subscription = this.mapService.getMessage().subscribe(message => { this.map.flyTo({center: [message.text[0], message.text[1]]}); });
 
         this.mapService.getAllAccidentGeoJson().
             subscribe(resp => {
@@ -177,67 +177,7 @@ export class MapPageComponent implements OnInit {
 
 
     showMarkers() {
-        /*this.map.addLayer({
-            'id': 'population',
-            'type': 'circle',
-            'source': {
-                type: 'vector',
-                url: 'mapbox://examples.8fgz4egr'
-            },
-            'source-layer': 'sf2010',
-            'paint': {
-                // make circles larger as the user zooms from z12 to z22
-                'circle-radius': {
-                    'base': 1.75,
-                    'stops': [[12, 2], [22, 180]]
-                },
-                // color circles by ethnicity, using a match expression
-                // https://www.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
-                'circle-color': [
-                    'match',
-                    ['get', 'ethnicity'],
-                    'White', '#fbb03b',
-                    'Black', '#223b53',
-                    'Hispanic', '#e55e5e',
-                    'Asian', '#3bb2d0',
-                    /* other */ '#ccc';
-                /*]
-            }
-        });*/
 
-        /*for (let _i = 0; _i < this.accidentsList.length; _i++) {*/
-
-            /*this.map.addSource('test', {
-                'type': 'geojson',
-                'data': this.geojson
-            });*/
-
-            /*this.map.addLayer({
-                'id': 'geojson',
-                'type': 'circle',
-                'source': this.geojson,
-                'paint': {
-                    'circle-radius': {
-                        stops: [
-                            [5, 1],
-                            [15, 30]
-                        ],
-                        base: 2
-                    },
-                    'circle-color': 'red',
-                    'circle-opacity': 0.6
-                }
-            });*/
-
-        /*let layers = this.map.getStyle().layers;
-        // Find the index of the first symbol layer in the map style
-        let firstSymbolId;
-        for (let i = 0; i < layers.length; i++) {
-            if (layers[i].type === 'symbol') {
-                firstSymbolId = layers[i].id;
-                break;
-            }
-        }*/
         this.map.addLayer({
             'id': 'urban-areas-fill',
             'type': 'circle',
@@ -249,22 +189,13 @@ export class MapPageComponent implements OnInit {
                 'visibility': 'visible'
             },
             'paint': {
-                'circle-radius': 8,
+                'circle-radius': {
+                    'base': 1.75,
+                    'stops': [[12, 2], [22, 180]]
+                },
                 'circle-color': 'rgba(55,148,179,1)'
             }
         });
-
-        /*this.geojson.features.forEach(function(marker) {
-
-            // create a HTML element for each feature
-            const el = document.createElement('div');
-            el.className = 'marker';
-
-            // make a marker for each feature and add to the map
-            new mapboxgl.Marker(el)
-                .setLngLat(marker.geometry.coordinates)
-                .addTo(Map);
-        });*/
 
 
     }
