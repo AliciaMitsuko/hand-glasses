@@ -19,7 +19,7 @@
     </div>
   </mat-card>
 
-  <mat-card *ngFor="let accident of accidentsList">
+  <mat-card *ngFor="let accident of accidentsList" (click)="goToMap(accident.geojson.coordinates)">
     <mat-card-content>
       <div class="row">
         <div class="col-2">

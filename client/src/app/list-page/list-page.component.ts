@@ -2,8 +2,9 @@ import {Component, Input, OnInit} from '@angular/core';
 import {AccidentService} from '../services/accident.service';
 import Accident from '../models/accident.model';
 import {Sort} from '@angular/material';
-import {IconService} from "../services/icon.service";
-import {DataService} from "../services/data.service";
+import {IconService} from '../services/icon.service';
+import {DataService} from '../services/data.service';
+import {MapService} from '../services/map.service';
 
 @Component({
     selector: 'app-list-page',
@@ -17,23 +18,34 @@ export class ListPageComponent implements OnInit {
     private sortedData;
 
     constructor(
-      private iconService: IconService, private dataService: DataService) { }
+        private iconService: IconService, private dataService: DataService, private mapService: MapService) { }
 
     ngOnInit() {
         this.dataService.accidentsListMap.subscribe(message => this.accidentsList = message);
     }
 
-  atmToIcon(num: number) {
-    return this.iconService.atmToIcon(num);
-  }
+    goToMap(geojson: Array<number>) {
+        console.log(geojson);
 
-  lumToIcon(num: number) {
-    return this.iconService.lumToIcon(num);
-  }
+        if (geojson[0] === 0 && geojson[0] === 0) {
+            // If the coordinates are equals to 0 it means that we don't know the location so we don't display it
+            alert("pas de coord");
+        } else {
+            this.mapService.sendMessage(geojson);
+        }
+    }
 
-  gravToIcon(num: number) {
-    return this.iconService.gravToIcon(num);
-  }
+    atmToIcon(num: number) {
+        return this.iconService.atmToIcon(num);
+    }
+
+    lumToIcon(num: number) {
+        return this.iconService.lumToIcon(num);
+    }
+
+    gravToIcon(num: number) {
+        return this.iconService.gravToIcon(num);
+    }
 
 
     sortData(sort: Sort) {
