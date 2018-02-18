@@ -45,7 +45,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSelectModule} from '@angular/material/select';
 
 import { ChartsModule } from 'ng2-charts/ng2-charts';
-import {FilterPipe, SortByPipe} from './FilterPipe';
+import {FilterPipe, SortByPipe, VotePipe} from './FilterPipe';
 import { ChartComponent } from './admin/chart/chart.component'
 
 const appRoutes: Routes = [
@@ -78,6 +78,8 @@ const appRoutes: Routes = [
     HomePageComponent,
     TableComponent,
     FilterPipe,
+    VotePipe,
+    SortByPipe,
     ChartComponent,
     ModalComponent,
     ModalContentComponent,

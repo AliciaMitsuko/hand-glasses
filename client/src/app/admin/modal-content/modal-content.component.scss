@@ -17,7 +17,8 @@ $to: rgb(4, 141, 254);
 }
 
 .modal-header {
-  @include gradient($to, $from);
+  //@include gradient($to, $from);
+  background-color: #17a2b8;
   color: white;
 }
 

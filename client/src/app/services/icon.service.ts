@@ -15,7 +15,8 @@ export class IconService {
       case 2: {
         return '../../assets/icons/001-medical-2.svg';
       }
-      case 3 || 4 : {
+      case 3 :
+      case 4 : {
         return '../../assets/icons/006-injured.svg';
       }
       default: {
@@ -56,7 +57,9 @@ export class IconService {
       case 2: {
         return '../../assets/icons/day.svg'; // dawn / twilight
       }
-      case 3  || 4 || 5 : {
+      case 3:
+      case 4:
+      case 5 : {
         return '../../assets/icons/evening.svg';
       }
       default: {
@@ -97,7 +100,8 @@ export class IconService {
       // case 1: {
       //   return '../../assets/icons/004-sun.svg';
       // }
-      case 2 || 3: {
+      case 2:
+      case 3: {
         return '../../assets/icons/005-rain.svg';
       }
       case 4: {
@@ -160,6 +164,9 @@ export class IconService {
     switch(num) {
       case 4: {
         return '../../../assets/icons/flood.svg';
+      }
+      case 5: {
+        return '../../../assets/icons/nature.svg';
       }
       default: {
         return '../../../assets/icons/nothing.svg'

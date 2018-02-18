@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import Accident from "./models/accident.model";
 
 @Pipe({
   name: 'filter',
@@ -9,8 +10,31 @@ export class FilterPipe implements PipeTransform {
     // console.log('filter', term);
 
     return term
-      ? items.filter(item => item.title.indexOf(term) !== -1)
+      // ? items.filter(item => item.title.indexOf(term) !== -1)
+      ? items.filter(item => item.num.indexOf(term) !== -1)
       : items;
+  }
+}
+
+@Pipe({
+  name: 'vote',
+  pure: false
+})
+export class VotePipe implements PipeTransform {
+  transform(items: Accident[]) {
+
+    // return items.filter(item => {
+    //   console.log(item.good);
+    //   item.good > term
+    // })
+    return items.filter(item => (item.good - item.bad) < 0);
+    // return term
+    //   // ? items.filter(item => item.title.indexOf(term) !== -1)
+    //   ? items.filter(item => {
+    //     console.log(item.good);
+    //     item.good > term
+    //   })
+    //   : items;
   }
 }
 

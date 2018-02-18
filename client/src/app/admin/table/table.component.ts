@@ -18,6 +18,7 @@ export class TableComponent implements OnInit {
   public sortBy = "num";
   public sortOrder = "asc";
 
+  accidentsListBad: Accident[];
   accidentsList: Accident[];
 
   constructor(
@@ -29,6 +30,12 @@ export class TableComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataService.accidentsList.subscribe(message => this.accidentsList = message)
+
+    // todo: faire une requete moins lourde
+    this.accidentService.getAccidents()
+      .subscribe(accidents => {
+        this.accidentsListBad = accidents
+      })
   }
 
   atmToIcon(num: number) {
@@ -49,10 +56,6 @@ export class TableComponent implements OnInit {
 
   setAccidentToEdit(accident: Accident) {
     this.dataService.changeAccidentToEdit(accident);
-  }
-
-  public toInt(num: string) {
-    return +num;
   }
 
   public sortByWordLength = (a: any) => {
