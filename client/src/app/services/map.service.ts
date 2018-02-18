@@ -27,8 +27,9 @@ export class MapService {
     }
 
     getAllAccidentGeoJson(): Observable<any> {
-        return this.http.get('http://localhost:3000/api/accidents/all').subscribe(data => {
-            console.log(data);
+        return this.http.get('http://localhost:3000/api/accidents/all')
+            .map(res => {
+                return res['data'];
             // return data;
         });
     }

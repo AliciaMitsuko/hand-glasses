@@ -84,6 +84,7 @@ export class MapPageComponent implements OnInit {
             subscribe(resp => {
                 this.geojson = resp;
                 console.log(this.geojson);
+                this.showMarkers();
                 // this.dataService.changeAccidentList(accidents); // update accidentList to component which are subscribed
             });
 
@@ -158,7 +159,7 @@ export class MapPageComponent implements OnInit {
 
         /// Add realtime firebase data on map load
         this.map.on('load', (event) => {
-           this.showMarkers();
+           // this.showMarkers();
         });
     }
 
