@@ -3,12 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="6675eab0-8ab2-417c-b307-d9327bb5351d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/app/admin/admin-page/admin-page.component.html" afterPath="$PROJECT_DIR$/client/src/app/admin/admin-page/admin-page.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/app/admin/admin-page/admin-page.component.scss" afterPath="$PROJECT_DIR$/client/src/app/admin/admin-page/admin-page.component.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/app/admin/admin-page/admin-page.component.ts" afterPath="$PROJECT_DIR$/client/src/app/admin/admin-page/admin-page.component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/app/admin/chart/chart.component.html" afterPath="$PROJECT_DIR$/client/src/app/admin/chart/chart.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/app/admin/modal-content/modal-content.component.html" afterPath="$PROJECT_DIR$/client/src/app/admin/modal-content/modal-content.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/app/admin/table/table.component.html" afterPath="$PROJECT_DIR$/client/src/app/admin/table/table.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/app/list-page/list-page.component.html" afterPath="$PROJECT_DIR$/client/src/app/list-page/list-page.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/app/list-page/list-page.component.scss" afterPath="$PROJECT_DIR$/client/src/app/list-page/list-page.component.scss" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -34,7 +30,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="admin-page.component.ts" pinned="false" current-in-tab="true">
+      <file leaf-file-name="admin-page.component.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/app/admin/admin-page/admin-page.component.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="165">
@@ -59,8 +55,58 @@
       <file leaf-file-name="admin-page.component.scss" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/app/admin/admin-page/admin-page.component.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="36" selection-end-column="20" />
+            <state relative-caret-position="162">
+              <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="20" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="list-page.component.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/src/app/list-page/list-page.component.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="369">
+              <caret line="42" column="48" lean-forward="false" selection-start-line="42" selection-start-column="48" selection-end-line="42" selection-end-column="48" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="list-page.component.scss" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client/src/app/list-page/list-page.component.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="30" column="7" lean-forward="true" selection-start-line="30" selection-start-column="7" selection-end-line="30" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="table.component.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/src/app/admin/table/table.component.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="571">
+              <caret line="61" column="22" lean-forward="false" selection-start-line="61" selection-start-column="22" selection-end-line="61" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="modal.component.scss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/src/app/admin/modal/modal.component.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="chart.component.scss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/src/app/admin/chart/chart.component.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -142,7 +188,6 @@
         <option value="$PROJECT_DIR$/client/src/app/admin/admin-page/admin-page.component.spec.ts" />
         <option value="$PROJECT_DIR$/client/src/app/admin/table/table.component.scss" />
         <option value="$PROJECT_DIR$/server/models/accident.model.js" />
-        <option value="$PROJECT_DIR$/client/src/app/list-page/list-page.component.html" />
         <option value="$PROJECT_DIR$/client/src/app/list-page/list-page.component.ts" />
         <option value="$PROJECT_DIR$/client/package.json" />
         <option value="$PROJECT_DIR$/client/src/index.html" />
@@ -168,11 +213,13 @@
         <option value="$PROJECT_DIR$/client/src/app/admin/modal/modal.component.ts" />
         <option value="$PROJECT_DIR$/client/src/app/admin/modal/modal.component.html" />
         <option value="$PROJECT_DIR$/client/src/app/admin/chart/chart.component.html" />
-        <option value="$PROJECT_DIR$/client/src/app/admin/admin-page/admin-page.component.scss" />
         <option value="$PROJECT_DIR$/client/src/app/admin/table/table.component.html" />
         <option value="$PROJECT_DIR$/client/src/app/admin/modal-content/modal-content.component.html" />
         <option value="$PROJECT_DIR$/client/src/app/admin/admin-page/admin-page.component.html" />
         <option value="$PROJECT_DIR$/client/src/app/admin/admin-page/admin-page.component.ts" />
+        <option value="$PROJECT_DIR$/client/src/app/admin/admin-page/admin-page.component.scss" />
+        <option value="$PROJECT_DIR$/client/src/app/list-page/list-page.component.html" />
+        <option value="$PROJECT_DIR$/client/src/app/list-page/list-page.component.scss" />
       </list>
     </option>
   </component>
@@ -441,12 +488,12 @@
       <workItem from="1518963028845" duration="26437000" />
       <workItem from="1518996423489" duration="1900000" />
       <workItem from="1519029649430" duration="5042000" />
-      <workItem from="1519039522650" duration="13281000" />
+      <workItem from="1519039522650" duration="13592000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="114579000" />
+    <option name="totallyTimeSpent" value="114890000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -486,13 +533,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/client/src/app/list-page/list-page.component.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/app/home-page/home-page.component.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -654,22 +694,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/app/admin/chart/chart.component.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/app/admin/modal/modal.component.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/app/home-page/home-page.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -774,14 +798,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/app/admin/table/table.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="61" column="22" lean-forward="false" selection-start-line="61" selection-start-column="22" selection-end-line="61" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/app/admin/modal/modal.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -818,14 +834,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="15" column="10" lean-forward="true" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/app/list-page/list-page.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="438">
-          <caret line="36" column="22" lean-forward="true" selection-start-line="36" selection-start-column="22" selection-end-line="36" selection-end-column="22" />
           <folding />
         </state>
       </provider>
@@ -878,14 +886,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/app/admin/admin-page/admin-page.component.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="36" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/app/admin/admin-page/admin-page.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
@@ -900,6 +900,54 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/app/admin/table/table.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="571">
+          <caret line="61" column="22" lean-forward="false" selection-start-line="61" selection-start-column="22" selection-end-line="61" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/app/admin/modal/modal.component.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/app/admin/chart/chart.component.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/app/admin/admin-page/admin-page.component.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="20" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/app/list-page/list-page.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="42" column="48" lean-forward="false" selection-start-line="42" selection-start-column="48" selection-end-line="42" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/app/list-page/list-page.component.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="30" column="7" lean-forward="true" selection-start-line="30" selection-start-column="7" selection-end-line="30" selection-end-column="7" />
           <folding />
         </state>
       </provider>
