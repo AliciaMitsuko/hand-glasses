@@ -40,8 +40,13 @@ exports.transformRegionCode = async function(req, res, next){
 };
 
 
-
-
+/**
+ * Transform com code to classic postalCode to interpret adress by an API
+ * @param req
+ * @param res
+ * @param next
+ * @returns {Promise<*|JSON|Promise<any>>}
+ */
 exports.transformComCodeToPostalCode = async function(req, res, next){
     try{
         var accidents = await AccidentService.getAllAccidentsCom();
@@ -57,8 +62,8 @@ exports.transformComCodeToPostalCode = async function(req, res, next){
                 com:jsonobject.com
             };
 
-            toto= await AccidentService.updateAccidentFieldCom(updateDep);
-            console.log("New accident Controller :"+toto);
+            newAccident = await AccidentService.updateAccidentFieldCom(updateDep);
+            console.log("New accident Controller :"+newAccident);
         }
         return res.status(200).json({status: 200, data: accidents});
     }catch(e){
@@ -66,6 +71,13 @@ exports.transformComCodeToPostalCode = async function(req, res, next){
     }
 };
 
+/**
+ * TMP Method
+ * @param req
+ * @param res
+ * @param next
+ * @returns {Promise<*|JSON|Promise<any>>}
+ */
 exports.checkPostCode = async function(req, res, next){
     try{
         var accidents = await AccidentService.getAllAccidentsCom();
