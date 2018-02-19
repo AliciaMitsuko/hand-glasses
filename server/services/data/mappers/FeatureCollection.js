@@ -26,9 +26,7 @@ exports.convertMultiple = function(accidents){
     var res = {};
     res.type = "FeatureCollection";
     res.features = [];
-    for(var a in accidents){
-      res.features.push(this.convertOne(accidents[a]));
-    }
+    accidents.map((a) => { res.features.push(this.convertOne(a))});
     return res;
   }catch(e){
     throw e;
