@@ -12,7 +12,7 @@ describe('test danger controller error', () => {
 
 describe('test danger controller success', () => {
   beforeAll(() => {
-    service.geoLocateDangers = function(){ };
+    service.geoLocateDangers = function(){ return [];};
   });
 
   test('good get nearby request', () => {

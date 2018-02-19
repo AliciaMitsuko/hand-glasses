@@ -3,7 +3,7 @@ var _ = require('lodash');
 var fs = require("fs");
 var csv = require("fast-csv");
 var q = require('q');
-var AccidentsTransformer = require('./AccidentsTransformer');
+var DataMapper = require('../services/data/DataMapper');
 _this = this;
 
 
@@ -87,6 +87,7 @@ exports.createAccidentFromLine = async function(data, req, res, next) {
 
 exports.getAccidents = async function(req, res, next){
 
+  var format = req.params.format ? req.params.format : 'default';
 
     var atm = req.query.atm ? req.query.atm : null;
     var gravite = req.query.gravite ? req.query.gravite : null;
@@ -121,14 +122,19 @@ exports.getAccidents = async function(req, res, next){
     console.log(page, limit)
 
     try{
-        var accidents = await AccidentService.getAccidents(query, page, limit)
-        return res.status(200).json({status: 200, data: accidents, message: "Succesfully Accidents Received"});
+        var accidents = await AccidentService.getAccidents(query, page, limit);
+        var returnData = await DataMapper.getInstanceOf(format).then((mapper) => {
+            return mapper.convertMultiple(accidents);
+        });
+        return res.status(200).json({status: 200, data: returnData, message: "Succesfully Accidents Received"});
     }catch(e){
         return res.status(400).json({status: 400, message: e.message});
     }
 }
 
 exports.getAccidentsById = async function(req, res, next){
+
+  var format = req.params.format ? req.params.format : 'default';
 
 
     var id = req.params.id;
@@ -154,8 +160,11 @@ exports.getAccidentsById = async function(req, res, next){
     console.log(page, limit)
 
     try{
-        var accidents = await AccidentService.getAccidents(query, page, limit)
-        return res.status(200).json({status: 200, data: accidents, message: "Succesfully Accidents Received"});
+        var accidents = await AccidentService.getAccidents(query, page, limit);
+        var returnData = await DataMapper.getInstanceOf(format).then((mapper) => {
+            return mapper.convertMultiple(accidents);
+        });
+        return res.status(200).json({status: 200, data: returnData, message: "Succesfully Accidents Received"});
     }catch(e){
         return res.status(400).json({status: 400, message: e.message});
     }
@@ -168,6 +177,9 @@ exports.getAccidentsByGravite = async function(req, res, next){
     var surf = req.query.surf ? req.query.surf : null;
     var position = req.query.position ? req.query.position : null;
     var queryVariable={};
+
+    var format = req.params.format ? req.params.format : 'default';
+
 
     queryVariable['contexte.atm'] = atm;
     queryVariable['gravite'] = gravite;
@@ -194,8 +206,11 @@ exports.getAccidentsByGravite = async function(req, res, next){
     console.log(page, limit)
 
     try{
-        var accidents = await AccidentService.getAccidentsByGravite(query, page, limit)
-        return res.status(200).json({status: 200, data: accidents, message: "Succesfully Accidents Received"});
+        var accidents = await AccidentService.getAccidentsByGravite(query, page, limit);
+        var returnData = await DataMapper.getInstanceOf(format).then((mapper) => {
+            return mapper.convertMultiple(accidents);
+        });
+        return res.status(200).json({status: 200, data: returnData, message: "Succesfully Accidents Received"});
     }catch(e){
         return res.status(400).json({status: 400, message: e.message});
     }
@@ -203,6 +218,10 @@ exports.getAccidentsByGravite = async function(req, res, next){
 
 // Not used !
 exports.createAccident = async function(req, res, next){
+
+  var format = req.params.format ? req.params.format : 'default';
+
+
     var accident = {
         gravite: req.body.gravite,
         dep: req.body.dep,
@@ -211,14 +230,20 @@ exports.createAccident = async function(req, res, next){
     }
 
     try{
-        var createdAccident = await AccidentService.createAccident(accident)
-        return res.status(201).json({status: 201, data: createdAccident, message: "Succesfully Created Accident"})
+        var createdAccident = await AccidentService.createAccident(accident);
+        var returnData = await DataMapper.getInstanceOf(format).then((mapper) => {
+            return mapper.convertMultiple(createdAccident);
+        });
+        return res.status(201).json({status: 201, data: returnData, message: "Succesfully Created Accident"})
     }catch(e){
         return res.status(400).json({status: 400, message: "Accident Creation was Unsuccesfull"})
     }
 }
 
 exports.updateAccident = async function(req, res, next){
+
+  var format = req.params.format ? req.params.format : 'default';
+
 
     if(!req.body._id){
         return res.status(400).json({status: 400, message: "Id must be present"})
@@ -243,7 +268,10 @@ exports.updateAccident = async function(req, res, next){
 
     try{
         var updatedAccident = await AccidentService.updateAccident(accident)
-        return res.status(200).json({status: 200, data: updatedAccident, message: "Succesfully Updated Accident"})
+        var returnData = await DataMapper.getInstanceOf(format).then((mapper) => {
+            return mapper.convertMultiple(updatedAccident);
+        });
+        return res.status(200).json({status: 200, data: returnData, message: "Succesfully Updated Accident"})
     }catch(e){
         return res.status(400).json({status: 400, message: e.message})
     }
@@ -265,10 +293,14 @@ exports.removeAccident = async function(req, res, next){
 
 
 exports.getAllAccidentsFeatureList = async function(req, res, next){
+  var format = req.params.format ? req.params.format : 'default';
+
     try{
       var accidents = await AccidentService.getAllAccidents();
-      var convertedAccident = (new AccidentsTransformer.AccidentsTransformer()).convertMultipleAccident(accidents);
-      return res.status(200).json({status: 200, data: convertedAccident});
+      var returnData = await DataMapper.getInstanceOf(format).then((mapper) => {
+          return mapper.convertMultiple(accidents);
+      });
+      return res.status(200).json({status: 200, data: returnData});
     }catch(e){
       return res.status(500).json({status: 500, message: JSON.stringify(e)});
     }
