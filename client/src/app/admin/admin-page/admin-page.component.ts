@@ -4,11 +4,27 @@ import ToDo from '../../models/todo.model';
 import Accident from "../../models/accident.model";
 import {AccidentService} from "../../services/accident.service";
 import {DataService} from "../../services/data.service";
+import {animate, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-admin-edit',
   templateUrl: './admin-page.component.html',
-  styleUrls: ['./admin-page.component.scss']
+  styleUrls: ['./admin-page.component.scss'],
+  animations: [
+    trigger('filterState', [
+      state('false', style({
+      })),
+      state('true',   style({
+        transform: 'scale(1.2)',
+        borderColor: '#17a2b8',
+        borderStyle: 'solid',
+        borderWidth: '3px'
+
+})),
+      transition('true => false', animate('100ms ease-in')),
+      transition('false => true', animate('100ms ease-out'))
+    ])
+  ]
 })
 export class AdminPageComponent implements OnInit {
   accidentsList: Accident[];

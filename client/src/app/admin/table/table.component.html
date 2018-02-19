@@ -1,80 +1,9 @@
-<!--<div class="row">-->
-  <!--<div class="col-lg-6 offset-1">-->
-    <!--<div class="panel panel-default">-->
-      <!--<div class="panel-heading"><b>Accidents à traiter</b></div>-->
+<mat-card>
+  <mat-card-content>
 
-      <!--&lt;!&ndash;<table class="table table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable"&ndash;&gt;-->
-      <!--<table class="table table-striped">-->
-        <!--<thead>-->
-        <!--<tr>-->
-          <!--&lt;!&ndash;<th style="width: 20%">&ndash;&gt;-->
-          <!--&lt;!&ndash;<mfDefaultSorter by="id">Id</mfDefaultSorter>&ndash;&gt;-->
-          <!--&lt;!&ndash;</th>&ndash;&gt;-->
-          <!--<th style="width: 10%;">-->
-            <!--Num-->
-          <!--</th>-->
-          <!--<th style="width: 20%">Dep-->
-          <!--</th>-->
-          <!--<th style="width: 10%">-->
-            <!--Com-->
-          <!--</th>-->
-          <!--<th style="width: 20%">-->
-            <!--Coords-->
-          <!--</th>-->
-          <!--<th style="width: 40%; padding-right: 3vw;padding-left: 3vw;">-->
-            <!--Contexte-->
-          <!--</th>-->
-          <!--<th style="width: 10%">-->
-            <!--Gravité-->
-          <!--</th>-->
-          <!--<th style="width: 10%">-->
-            <!--Vote-->
-          <!--</th>-->
-          <!--<th style="width: 10%">-->
-            <!--Date-->
-          <!--</th>-->
-          <!--<th style="width: 10%">-->
-          <!--</th>-->
-        <!--</tr>-->
-        <!--</thead>-->
-        <!--<tbody *ngIf="accidentsListBad != null">-->
-        <!--<tr *ngFor="let accident of (accidentsListBad | vote)">-->
-          <!--&lt;!&ndash;<tr *ngFor="let accident of accidentsList">&ndash;&gt;-->
-          <!--&lt;!&ndash;<td>{{accident._id}}</td>&ndash;&gt;-->
-          <!--<td>{{accident.num}}</td>-->
-          <!--<td>{{accident.dep}}</td>-->
-          <!--<td>{{accident.com}}</td>-->
-          <!--<td>({{accident['geojson'].coordinates[0]}}, {{accident['geojson'].coordinates[1]}})</td>-->
-          <!--<td>-->
-            <!--<ul>-->
-              <!--<li>-->
-                <!--<img style="width: 30%;" [src]="atmToIcon(accident.contexte.atm)" class="img-fluid"/>-->
-              <!--</li>-->
-              <!--<li>-->
-                <!--<img style="width: 30%;" [src]="lumToIcon(accident.contexte.lum)" class="img-fluid"/>-->
-              <!--</li>-->
-              <!--<li>-->
-                <!--<img style="width: 30%;" [src]="surfToIcon(accident.contexte.surf)" class="img-fluid"/>-->
-              <!--</li>-->
-            <!--</ul>-->
-          <!--</td>-->
-          <!--<td>-->
-            <!--<img style="width: 70%" [src]="gravToIcon(accident.gravite)" class="img-fluid"/>-->
-          <!--</td>-->
-          <!--<td>-->
-            <!--{{accident.good-accident.bad}}-->
-          <!--</td>-->
-          <!--<td>-->
-            <!--{{accident.date | date: 'dd/MM/yyyy hh:mm'}}-->
-          <!--<td>-->
-            <!--<app-modal (click)="setAccidentToEdit(accident)"></app-modal>-->
-          <!--</td>-->
-        <!--</tr>-->
-        <!--</tbody>-->
-      <!--</table>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->
+
+
+
 <div class="row">
   <div class="col-lg-6">
     <div class="panel panel-default">
@@ -178,7 +107,13 @@
   </div>
 </div>
 
+  </mat-card-content>
+</mat-card>
+
+
 <br/><br/>
+<mat-card>
+<mat-card-content>
 <div class="row">
   <div class="col-lg-6">
 <div class="panel panel-default">
@@ -238,7 +173,7 @@
       <td>{{accident.num}}</td>
       <td>{{accident.dep}}</td>
       <td>{{accident.com}}</td>
-      <td>({{accident['geojson'].coordinates[0]}}, {{accident['geojson'].coordinates[1]}})</td>
+      <td>({{accident['geojson'].coordinates[1]}}, {{accident['geojson'].coordinates[0]}})</td>
       <td>
         <ul>
         <li>
@@ -278,3 +213,5 @@
 </div>
   </div>
 </div>
+</mat-card-content>
+</mat-card>
