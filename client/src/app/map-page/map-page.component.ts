@@ -26,6 +26,7 @@ export class MapPageComponent implements OnInit {
     // This is also the standard zone distance to get accident list
     private bufferDistance = 10;
     private nearAccidentList: Accident[] = [];
+    public showAlertAccident = false;
 
     // We store the last coordinates corresponding tp the last API call
     private lastLatCheck = 0;
@@ -170,14 +171,14 @@ export class MapPageComponent implements OnInit {
 
         // When a click event occurs on a feature in the states layer, open a popup at the
         // location of the click, with description HTML from its properties.
-        this.map.on('click', 'accident' + gravite, function (e) {
+        /*this.map.on('click', 'accident' + gravite, function (e) {
             /*new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
                 .setHTML(e.features[0].properties.name)
-                .addTo(map);*/
+                .addTo(map);
             alert(e.lngLat);
             // this.mapService.sendMessage("dff");
-        });
+        });*/
 
     }
 
@@ -195,7 +196,8 @@ export class MapPageComponent implements OnInit {
                 // We go through the class var which contains the nearby accident and pop an alert if one is close
                 for (const accident of this.nearAccidentList) {
                     if (this.calculateDistance(this.lat, accident.geojson.coordinates[1].valueOf(), this.lng, accident.geojson.coordinates[0].valueOf()) < 0.1) {
-                        alert('close');
+                        //alert('close');
+                        this.showAlertAccident = true;
                     }
                 }
             });
@@ -207,14 +209,18 @@ export class MapPageComponent implements OnInit {
             // We go through the class var which contains the nearby accident and pop an alert if one is close
             for (const accident of this.nearAccidentList) {
                 if (this.calculateDistance(this.lat, accident.geojson.coordinates[1].valueOf(), this.lng, accident.geojson.coordinates[0].valueOf()) < 0.1) {
-                    alert('close');
+                    //alert('close');
+                    this.showAlertAccident = true;
                 }
 
 
             }
         }
 
+    }
 
+    dismissAlertAccident() {
+        this.showAlertAccident = false;
     }
 
     calculateDistance(lat1: number, lat2: number, long1: number, long2: number) {

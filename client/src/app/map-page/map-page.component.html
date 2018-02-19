@@ -1,8 +1,6 @@
 <!--<input type="text" [(ngModel)]="message" placeholder="your message...">-->
 <!--<h1>Markers</h1>-->
 
-<div class="map-container" *ngFor="let marker of markers | async">
-  <button (click)="flyTo(marker)">{{ marker.properties.message }}</button>
-  <button (click)="removeMarker(marker)">Delete</button>
-</div>
-<div class="map" id="map"  style='width: 100%; height: 102vh;'></div>
+<div class="map" id="map"  style='width: 100%; height: 100vh;'></div>
+<div class="alert" *ngIf="showAlertAccident" (click)="dismissAlertAccident()"> Vous approchez d'un accident </div>
+
