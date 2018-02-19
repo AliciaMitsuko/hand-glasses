@@ -14,13 +14,13 @@ exports.convertCSVToAccidentLineAsync = async (req, res, next) => {
             let options = { delimiter: ';', headers: true };
             let bool = true;
             // let stream = fs.createReadStream('../resources/accidents_2016.csv')
-            let stream = fs.createReadStream('../resources/accidents_good_2016.csv');
+            let stream = fs.createReadStream('../resources/finalV1.csv');
 
             let index=2; // index 1 is the title so starts at index 2
             let csvStream = csv(options)
                 .on('data', (data) => {
                     if (bool && (index == id)) {
-                        console.log(data.adr)
+                        //console.log(data.adr)
                         bool = false
                         resolve(data)
                     }
@@ -36,9 +36,10 @@ exports.convertCSVToAccidentLineAsync = async (req, res, next) => {
     var id = req.params.id;
 
     try {
+
         readCSV(id).then(
             (accident) => {
-                // console.log(accident);
+                 console.log(accident);
                 this.createAccidentFromLine(accident, req, res, next)
             },
             (error) => {
@@ -59,6 +60,7 @@ exports.createAccidentFromLine = async function(data, req, res, next) {
         gravite: data.grav,
         dep: data.dep,
         com: data.com,
+        adr:data.adr,
         // contexte: new Contexte(data.surf, data.atm, data, lum, data.hrmn),
         contexte: {surf: Number(data.surf), atm: Number(data.atm), lum: Number(data.lum), heure: data.hrmn},
         // geojson: new GeoJSON(data.lat, data.long),
