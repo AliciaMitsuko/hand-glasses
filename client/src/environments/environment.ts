@@ -12,10 +12,6 @@ export const environment = {
   }
 };
 
-// export enum gravEnum{
-//   'INDEMNE', 'TUE', 'HOSPITALISE', 'LEGER'
-// }
-
 export enum userRoleEnum{
   'CLIENT', 'ADMIN'
 }
