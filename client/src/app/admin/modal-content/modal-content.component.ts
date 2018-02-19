@@ -34,7 +34,7 @@ export class ModalContentComponent implements OnInit {
   private lat = 48.8566;
   private lng = 2.3522;
   public map: Map;
-  private style = 'mapbox://styles/mapbox/light-v9';
+  private style = 'mapbox://styles/mapbox/outdoors-v9'; //'mapbox://styles/mapbox/light-v9';
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -51,7 +51,6 @@ export class ModalContentComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.buildMap();
 
     this.dataService.accidentToEdit.subscribe(message => {
       this.accidentToEdit = message
@@ -59,6 +58,8 @@ export class ModalContentComponent implements OnInit {
         this.lng = message['geojson'].coordinates[0].valueOf();
         this.lat = message['geojson'].coordinates[1].valueOf();
 
+
+        this.buildMap();
 
         this.map.on('load', (event) => {
           if (this.boolMarker) {
@@ -82,7 +83,7 @@ export class ModalContentComponent implements OnInit {
     this.map = new Map({
       container: 'map',
       style: this.style,
-      zoom: 8,
+      zoom: 6,
       center: [this.lng, this.lat]
     });
     this.boolMarker = true;
