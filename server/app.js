@@ -74,8 +74,13 @@ swagger.compile();
 console.log(swaggerUi.serve);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swagger.json()));
 
+//serv test coverage report
+app.use(express.static(__dirname + '/coverage/lcov-report/'));
+app.get('/coverage', function(req,res){
+    res.sendFile(__dirname + '/coverage/lcov-report/index.html');
+});
+
 app.get('/swagger.json', (err, res) => {
-    console.log("biutb");
     res.status(200).json(swagger.json());
 });
 
