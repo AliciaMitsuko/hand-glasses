@@ -20,7 +20,7 @@ export class AccidentService {
   generateAccidents(id: number): Observable<Accident[]>{
     return this.http.get(this.accidentUrl+'/generate/'+id)
       .map(res  => {
-        return res["data"].docs as Accident[];
+        return res["data"] as Accident[];
       })
   }
 
@@ -31,28 +31,28 @@ export class AccidentService {
   getAccidents(): Observable<Accident[]>{
     return this.http.get(this.accidentUrl)
     .map(res  => {
-      return res["data"].docs as Accident[];
+      return res["data"] as Accident[];
     })
   }
 
   getAccidentsParams(params: string): Observable<Accident[]>{
     return this.http.get(this.accidentUrl+"?"+params)
       .map(res  => {
-        return res["data"].docs as Accident[];
+        return res["data"] as Accident[];
       })
   }
 
   // getAccidentsGrav(num: number): Observable<Accident[]>{
   //   return this.http.get(this.accidentUrl+"?gravite="+num)
   //     .map(res  => {
-  //       return res["data"].docs as Accident[];
+  //       return res["data"] as Accident[];
   //     })
   // }
   //
   // getAccidentsLum(num: number): Observable<Accident[]>{
   //   return this.http.get(this.accidentUrl+"?lum="+num)
   //     .map(res  => {
-  //       return res["data"].docs as Accident[];
+  //       return res["data"] as Accident[];
   //     })
   // }
 

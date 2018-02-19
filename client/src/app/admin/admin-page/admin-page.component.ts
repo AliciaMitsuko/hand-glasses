@@ -36,11 +36,13 @@ export class AdminPageComponent implements OnInit {
    }
 
   getAccidents() {
+    console.log("ts: getAccidents");
     this.accidentService.getAccidents()
       .subscribe(accidents => {
+        console.log("ts: subscribe getAccidents");
+        console.log(accidents)
         this.accidentsList = accidents
         this.dataService.changeAccidentList(accidents); // update accidentList to component which are subscribed
-        console.log(accidents)
       })
   }
 

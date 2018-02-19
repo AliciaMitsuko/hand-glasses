@@ -89,6 +89,7 @@ exports.getAccidents = async function(req, res, next){
 
   var format = req.params.format ? req.params.format : 'default';
 
+  console.log("format = "+format);
     var atm = req.query.atm ? req.query.atm : null;
     var gravite = req.query.gravite ? req.query.gravite : null;
     var lum = req.query.lum ? req.query.lum : null;
@@ -126,6 +127,8 @@ exports.getAccidents = async function(req, res, next){
         var returnData = await DataMapper.getInstanceOf(format).then((mapper) => {
             return mapper.convertMultiple(accidents.docs);
         });
+
+        // console.log(returnData);
         return res.status(200).json({status: 200, data: returnData, message: "Succesfully Accidents Received"});
     }catch(e){
         console.log(e);
