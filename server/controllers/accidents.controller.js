@@ -70,9 +70,6 @@ exports.createAccidentFromLine = async function(data, req, res, next) {
             ]
         },
         date: new Date('20'+data.an, data.mois, data.jour, data.hrmn.substring(0, 2), data.hrmn.substring(2, 4)),
-        // an: Number(data.an),
-        // mois: Number(data.mois),
-        // jour: Number(data.jour),
         good: 0,
         bad: 0
     };
@@ -113,13 +110,8 @@ exports.getAccidents = async function(req, res, next){
         }
     }
 
-    // console.log("toto");
-    console.log(query);
-
     var page = req.query.page ? req.query.page : 1;
     var limit = req.query.limit ? req.query.limit : 1000;
-
-    console.log(page, limit)
 
     try{
         var accidents = await AccidentService.getAccidents(query, page, limit);
@@ -288,6 +280,26 @@ exports.removeAccident = async function(req, res, next){
 
 }
 
+exports.getAccidentsByVote = async function(req, res, next){
+  var page = req.query.page ? req.query.page : 1;
+  var limit = req.query.limit ? req.query.limit : 1000;
+  var format = req.params.format ? req.params.format : 'default';
+
+  var threshold = req.query.threshold ? req.query.threshold : 0;
+
+  console.log('CHIBRE : ' + threshold);
+
+  try{
+    var query = { $where : "(this.good - this.bad) <= " + threshold};
+    var accidents = await AccidentService.getAccidents(query, page, limit);
+    var returnData = await DataMapper.getInstanceOf(format).then((mapper) => {
+        return mapper.convertMultiple(accidents.docs);
+    });
+    return res.status(200).json({status: 200, data: returnData})
+  }catch(e){
+    return res.status(500).json({status: 500, message: JSON.stringify(e)});
+  }
+}
 
 
 exports.getAllAccidentsFeatureList = async function(req, res, next){
