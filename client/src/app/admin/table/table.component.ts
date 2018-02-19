@@ -32,7 +32,7 @@ export class TableComponent implements OnInit {
     this.dataService.accidentsList.subscribe(message => this.accidentsList = message)
 
     // todo: faire une requete moins lourde
-    this.accidentService.getAccidentsThreshold('-1')
+    this.accidentService.getAccidentsThreshold('-3')
       .subscribe(accidents => {
         this.accidentsListBad = accidents
       })
