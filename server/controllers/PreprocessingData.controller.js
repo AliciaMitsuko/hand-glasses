@@ -24,12 +24,13 @@ exports.transformRegionCode = async function(req, res, next){
             //We divide only if the dep have two or three digit
             if(JsonObject.dep.toString().length==3 || JsonObject.dep.toString().length==2) {
                 updateDep={
-                    dep:test.dep/10,
-                    id:test._id
+                    dep:JsonObject.dep/10,
+                    id:JsonObject._id
                 };
 
                 //We update accident
-                toto=await  AccidentService.updateAccidentFieldDep(updateDep);
+                newAccident=await  AccidentService.updateAccidentFieldDep(updateDep);
+                console.log(newAccident);
 
             }
         }
@@ -38,6 +39,8 @@ exports.transformRegionCode = async function(req, res, next){
         return res.status(500).json({status: 500, message: console.log(e)});
     }
 };
+
+
 
 
 /**
@@ -54,16 +57,19 @@ exports.transformComCodeToPostalCode = async function(req, res, next){
         for (var i=0; i < accidents.length; i++) {
             resp=JSON.stringify(accidents[i]);
             jsonobject = JSON.parse(resp);
-            console.log(jsonobject);
+           // console.log(jsonobject);
 
-            updateDep={
+            updateCom={
                 id:jsonobject._id,
                 dep:jsonobject.dep,
                 com:jsonobject.com
             };
+            if(jsonobject.com.toString().length<5) {
+                console.log(accidents[i]);
+                newAccident = await AccidentService.updateAccidentFieldCom(updateCom);
+                console.log("New accident Controller :"+newAccident);
+            }
 
-            newAccident = await AccidentService.updateAccidentFieldCom(updateDep);
-            console.log("New accident Controller :"+newAccident);
         }
         return res.status(200).json({status: 200, data: accidents});
     }catch(e){
@@ -104,6 +110,48 @@ exports.checkPostCode = async function(req, res, next){
 
            // toto= await AccidentService.updateAccidentFieldCom(updateDep);
            // console.log("New accident Controller :"+toto);
+        }
+        console.log(j);
+        return res.status(200).json({status: 200, data: accidents});
+    }catch(e){
+        return res.status(500).json({status: 500, message: console.log(e)});
+    }
+};
+
+
+/**
+ * TMP Method
+ * @param req
+ * @param res
+ * @param next
+ * @returns {Promise<*|JSON|Promise<any>>}
+ */
+exports.getCoordWithAdress = async function(req, res, next){
+    try{
+        var accidents = await AccidentService.getAllAccidentsCoords();
+        var j=0;
+
+        for (var i=0; i < accidents.length; i++) {
+            resp=JSON.stringify(accidents[i]);
+            jsonobject = JSON.parse(resp);
+            //console.log(jsonobject.geojson.coordinates);
+            if(jsonobject.geojson.coordinates[0]===0 && jsonobject.geojson.coordinates[1]===0){
+                updateCoord={
+                    id:jsonobject._id,
+                    dep:jsonobject.dep,
+                    com:jsonobject.com,
+                    adr : jsonobject.adr
+                };
+
+                //console.log(accidents[i]);
+                newAccident = await AccidentService.updateAccidentFieldCoords(updateCoord);
+                j++;
+            }
+
+
+
+            // toto= await AccidentService.updateAccidentFieldCom(updateDep);
+            // console.log("New accident Controller :"+toto);
         }
         console.log(j);
         return res.status(200).json({status: 200, data: accidents});

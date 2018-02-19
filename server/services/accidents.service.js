@@ -50,9 +50,7 @@ exports.getAllAccidentsCom = async function(){
     try{
         var toto={};
         var accident = {
-            num:1,
             com : 1,
-            _id:0,
             dep : 1
         }
         var accidents = await Accident.find(toto,accident).catch(e => {
@@ -63,6 +61,26 @@ exports.getAllAccidentsCom = async function(){
         throw Error('Error while getting all accidents');
     }
 }
+
+
+exports.getAllAccidentsCoords = async function(){
+    try{
+        var toto={};
+        var accident = {
+            com : 1,
+            adr:1,
+            geojson:1,
+            dep : 1
+        }
+        var accidents = await Accident.find(toto,accident).catch(e => {
+            console.log('e');
+        });
+        return accidents;
+    } catch(e) {
+        throw Error('Error while getting all accidents');
+    }
+}
+
 
 
 
@@ -194,6 +212,7 @@ exports.updateAccidentFieldCom = async function(accident){
     var dep = accident.dep;
 
 
+
     try{
         var oldAccident = await Accident.findById(id);
     }catch(e){
@@ -228,6 +247,66 @@ exports.updateAccidentFieldCom = async function(accident){
                 }
             }
 
+
+        }
+    });
+
+};
+
+
+/**
+ * Update field coord of an Accident
+ * We use GoogleMap API to get lt et lng from adress
+ * @param accident
+ * @returns {Promise<boolean>}
+ */
+exports.updateAccidentFieldCoords = async function(accident){
+    var id = accident.id;
+    var com = accident.com;
+    var adr = accident.adr;
+
+
+    //console.log(id);
+    try{
+        var oldAccident = await Accident.findById(id);
+    }catch(e){
+        throw Error("Error occured while Finding the Accident")
+    }
+
+    if(!oldAccident){
+        return false;
+    }
+    formatText=adr+" "+com+" FRANCE";
+    formatText=encodeURIComponent(formatText);
+    url = "https://maps.googleapis.com/maps/api/geocode/json?&components=country:FR&address="+formatText+"&key=AIzaSyCxcipRptLDzt1v-v9L6OBWMzAwvG9qNmc";
+
+    //console.log(url);
+    //console.log("Old Accident"+oldAccident)
+
+    client.get(url, function (data, response) {
+        if (response.statusCode == 200) {
+
+            res = JSON.stringify(data);
+            res = JSON.parse(res);
+            if(typeof  res.results[0]!=="undefined" && res.status!=="ZERO_RESULTS"){
+                if (typeof  res.results[0].formatted_address !== "undefined") {
+                    console.log(url);
+
+                    var lng = res.results[0].geometry.location.lng;
+                    var lt = res.results[0].geometry.location.lat;
+
+                    coord=[Number(lng),Number(lt)];
+                    oldAccident.geojson.coordinates=coord;
+
+
+
+                    oldAccident.save().then(savedAccident => {
+                        console.log("New Accident" + oldAccident.num)
+                        return savedAccident;
+
+                    });
+                }
+            }
 
         }
     });

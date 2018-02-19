@@ -8,6 +8,7 @@ var PreprocessingController = require('../../controllers/PreprocessingData.contr
 router.get('/', AccidentController.getAccidents)
 router.get('/preprocessingDep', PreprocessingController.transformRegionCode)
 router.get('/preprocessingCom', PreprocessingController.transformComCodeToPostalCode)
+router.get('/preprocessingCoords', PreprocessingController.getCoordWithAdress)
 router.get('/checkPostCode', PreprocessingController.checkPostCode)
 
 router.get('/id/:id', AccidentController.getAccidentsById)
