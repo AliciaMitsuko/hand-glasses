@@ -29,7 +29,7 @@ mat-card {
 }
 
 .vote {
-  background-color: #000014;
+  background-color: #F0F0F0;
   padding-top: 13px;
   margin-left: 2px;
   height: 20vh;
@@ -37,7 +37,10 @@ mat-card {
 }
 
 .vote-number {
-  margin-left: 9px;
+  width: 80%;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .info {
@@ -46,4 +49,13 @@ mat-card {
 
 .shadow {
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.icon {
+  width: 80%;
+  text-align: center;
+}
+
+.center-icon {
+  padding-top: 20px;
 }
