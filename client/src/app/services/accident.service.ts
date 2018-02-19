@@ -35,6 +35,13 @@ export class AccidentService {
     })
   }
 
+  getAccidentsThreshold(params: string): Observable<Accident[]>{
+    return this.http.get(this.accidentUrl+"/vote?threshold="+params) // return accident <= threshold
+      .map(res  => {
+        return res["data"] as Accident[];
+      })
+  }
+
   getAccidentsParams(params: string): Observable<Accident[]>{
     return this.http.get(this.accidentUrl+"?"+params)
       .map(res  => {

@@ -1,4 +1,5 @@
 <!--<button class="btn btn-lg btn-outline-primary" (click)="open()">Launch demo modal</button>-->
-<div class="text-center">
-  <button class="btn btn-info" (click)="open()">Détails</button>
-</div>
+<!--<span class="text-center">-->
+  <button *ngIf="type == 'icon'" class="btn btn-info" (click)="open()"><fa name="pencil"></fa></button>
+  <button *ngIf="type == 'details'" class="btn btn-info" (click)="open()">Détails</button>
+<!--</span>-->
