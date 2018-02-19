@@ -29,8 +29,11 @@ mat-card {
 }
 
 .vote {
-  padding-top: 7px;
+  background-color: gray;
+  padding-top: 13px;
   margin-left: 2px;
+  height: 142px;
+  margin-bottom: -24px;
 }
 
 .vote-number {
@@ -38,5 +41,5 @@ mat-card {
 }
 
 .info {
-  margin-top: 20px;
+  margin-top: 10px;
 }
