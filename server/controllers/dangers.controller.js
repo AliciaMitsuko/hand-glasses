@@ -23,7 +23,6 @@ exports.getNearbyDangers = async function(req, res, next){
       var geoJson = req.body.geoJson;
       distance = req.body.distance ? req.body.distance : 100;
     }
-    console.log("body is : " + req.body);
     if(isNaN(distance)){
       return res.status(400).json({status: 400, message: "distance (in meters) must be a number "});
     }
@@ -36,7 +35,6 @@ exports.getNearbyDangers = async function(req, res, next){
     return res.status(200).json({status: 200, data: returnData});
   }
   catch(err){
-    console.log(err);
     return res.status(500).json({status: 500, message: "Problem getting nearby accidents.\nStackTrace : " + JSON.stringify(err)});
   }
 };
@@ -46,7 +44,6 @@ exports.getDangersWithin = async function(req, res, next){
   var limit = req.query.limit ? req.query.limit : 1000;
   var format = req.params.format ? req.params.format : 'default';
   if(!req.body.geoJson){
-    console.log(JSON.stringify(req.body));
     return res.status(400).json({status: 400, message: "geoJSON needed in request body for Within geo spatial request"});
   }
   var geoJson = req.body.geoJson;
