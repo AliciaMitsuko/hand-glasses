@@ -6,8 +6,8 @@ import Accident from '../models/accident.model';
 import {LngLat, Map} from 'mapbox-gl';
 import {environment} from '../../environments/environment';
 import {forEach} from '@angular/router/src/utils/collection';
-import {DataService} from "../services/data.service";
-import {Subscription} from "rxjs/Subscription";
+import {DataService} from '../services/data.service';
+import {Subscription} from 'rxjs/Subscription';
 import {MapService} from '../services/map.service';
 
 @Component({
@@ -19,7 +19,8 @@ export class MapPageComponent implements OnInit {
 
     public accidentsList: Accident[];
     private subscription: Subscription;
-    private geojson;
+    private geojson: any[4] = [];
+    private gravityColors = ['', '#00FF00', '#FFA500', '#FF0000'];
 
     // The distance in km before checkin for new accident
     // This is also the standard zone distance to get accident list
@@ -52,13 +53,16 @@ export class MapPageComponent implements OnInit {
 
         this.subscription = this.mapService.getMessage().subscribe(message => { this.map.flyTo({center: [message.text[0], message.text[1]]}); });
 
-        this.mapService.getAllAccidentGeoJson().
+        for (let _i = 1; _i < 4; _i++) {
+            console.log(_i);
+            this.mapService.getAllAccidentGeoJson(_i).
             subscribe(resp => {
-                this.geojson = resp;
+                this.geojson[_i] = resp;
                 console.log(this.geojson);
-                this.showMarkers();
+                this.showMarkers(_i);
                 // this.dataService.changeAccidentList(accidents); // update accidentList to component which are subscribed
             });
+        }
 
         this.initializeMap();
     }
@@ -100,6 +104,7 @@ export class MapPageComponent implements OnInit {
         }
         this.buildMap();
     }
+
     buildMap() {
 
         mapboxgl.accessToken = environment.mapbox.accessToken;
@@ -142,16 +147,14 @@ export class MapPageComponent implements OnInit {
         });
     }
 
-
-
-    showMarkers() {
+    showMarkers(gravite: number) {
 
         this.map.addLayer({
-            'id': 'urban-areas-fill',
+            'id': 'accident' + gravite,
             'type': 'circle',
             'source': {
                 'type': 'geojson',
-                'data': this.geojson
+                'data': this.geojson[gravite]
             },
             'layout': {
                 'visibility': 'visible'
@@ -161,12 +164,23 @@ export class MapPageComponent implements OnInit {
                     'base': 1.75,
                     'stops': [[12, 2], [22, 180]]
                 },
-                'circle-color': 'rgba(55,148,179,1)'
+                'circle-color': this.gravityColors[gravite]
             }
         });
 
+        // When a click event occurs on a feature in the states layer, open a popup at the
+        // location of the click, with description HTML from its properties.
+        this.map.on('click', 'accident' + gravite, function (e) {
+            /*new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(e.features[0].properties.name)
+                .addTo(map);*/
+            alert(e.lngLat);
+            // this.mapService.sendMessage("dff");
+        });
 
     }
+
 
     checkAreaForAccident() {
 
