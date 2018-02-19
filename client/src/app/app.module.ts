@@ -19,6 +19,8 @@ import {IconService} from './services/icon.service';
 import {MapService} from './services/map.service';
 
 /** Plug in **/
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+
 import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ModalComponent} from "./admin/modal/modal.component";
 import { ModalContentComponent } from './admin/modal-content/modal-content.component';
@@ -94,7 +96,7 @@ const appRoutes: Routes = [
     MatSortModule,
     DataTableModule,
     BrowserAnimationsModule,
-
+    AngularFontAwesomeModule,
     // charts
     ChartsModule,
 

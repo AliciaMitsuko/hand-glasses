@@ -24,7 +24,7 @@ export class ListPageComponent implements OnInit {
         private iconService: IconService, private dataService: DataService, private mapService: MapService, private accidentService: AccidentService) { }
 
     ngOnInit() {
-        this.dataService.accidentsListMap.subscribe(message => this.accidentsList = message);
+        this.dataService.accidentsListMap.subscribe(message => {this.accidentsList = message; console.log(message); });
     }
 
     addGood(accident: Accident) {
@@ -61,7 +61,7 @@ export class ListPageComponent implements OnInit {
 
         if (geojson[0] === 0 && geojson[0] === 0) {
             // If the coordinates are equals to 0 it means that we don't know the location so we don't display it
-            alert("pas de coord");
+            alert('pas de coord');
         } else {
             this.mapService.sendMessage(geojson);
         }
@@ -87,25 +87,53 @@ export class ListPageComponent implements OnInit {
             return;
         }
 
-        this.accidentsList = data.sort((a, b) => {
-            const isAsc = sort.direction === 'asc';
-            switch (sort.active) {
-                case 'gravite': return this.compare(a.gravite, b.gravite, isAsc);
-                case 'lum': return this.compare(+a.contexte.lum, +b.contexte.lum, isAsc);
-                case 'atm': return this.compare(+a.contexte.atm, +b.contexte.atm, isAsc);
-                default: return 0;
+        //console.log(sort.active);
+
+       /* if (sort.active === 'distance') {
+
+
+            if (navigator.geolocation) {
+
+                alert('yes');
+                navigator.geolocation.getCurrentPosition(position => {
+                    alert('wesh');
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+
+                    this.mapService.getAccidentWithinPerimeter(lat, lng, 1000000000000000).subscribe(resp => {
+
+                        this.accidentsList = [];
+                        //this.accidentsList = resp;
+                        console.log(resp);
+                        return;
+
+                    });
+
+                });
+            } else {
+                alert('no');
             }
-        });
+
+        } else {*/
+            this.accidentsList = data.sort((a, b) => {
+                const isAsc = sort.direction === 'asc';
+                switch (sort.active) {
+                    case 'gravite': return this.compare(a.gravite, b.gravite, isAsc);
+                    case 'lum': return this.compare(+a.contexte.lum, +b.contexte.lum, isAsc);
+                    case 'atm': return this.compare(+a.contexte.atm, +b.contexte.atm, isAsc);
+                    // case 'distance': return this.
+                    default: return 0;
+                }
+            });
+        //}
     }
 
     compare(a, b, isAsc) {
         return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
     }
 
-    displayAccidentInfo(amount: number) {
-        if (amount > 0) {
-            return amount;
-        }
+    displayAccidentInfo(accident: Accident) {
+        return accident.good - accident.bad;
     }
 
 }

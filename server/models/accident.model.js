@@ -21,6 +21,10 @@ var AccidentSchema = new mongoose.Schema({
         type: Number,
         trim: true,
     },
+    adr:{
+        type:String,
+        trim: true,
+    },
 
     good: {
         type: Number,

@@ -12,29 +12,41 @@
   <mat-card class="filter">
     <div class="row">
       <!-- header -->
-      <div class="col-3" mat-sort-header="gravite"> Gravité </div>
-      <div class="col-3" mat-sort-header="lum"> Moment </div>
-      <div class="col-3" mat-sort-header="atm"> Météo </div>
-      <div class="col-3" mat-sort-header="distance"> Proximité </div>
+      <div class="col-4" mat-sort-header="gravite"> Gravité </div>
+      <div class="col-4" mat-sort-header="lum"> Moment </div>
+      <div class="col-4" mat-sort-header="atm"> Météo </div>
     </div>
   </mat-card>
 
   <mat-card *ngFor="let accident of accidentsList">
-    <mat-card-content (click)="goToMap(accident.geojson.coordinates)">
+    <mat-card-content>
       <div class="row">
+
         <div class="col-2">
           <img [src]="gravToIcon( accident.gravite )" height="35"/>
+
         </div>
-        <div class="col-10">
-          <div class="row">
+
+        <div class="col-8">
+          <div (click)="goToMap(accident.geojson.coordinates)" class="row">
             <h4>Commune</h4>
           </div>
-          <div class="row">
+          <div class="row info">
             <p class="col-4" > dpt : {{ accident.dep }}</p>
             <p class="col-4" > <img [src]="lumToIcon( accident.contexte.lum )" height="30"> </p>
             <p class="col-4" > <img [src]="atmToIcon( accident.contexte.atm )" height="30"> </p>
           </div>
         </div>
+
+        <div class="col-2">
+          <div mat-card-image class="vote shadow">
+
+              <div class="icon center-icon" (click)="addBad(accident)" > <img src="../../assets/icons/001-warning.svg" height="35"> </div>
+              <div class="vote-number">{{ displayAccidentInfo( accident ) }}</div>
+              <div class="icon" (click)="addGood(accident)" >  <img src="../../assets/icons/002-shield.svg" height="35">  </div>
+          </div>
+        </div>
+
       </div>
     </mat-card-content>
 

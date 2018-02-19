@@ -1,6 +1,9 @@
 var Accident = require('../models/accident.model')
 
 _this = this
+var Client = require('node-rest-client').Client;
+
+var client = new Client();
 
 
 exports.getAccidents = async function(query, page, limit){
@@ -18,7 +21,8 @@ exports.getAccidents = async function(query, page, limit){
 
 exports.getAllAccidents = async function(){
   try{
-    var accidents = await Accident.find().catch(e => {
+      var toto={};
+    var accidents = await Accident.find(toto).catch(e => {
       console.log('e');
     });
     return accidents;
@@ -26,6 +30,41 @@ exports.getAllAccidents = async function(){
     throw Error('Error while getting all accidents');
   }
 }
+
+exports.getAllAccidentsDep = async function(){
+    try{
+        var toto={};
+        var accident = {
+            dep : 1
+        }
+        var accidents = await Accident.find(toto,accident).catch(e => {
+            console.log('e');
+        });
+        return accidents;
+    } catch(e) {
+        throw Error('Error while getting all accidents');
+    }
+}
+
+exports.getAllAccidentsCom = async function(){
+    try{
+        var toto={};
+        var accident = {
+            num:1,
+            com : 1,
+            _id:0,
+            dep : 1
+        }
+        var accidents = await Accident.find(toto,accident).catch(e => {
+            console.log('e');
+        });
+        return accidents;
+    } catch(e) {
+        throw Error('Error while getting all accidents');
+    }
+}
+
+
 
 exports.getAccidentsByGravite= async function(query, page, limit){
     //var query = { "gravite": 1 };
@@ -41,6 +80,8 @@ exports.getAccidentsByGravite= async function(query, page, limit){
     }
 }
 
+
+
 exports.createAccident = async function(accident){
 console.log("call the service")
     console.log(accident);
@@ -50,6 +91,7 @@ console.log("call the service")
         gravite: Number(accident.gravite),
         dep: Number(accident.dep),
         com: Number(accident.com),
+        adr:accident.adr,
         contexte: accident.contexte,
         geojson: accident.geojson,
         date: accident.date,
@@ -83,6 +125,7 @@ exports.updateAccident = async function(accident){
         return false;
     }
 
+
     console.log(oldAccident)
 
     oldAccident.num = accident.num; // can't replace
@@ -104,6 +147,92 @@ exports.updateAccident = async function(accident){
         throw Error("And Error occured while updating the Accident");
     }
 }
+
+/**
+ * Update field dep of an Accident
+ * @param accident
+ * @returns {Promise<*>}
+ */
+exports.updateAccidentFieldDep = async function(accident){
+    var id = accident.id;
+    var dep = accident.dep;
+    try{
+        var oldAccident = await Accident.findById(id);
+    }catch(e){
+        throw Error("Error occured while Finding the Accident")
+    }
+
+    if(!oldAccident){
+        return false;
+    }
+
+   // console.log(oldAccident)
+
+    oldAccident.dep = Number(dep);
+
+
+   // console.log(oldAccident)
+
+    try{
+        var savedAccident = await oldAccident.save()
+        return savedAccident;
+    }catch(e){
+        throw Error("And Error occured while updating the Accident");
+    }
+}
+
+
+/**
+ * Update field com of an Accident
+ * We use datanova API to get postalCode from com code
+ * @param accident
+ * @returns {Promise<boolean>}
+ */
+exports.updateAccidentFieldCom = async function(accident){
+    var id = accident.id;
+    var com = accident.com;
+    var dep = accident.dep;
+
+
+    try{
+        var oldAccident = await Accident.findById(id);
+    }catch(e){
+        throw Error("Error occured while Finding the Accident")
+    }
+
+    if(!oldAccident){
+        return false;
+    }
+
+    url = "https://datanova.laposte.fr/api/records/1.0/search/?dataset=code-postal-code-insee-2015&q=code_com:"+com+"+AND+code_dept:"+dep;
+    console.log("Old Accident"+oldAccident)
+
+    client.get(url, function (data, response) {
+        if (response.statusCode == 200) {
+            //console.log(data);
+            res = JSON.stringify(data);
+            res = JSON.parse(res);
+            //console.log(res);
+
+            if(typeof res.records[0] !== "undefined") {
+                if(typeof res.records[0].fields.code_postal !== "undefined") {
+                    console.log("Code postal trouvé : "+res.records[0].fields.code_postal);
+                    codePostal = res.records[0].fields.code_postal;
+
+                    oldAccident.com = Number(codePostal);
+
+                    oldAccident.save().then(savedAccident => {
+                        console.log("New Accident" + oldAccident)
+                        return savedAccident;
+                    });
+                }
+            }
+
+
+        }
+    });
+
+};
 
 exports.deleteAccident = async function(id){
 

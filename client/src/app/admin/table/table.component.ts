@@ -32,7 +32,7 @@ export class TableComponent implements OnInit {
     this.dataService.accidentsList.subscribe(message => this.accidentsList = message)
 
     // todo: faire une requete moins lourde
-    this.accidentService.getAccidents()
+    this.accidentService.getAccidentsThreshold('-3')
       .subscribe(accidents => {
         this.accidentsListBad = accidents
       })
@@ -56,6 +56,10 @@ export class TableComponent implements OnInit {
 
   setAccidentToEdit(accident: Accident) {
     this.dataService.changeAccidentToEdit(accident);
+  }
+
+  setChecked(accident: Accident) {
+    accident['checked'] = true;
   }
 
   public sortByWordLength = (a: any) => {

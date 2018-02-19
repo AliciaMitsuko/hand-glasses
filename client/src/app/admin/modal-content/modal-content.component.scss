@@ -26,15 +26,15 @@ $to: rgb(4, 141, 254);
   background-color: #efefef;
 }
 
-img {
-    //background-color: white;
-  @include gradient($to, $from);
-
-  border-radius: 20%;
-    //border: 1px solid grey;
-    padding:10px;
-
-}
+//img {
+//    //background-color: white;
+//  @include gradient($to, $from);
+//
+//  border-radius: 20%;
+//    //border: 1px solid grey;
+//    padding:10px;
+//
+//}
 
 ul {
   list-style:none;

@@ -11,6 +11,9 @@
       <div class="map" id="map"  style='width: 18vw; height: 20vh;'></div>
     </div>
     <div class="col-lg-5">
+      ({{accidentToEdit.geojson.coordinates[1]}}, {{accidentToEdit.geojson.coordinates[0]}})<br/><br/><br/>
+      <img src="../../assets/icons/001-warning.svg" height="27"> {{accidentToEdit.bad}}<br/>
+      <img src="../../assets/icons/002-shield.svg" height="27">  {{accidentToEdit.good}}<br/>
       {{accidentToEdit.date | date: 'dd/MM/yyyy hh:mm'}}
     </div>
   </div>

@@ -14,13 +14,13 @@ exports.convertCSVToAccidentLineAsync = async (req, res, next) => {
             let options = { delimiter: ';', headers: true };
             let bool = true;
             // let stream = fs.createReadStream('../resources/accidents_2016.csv')
-            let stream = fs.createReadStream('../resources/accidents_good_2016.csv');
+            let stream = fs.createReadStream('../resources/finalV1.csv');
 
             let index=2; // index 1 is the title so starts at index 2
             let csvStream = csv(options)
                 .on('data', (data) => {
                     if (bool && (index == id)) {
-                        console.log(data.adr)
+                        //console.log(data.adr)
                         bool = false
                         resolve(data)
                     }
@@ -36,9 +36,10 @@ exports.convertCSVToAccidentLineAsync = async (req, res, next) => {
     var id = req.params.id;
 
     try {
+
         readCSV(id).then(
             (accident) => {
-                // console.log(accident);
+                 console.log(accident);
                 this.createAccidentFromLine(accident, req, res, next)
             },
             (error) => {
@@ -59,6 +60,7 @@ exports.createAccidentFromLine = async function(data, req, res, next) {
         gravite: data.grav,
         dep: data.dep,
         com: data.com,
+        adr:data.adr,
         // contexte: new Contexte(data.surf, data.atm, data, lum, data.hrmn),
         contexte: {surf: Number(data.surf), atm: Number(data.atm), lum: Number(data.lum), heure: data.hrmn},
         // geojson: new GeoJSON(data.lat, data.long),
@@ -86,6 +88,7 @@ exports.getAccidents = async function(req, res, next){
 
   var format = req.params.format ? req.params.format : 'default';
 
+  console.log("format = "+format);
     var atm = req.query.atm ? req.query.atm : null;
     var gravite = req.query.gravite ? req.query.gravite : null;
     var lum = req.query.lum ? req.query.lum : null;
@@ -118,6 +121,8 @@ exports.getAccidents = async function(req, res, next){
         var returnData = await DataMapper.getInstanceOf(format).then((mapper) => {
             return mapper.convertMultiple(accidents.docs);
         });
+
+        // console.log(returnData);
         return res.status(200).json({status: 200, data: returnData, message: "Succesfully Accidents Received"});
     }catch(e){
         console.log(e);
