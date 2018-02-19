@@ -6,6 +6,7 @@ exports.getInstanceOf = function(mapper){
   return new Promise((resolve, reject) => {
     try{
       var mapperInstance = Mappers[mapper];
+      //TODO: make this work
       /*if(typeOf(mapperInstance.convertOne) == "function" && typeOf(mapperInstance.convertMultiple)  == "function" && typeOf(mapperInstance.getTargetType)  == "function" ){
         console.log('in test');
         resolve(mapperInstance);

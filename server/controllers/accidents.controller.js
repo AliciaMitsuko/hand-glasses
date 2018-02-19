@@ -124,10 +124,11 @@ exports.getAccidents = async function(req, res, next){
     try{
         var accidents = await AccidentService.getAccidents(query, page, limit);
         var returnData = await DataMapper.getInstanceOf(format).then((mapper) => {
-            return mapper.convertMultiple(accidents);
+            return mapper.convertMultiple(accidents.docs);
         });
         return res.status(200).json({status: 200, data: returnData, message: "Succesfully Accidents Received"});
     }catch(e){
+        console.log(e);
         return res.status(400).json({status: 400, message: e.message});
     }
 }
@@ -162,7 +163,7 @@ exports.getAccidentsById = async function(req, res, next){
     try{
         var accidents = await AccidentService.getAccidents(query, page, limit);
         var returnData = await DataMapper.getInstanceOf(format).then((mapper) => {
-            return mapper.convertMultiple(accidents);
+            return mapper.convertMultiple(accidents.docs);
         });
         return res.status(200).json({status: 200, data: returnData, message: "Succesfully Accidents Received"});
     }catch(e){
@@ -198,17 +199,14 @@ exports.getAccidentsByGravite = async function(req, res, next){
         }
     }
 
-    console.log(query);
 
     var page = req.query.page ? req.query.page : 1;
     var limit = req.query.limit ? req.query.limit : 1000;
 
-    console.log(page, limit)
-
     try{
         var accidents = await AccidentService.getAccidentsByGravite(query, page, limit);
         var returnData = await DataMapper.getInstanceOf(format).then((mapper) => {
-            return mapper.convertMultiple(accidents);
+            return mapper.convertMultiple(accidents.docs);
         });
         return res.status(200).json({status: 200, data: returnData, message: "Succesfully Accidents Received"});
     }catch(e){
@@ -232,7 +230,7 @@ exports.createAccident = async function(req, res, next){
     try{
         var createdAccident = await AccidentService.createAccident(accident);
         var returnData = await DataMapper.getInstanceOf(format).then((mapper) => {
-            return mapper.convertMultiple(createdAccident);
+            return mapper.convertMultiple(createdAccident.docs);
         });
         return res.status(201).json({status: 201, data: returnData, message: "Succesfully Created Accident"})
     }catch(e){
@@ -269,7 +267,7 @@ exports.updateAccident = async function(req, res, next){
     try{
         var updatedAccident = await AccidentService.updateAccident(accident)
         var returnData = await DataMapper.getInstanceOf(format).then((mapper) => {
-            return mapper.convertMultiple(updatedAccident);
+            return mapper.convertMultiple(updatedAccident.docs);
         });
         return res.status(200).json({status: 200, data: returnData, message: "Succesfully Updated Accident"})
     }catch(e){

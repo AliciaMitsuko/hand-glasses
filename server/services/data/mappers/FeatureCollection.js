@@ -1,5 +1,4 @@
 exports.convertOne = function(accident){
-
     if(!accident){
       throw new Error('Invalid accident');
     }
