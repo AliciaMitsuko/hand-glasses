@@ -12,10 +12,9 @@
   <mat-card class="filter">
     <div class="row">
       <!-- header -->
-      <div class="col-3" mat-sort-header="gravite"> Gravité </div>
-      <div class="col-3" mat-sort-header="lum"> Moment </div>
-      <div class="col-3" mat-sort-header="atm"> Météo </div>
-      <div class="col-3" mat-sort-header="distance"> Proximité </div>
+      <div class="col-4" mat-sort-header="gravite"> Gravité </div>
+      <div class="col-4" mat-sort-header="lum"> Moment </div>
+      <div class="col-4" mat-sort-header="atm"> Météo </div>
     </div>
   </mat-card>
 
@@ -42,9 +41,9 @@
         <div class="col-2">
           <div mat-card-image class="vote shadow">
 
-              <div (click)="addBad(accident)" > <img src="../../assets/icons/001-warning.svg" height="27"> </div>
+              <div class="icon center-icon" (click)="addBad(accident)" > <img src="../../assets/icons/001-warning.svg" height="35"> </div>
               <div class="vote-number">{{ displayAccidentInfo( accident ) }}</div>
-              <div (click)="addGood(accident)" >  <img src="../../assets/icons/002-shield.svg" height="27">  </div>
+              <div class="icon" (click)="addGood(accident)" >  <img src="../../assets/icons/002-shield.svg" height="35">  </div>
           </div>
         </div>
 
