@@ -3,44 +3,45 @@
   <ul class="nav nav-tabs nav-fill">
     <li  class="nav-item"
          (click)="setIndex(1)">
-      <a class="nav-link" [class.active]="selectedIndex === 1">Tableau</a>
+      <a class="nav-link" [class.active]="selectedIndex === 1">Graphs</a>
     </li>
     <li  class="nav-item" [class.active]="selectedIndex === 2"
          (click)="setIndex(2)">
-      <a class="nav-link" [class.active]="selectedIndex === 2">Graphs</a>
+      <a class="nav-link" [class.active]="selectedIndex === 2">Tableau</a>
     </li>
   </ul>
 </div>
 <br/><br/><br/><br/>
 <div class="container" >
   <div class="row">
-    <div class="col-lg-10">
+    <div class="col-lg-10 col-md-10">
       <app-chart [hidden]="selectedIndex !== 1"></app-chart>
       <app-table [hidden]="selectedIndex !== 2"></app-table>
 
     </div>
-    <div class="col-lg-2">
+    <div class="col-lg-2 col-md-2">
       <b>Recherche rapide</b>
       <p>Gravité</p>
       <div class="text-center">
-        <img style="height:8vh" (click)="getAccidentsGrav(3)" src="../../../assets/icons/006-injured.svg" class="img-fluid"/><br/>
-        <img style="height:8vh" (click)="getAccidentsGrav(1)" src="../../../assets/icons/004-heart.svg" class="img-fluid"/><br/>
+        <img style="height:8vh; margin-bottom: 1vh;" (click)="getAccidentsGrav(3)" src="../../../assets/icons/006-injured.svg" class="img-fluid"/><br/>
+        <img style="height:8vh; margin-bottom: 1vh;" (click)="getAccidentsGrav(1)" src="../../../assets/icons/004-heart.svg" class="img-fluid"/><br/>
       </div>
       <p>Période</p>
       <div class="text-center">
-        <img style="height:8vh" (click)="getAccidentsLum(1)" src="../../../assets/icons/004-sun.svg" class="img-fluid"/><br/>
-        <img style="height:8vh" (click)="getAccidentsLum(2)" src="../../../assets/icons/day.svg" class="img-fluid"/>
+        <img style="height:8vh; margin-bottom: 1vh;" (click)="getAccidentsLum(1)" src="../../../assets/icons/004-sun.svg" class="img-fluid"/><br/>
+        <img style="height:8vh; margin-bottom: 1vh;" (click)="getAccidentsLum(2)" src="../../../assets/icons/day.svg" class="img-fluid"/>
       </div>
       <p>Cond. atm.</p>
       <div class="text-center">
-        <img style="height:8vh" (click)="getAccidentsAtm(4)" src="../../../assets/icons/003-snowflake.svg" class="img-fluid"/><br/>
-        <img style="height:8vh" (click)="getAccidentsAtm(6)" src="../../../assets/icons/001-wind.svg" class="img-fluid"/><br/>
+        <img style="height:8vh; margin-bottom: 1vh;" (click)="getAccidentsAtm(4)" src="../../../assets/icons/003-snowflake.svg" class="img-fluid"/><br/>
+        <img style="height:8vh; margin-bottom: 1vh;" (click)="getAccidentsAtm(6)" src="../../../assets/icons/001-wind.svg" class="img-fluid"/><br/>
       </div>
       <p>Surface</p>
       <div class="text-center">
-        <img style="height:8vh" (click)="getAccidentsSurf(4)" src="../../../assets/icons/flood.svg" class="img-fluid"/><br/>
+        <img style="height:8vh; margin-bottom: 1vh;" (click)="getAccidentsSurf(4)" src="../../../assets/icons/flood.svg" class="img-fluid"/><br/>
+        <img style="height:8vh; margin-bottom: 1vh;" (click)="getAccidentsSurf(5)" src="../../../assets/icons/nature.svg" class="img-fluid"/><br/>
       </div>
-      <button class="btn btn-info" (click)="resetFilter()">Reinitialiser</button>
+      <button class="btn btn-info pull-right" (click)="resetFilter()">Reinitialiser</button>
     </div>
   </div>
 </div>

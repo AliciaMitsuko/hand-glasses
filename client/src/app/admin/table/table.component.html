@@ -1,53 +1,86 @@
+<div class="row">
+  <div class="col-lg-6 offset-1">
+    <div class="panel panel-default">
+      <div class="panel-heading"><b>Accidents à traiter</b></div>
 
+      <!--<table class="table table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable"-->
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <!--<th style="width: 20%">-->
+          <!--<mfDefaultSorter by="id">Id</mfDefaultSorter>-->
+          <!--</th>-->
+          <th style="width: 10%;">
+            Num
+          </th>
+          <th style="width: 20%">Dep
+          </th>
+          <th style="width: 10%">
+            Com
+          </th>
+          <th style="width: 20%">
+            Coords
+          </th>
+          <th style="width: 40%; padding-right: 3vw;padding-left: 3vw;">
+            Contexte
+          </th>
+          <th style="width: 10%">
+            Gravité
+          </th>
+          <th style="width: 10%">
+            Vote
+          </th>
+          <th style="width: 10%">
+            Date
+          </th>
+          <th style="width: 10%">
+          </th>
+        </tr>
+        </thead>
+        <tbody *ngIf="accidentsListBad != null">
+        <tr *ngFor="let accident of (accidentsListBad | vote)">
+          <!--<tr *ngFor="let accident of accidentsList">-->
+          <!--<td>{{accident._id}}</td>-->
+          <td>{{accident.num}}</td>
+          <td>{{accident.dep}}</td>
+          <td>{{accident.com}}</td>
+          <td>({{accident['geojson'].coordinates[0]}}, {{accident['geojson'].coordinates[1]}})</td>
+          <td>
+            <ul>
+              <li>
+                <img style="width: 30%;" [src]="atmToIcon(accident.contexte.atm)" class="img-fluid"/>
+              </li>
+              <li>
+                <img style="width: 30%;" [src]="lumToIcon(accident.contexte.lum)" class="img-fluid"/>
+              </li>
+              <li>
+                <img style="width: 30%;" [src]="surfToIcon(accident.contexte.surf)" class="img-fluid"/>
+              </li>
+            </ul>
+          </td>
+          <td>
+            <img style="width: 70%" [src]="gravToIcon(accident.gravite)" class="img-fluid"/>
+          </td>
+          <td>
+            {{accident.good-accident.bad}}
+          </td>
+          <td>
+            {{accident.date | date: 'dd/MM/yyyy hh:mm'}}
+          <td>
+            <app-modal (click)="setAccidentToEdit(accident)"></app-modal>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
-
-<!--<div class="row">-->
-  <!--<div class="col-lg-4 offset-2">-->
-    <!--<label class="label-control">Rows on page</label>-->
-    <!--<select class="form-control input-sm" [(ngModel)]="rowsOnPage">-->
-      <!--<option [ngValue]="5">5</option>-->
-      <!--<option [ngValue]="10">10</option>-->
-      <!--<option [ngValue]="15">15</option>-->
-    <!--</select>-->
-  <!--</div>-->
-  <!--<div class="col-lg-6">-->
-    <!--<div class="row">-->
-      <!--<label class="col-lg-12 label-control">Sort by</label>-->
-    <!--</div>-->
-    <!--<div class="col-lg-6">-->
-      <!--<div class="row">-->
-        <!--<select class="form-control input-sm" [(ngModel)]="sortBy">-->
-          <!--&lt;!&ndash;<option ngValue="name">Name</option>&ndash;&gt;-->
-          <!--&lt;!&ndash;<option ngValue="email">Email</option>&ndash;&gt;-->
-          <!--&lt;!&ndash;<option ngValue="age">Age</option>&ndash;&gt;-->
-          <!--&lt;!&ndash;<option [ngValue]="sortByWordLength">City</option>&ndash;&gt;-->
-
-          <!--&lt;!&ndash;<option ngValue="id">Id</option>&ndash;&gt;-->
-          <!--<option ngValue="num">Num</option>-->
-          <!--<option ngValue="com">Com</option>-->
-          <!--<option ngValue="contexte">Contexte</option>-->
-          <!--<option ngValue="dep">Dep</option>-->
-          <!--<option ngValue="gravite">Gravite</option>-->
-          <!--<option ngValue="date">Date</option>-->
-        <!--</select>-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--<div class="col-lg-6">-->
-      <!--<div class="row">-->
-        <!--<select class="form-control input-sm" [(ngModel)]="sortOrder">-->
-          <!--<option ngValue="asc">Ascending</option>-->
-          <!--<option ngValue="desc">Descending</option>-->
-          <!--<option ngValue="badValue">Bad value</option>-->
-        <!--</select>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->
-
+<br/><br/>
 <div class="row">
   <div class="col-lg-6 offset-1">
 <div class="panel panel-default">
-  <div class="panel-heading">Information sur les accidents</div>
+  <div class="panel-heading"><b>Information sur les accidents</b></div>
 
   <!--<table class="table table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable"-->
   <table class="table table-striped" [mfData]="accidentsList | filter: filterQuery" #mf="mfDataTable"
@@ -57,8 +90,9 @@
       <!--<th style="width: 20%">-->
         <!--<mfDefaultSorter by="id">Id</mfDefaultSorter>-->
       <!--</th>-->
-      <th style="width: 20%">
-        <mfDefaultSorter by="num">Num</mfDefaultSorter>
+      <th style="width: 10%;">
+        <mfDefaultSorter by="num" style="padding-right: 3vw;padding-left: 3vw;">Num</mfDefaultSorter>
+        <input class="form-control" placeholder="Recherche" [(ngModel)]="filterQuery"/>
       </th>
       <th style="width: 20%">
         <mfDefaultSorter by="dep">Dep</mfDefaultSorter>
@@ -76,22 +110,26 @@
         <mfDefaultSorter by="gravite">Gravité</mfDefaultSorter>
       </th>
       <th style="width: 10%">
+        <mfDefaultSorter by="vote">Vote</mfDefaultSorter>
+      </th>
+      <th style="width: 10%">
         <mfDefaultSorter by="date">Date</mfDefaultSorter>
       </th>
       <!--<th style="width: 20%">-->
         <!--<mfDefaultSorter [by]="sortByWordLength">City</mfDefaultSorter>-->
       <!--</th>-->
-      <th style="width: 10%"></th>
+      <th style="width: 10%">
+      </th>
 
     </tr>
-    <tr>
+    <!--<tr>-->
       <!--<th colspan="5">-->
-        <!--Filter by name:-->
+        <!--Filter:-->
         <!--<input class="form-control" [(ngModel)]="filterQuery"/>-->
       <!--</th>-->
-    </tr>
+    <!--</tr>-->
     </thead>
-    <tbody>
+    <tbody *ngIf="mf.data != null">
     <tr *ngFor="let accident of mf.data">
     <!--<tr *ngFor="let accident of accidentsList">-->
       <!--<td>{{accident._id}}</td>-->
@@ -114,7 +152,10 @@
       </td>
       <td>
         <img style="width: 70%" [src]="gravToIcon(accident.gravite)" class="img-fluid"/>
-        </td>
+      </td>
+      <td>
+        {{accident.good-accident.bad}}
+      </td>
       <td>
         {{accident.date | date: 'dd/MM/yyyy hh:mm'}}
       <td>
