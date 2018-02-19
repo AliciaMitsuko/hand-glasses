@@ -1,3 +1,35 @@
+.app-admin-edit {
+  background: url('../../../assets/background3.jpg');
+}
+
+.container {
+  background: white;
+
+}
 .nav-pills .nav-link.active {
   background-color: #17a2b8;
+}
+
+.shadow {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  border-radius: 50%;
+  //border-image: url('../../../assets/icons/004-sun.svg');//'../../../assets/icons/004-sun.svg');
+  padding:2px
+}
+
+.padding-side {
+  padding-left:50px;
+  padding-right:50px;
+}
+.shadow-container {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  //padding-left:50px;
+  //padding-right:50px;
+}
+
+.border-selected {
+  border-color: #17a2b8;
+
+  border-style: solid;
+  border-width: 3px;
 }

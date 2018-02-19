@@ -19,7 +19,13 @@ export class AdminPageComponent implements OnInit {
   stringAtm="";
   stringLum="";
   stringSurf="";
-    constructor(
+
+  gravIndex: number = 0;
+  atmIndex: number = 0;
+  lumIndex: number = 0;
+  surfIndex: number = 0;
+
+  constructor(
         private dataService: DataService,
         private accidentService: AccidentService
     ) { }
@@ -48,25 +54,50 @@ export class AdminPageComponent implements OnInit {
   }
 
   getAccidentsGrav(grav :number) {
-    this.stringGrav = "&gravite="+grav;
+    if (this.gravIndex == grav) {
+      this.stringGrav = "";
+      this.gravIndex = 0;
+    } else {
+      this.stringGrav = "&gravite="+grav;
+      this.gravIndex = grav;
+    }
 
     this.getAccidentsParam();
   }
 
   getAccidentsLum(lum :number) {
-    this.stringLum = "&lum="+lum;
+    if (this.lumIndex == lum) {
+      this.stringLum = "";
+      this.lumIndex = 0;
+
+    } else {
+      this.stringLum = "&lum="+lum;
+      this.lumIndex = lum;
+    }
 
     this.getAccidentsParam();
   }
 
   getAccidentsAtm(atm :number) {
-    this.stringAtm = "&atm="+atm;
+    if (this.atmIndex == atm) {
+      this.stringAtm = "";
+      this.atmIndex = 0;
+    } else {
+      this.stringAtm = "&atm="+atm;
+      this.atmIndex = atm;
+    }
 
     this.getAccidentsParam();
   }
 
   getAccidentsSurf(surf :number) {
-    this.stringSurf = "&surf="+surf;
+    if (this.surfIndex == surf) {
+      this.stringSurf = "";
+      this.surfIndex = 0;
+    } else {
+      this.stringSurf = "&surf="+surf;
+      this.surfIndex = surf;
+    }
 
     this.getAccidentsParam();
   }
@@ -76,6 +107,11 @@ export class AdminPageComponent implements OnInit {
     this.stringAtm="";
     this.stringLum="";
     this.stringSurf="";
+
+    this.gravIndex = 0;
+    this.lumIndex = 0;
+    this.atmIndex = 0;
+    this.surfIndex = 0;
 
     this.getAccidents();
 
