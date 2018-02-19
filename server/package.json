@@ -1,4 +1,5 @@
 {
+  "title": "Hand-Glasses",
   "name": "server",
   "version": "0.0.0",
   "private": true,
@@ -22,7 +23,10 @@
     "node-rest-client": "^3.1.0",
     "nodemon": "^1.15.0",
     "q": "^1.5.1",
-    "serve-favicon": "^2.4.5"
+    "serve-favicon": "^2.4.5",
+    "swagger-spec-express": "2.0.4",
+    "swagger-ui": "^3.10.0",
+    "swagger-ui-express": "^2.0.15"
   },
   "devDependencies": {
     "jest": "^22.3.0",
