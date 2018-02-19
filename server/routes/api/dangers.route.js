@@ -5,6 +5,7 @@ var router = express.Router();
 var DangerController = require('../../controllers/dangers.controller');
 
 router.get('/', DangerController.getNearbyDangers);
+router.get('/:format', DangerController.getNearbyDangers);
 router.post('/', DangerController.getNearbyDangers);
 router.post('/:format', DangerController.getNearbyDangers);
 
