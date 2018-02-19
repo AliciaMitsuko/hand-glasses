@@ -20,7 +20,7 @@ export class MapPageComponent implements OnInit {
     public accidentsList: Accident[];
     private subscription: Subscription;
     private geojson: any[4] = [];
-    private gravityColors = ['', '#00FF00', '#FFA500', '#FF0000'];
+    private gravityColors = ['', '#00FF00', '#FF0000', '#FFA500'];
 
     // The distance in km before checkin for new accident
     // This is also the standard zone distance to get accident list
