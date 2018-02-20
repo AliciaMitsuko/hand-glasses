@@ -92,7 +92,6 @@ var options = {
    }
 };
 
-console.log(JSON.stringify(options));
 swagger.initialise(app, options);
 
 
@@ -121,7 +120,6 @@ app.use('/api', api);
 swagger.compile();
 
 
-console.log(swaggerUi.serve);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swagger.json()));
 
 //serv test coverage report

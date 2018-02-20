@@ -10,11 +10,11 @@ router.post('/within/:format', DangerController.getDangersWithin);
 router.post('/crossed/:format', DangerController.getCrossedDangers);
 
 router.get('/', DangerController.getNearbyDangers).describe({
+    summary: "Récupère les accidents proche géographiquement",
+    description: "Récupère les accidents distant d'au plus n mètres en fonction de la latitude et de la longitude",
+    operationId: "Nearby",
+    produces:["application/json"],
     responses: {
-        summary: "Récupère les accidents proche géographiquement",
-        description: "Récupère les accidents distant d'au plus n mètres en fonction de la latitude et de la longitude",
-        operationId: "Nearby",
-        produces:["application/json"],
         200: {
             description: "Return a list of nearby accidents"
         }
