@@ -53,6 +53,22 @@ Run `npm install -g nodemon` to install Nodemon Globally.
 Run `npm start` to run the NodeJS Server.
 
 The API will listen to `http://localhost:3000/`
+### Tests
+
+![alt text](https://github.com/AliciaMitsuko/hand-glasses/blob/master/resources/screen/tests.png)
+
+You can run the application tests by going in the folder `hand-glasses/server` and typing `npm test`
+
+Once you have run the tests at least once, you can access an HTML report in the folder `hand-glasses/server/coverage/index.html`. You can also access the coverage while the API is running at `http://localhost:3000/coverage/`
+
+![alt text](https://github.com/AliciaMitsuko/hand-glasses/blob/master/resources/screen/coverage.png)
+
+## API doc
+
+![alt text](https://github.com/AliciaMitsuko/hand-glasses/blob/master/resources/screen/swagger.png)
+
+The API documentation (WIP) is accessible here => `http://localhost:3000/api-docs`
+
 
 ### Database Setup
 
