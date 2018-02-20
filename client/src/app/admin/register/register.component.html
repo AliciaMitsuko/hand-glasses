@@ -1,0 +1,29 @@
+<div class="app-admin-edit">
+  <div class="container shadow-container padding-side">
+    <br/><br/><br/><br/>
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <h1>Enregistrement</h1>
+        <p class="lead">Ici vous pouvez enregistrer un autre membre</p>
+        <form (submit)="register()">
+          <div class="form-group">
+            <label for="name">Nom</label>
+            <input type="text" class="form-control" name="name" placeholder="Entrer votre nom" [(ngModel)]="credentials.name">
+          </div>
+          <div class="form-group">
+            <label for="email">Adresse email</label>
+            <input type="email" class="form-control" name="email" placeholder="Entrer votre email" [(ngModel)]="credentials.email">
+          </div>
+          <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input type="password" class="form-control" name="password" placeholder="Mot de passe" [(ngModel)]="credentials.password">
+          </div>
+          <button type="submit" class="btn btn-info">S'enregistrer</button>
+          <br/><br/><br/>
+          <button class="btn btn-danger" routerLink="/adminLog">Retour</button>
+        </form>
+      </div>
+    </div>
+    <br/><br/><br/><br/>
+  </div>
+</div>
