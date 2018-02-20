@@ -48,13 +48,19 @@ import {MatSelectModule} from '@angular/material/select';
 
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import {FilterPipe, SortByPipe, VotePipe} from './FilterPipe';
-import { ChartComponent } from './admin/chart/chart.component'
+import { ChartComponent } from './admin/chart/chart.component';
+import {HomeComponent} from "./admin/home/home.component";
+import {RegisterComponent} from "./admin/register/register.component";
+import {AuthenticationService} from "./services/authentication.service";
+import {AuthGuardService} from "./services/auth-guard.service";
 
 const appRoutes: Routes = [
-    { path: 'admin', component: AdminPageComponent },
+    { path: 'admin', component: HomeComponent },
     { path: 'home', component: HomePageComponent },
     { path: '404', component: PageNotFoundComponent },
-    { path: '**', component: HomePageComponent }
+    { path: 'adminLog', component: AdminPageComponent, canActivate: [AuthGuardService] },
+    { path: 'register', component: RegisterComponent, canActivate: [AuthGuardService] },
+    { path: '**', component: HomePageComponent },
 ];
 
 // const MY_DATE_FORMATS = {
@@ -84,6 +90,8 @@ const appRoutes: Routes = [
     SortByPipe,
     ChartComponent,
     ModalComponent,
+    RegisterComponent,
+    HomeComponent,
     ModalContentComponent,
   ],
   imports: [
@@ -140,6 +148,8 @@ const appRoutes: Routes = [
     DataService,
     IconService,
     MapService,
+    AuthenticationService,
+    AuthGuardService
     // {provide: DateAdapter, useClass: NativeDateAdapter},
     // {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
     // {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}
