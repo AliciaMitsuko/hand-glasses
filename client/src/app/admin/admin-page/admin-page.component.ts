@@ -5,6 +5,8 @@ import Accident from "../../models/accident.model";
 import {AccidentService} from "../../services/accident.service";
 import {DataService} from "../../services/data.service";
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {AuthenticationService} from "../../services/authentication.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-admin-edit',
@@ -43,7 +45,9 @@ export class AdminPageComponent implements OnInit {
 
   constructor(
         private dataService: DataService,
-        private accidentService: AccidentService
+        private accidentService: AccidentService,
+        private auth: AuthenticationService,
+        private router: Router
     ) { }
 
   ngOnInit(): void {

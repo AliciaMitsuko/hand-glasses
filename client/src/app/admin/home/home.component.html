@@ -1,0 +1,25 @@
+<div class="app-admin-edit">
+  <div class="container shadow-container padding-side">
+    <br/><br/><br/><br/>
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <h1>Bonjour</h1>
+
+        <p>Merci de vous authentifier, si vous n'êtes pas enregistrer demander à un utilisateur deja enregistré de vous créer un compte.</p>
+
+        <form (submit)="login()">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" name="email" placeholder="Entrer Email" [(ngModel)]="credentials.email">
+          </div>
+          <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input type="password" class="form-control" name="password" placeholder="Mot de passe" [(ngModel)]="credentials.password">
+          </div>
+          <button type="submit" class="btn btn-info">S'identifier</button>
+        </form>
+      </div>
+    </div>
+    <br/><br/><br/><br/>
+  </div>
+</div>

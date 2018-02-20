@@ -1,0 +1,61 @@
+.app-admin-edit {
+  background: url('../../../assets/background3.jpg') repeat;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  height: 100%;
+}
+
+.container {
+  background: white;
+  padding-bottom: 1vh;
+
+}
+.nav-pills .nav-link.active {
+  background-color: #17a2b8;
+}
+
+.shadow {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  border-radius: 50%;
+  //border-image: url('../../../assets/icons/004-sun.svg');//'../../../assets/icons/004-sun.svg');
+  padding:2px
+}
+
+.padding-side {
+  padding-left:50px;
+  padding-right:50px;
+}
+.shadow-container {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  //padding-left:50px;
+  //padding-right:50px;
+}
+
+.border-selected {
+  border-color: #17a2b8;
+
+  border-style: solid;
+  border-width: 3px;
+}
+
+
+a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+}
+
+a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.previous {
+  background-color: #f1f1f1;
+  color: black;
+}
+
+
+.round {
+  border-radius: 50%;
+}

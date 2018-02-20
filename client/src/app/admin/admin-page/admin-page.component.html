@@ -1,48 +1,65 @@
 <div class="app-admin-edit">
-<div class="container shadow-container padding-side">
-  <br/><br/>
-  <ul class="nav nav-tabs nav-fill">
-    <li  class="nav-item"
-         (click)="setIndex(1)">
-      <a class="nav-link" [class.active]="selectedIndex === 1">Graphs</a>
-    </li>
-    <li  class="nav-item" [class.active]="selectedIndex === 2"
-         (click)="setIndex(2)">
-      <a class="nav-link" [class.active]="selectedIndex === 2">Tableau</a>
-    </li>
-  </ul>
-  <br/><br/><br/><br/>
-  <div class="row">
-    <div class="col-lg-10 col-md-10">
-
-      <app-chart [hidden]="selectedIndex !== 1"></app-chart>
-      <app-table [hidden]="selectedIndex !== 2"></app-table>
+  <div class="container shadow-container padding-side">
+    <br/><br/>
+    <div class="row">
+      <div class="col-lg-10 col-md-10">
+        Bonjour {{ auth.getUserDetails()?.name }} voulez-vous <a routerLink="/register">enregistrer</a> quelqu'un ?
+      </div>
+      <div class="col-lg-2 col-md-2">
+        <button class="btn btn-danger" (click)="auth.logout()">Deconnexion</button>
+      </div>
     </div>
-    <div class="col-lg-2 col-md-2">
-      <b>Recherche rapide</b>
-      <p>Gravité</p>
-      <div class="text-center">
-        <!--<img style="height:8vh; margin-bottom: 1vh;" [@filterState]="''+(gravIndex === 3)" [class.border-selected]="gravIndex === 3" (click)="getAccidentsGrav(3)" src="../../../assets/icons/006-injured.svg" class="img-fluid shadow"/><br/>-->
-        <img style="height:8vh; margin-bottom: 1vh;" [@filterState]="''+(gravIndex === 3)" (click)="getAccidentsGrav(3)" src="../../../assets/icons/006-injured.svg" class="img-fluid shadow"/><br/>
-        <img style="height:8vh; margin-bottom: 1vh;" [@filterState]="gravIndex === 1" (click)="getAccidentsGrav(1)" src="../../../assets/icons/004-heart.svg" class="img-fluid shadow"/><br/>
+    <br/><br/>
+    <ul class="nav nav-tabs nav-fill">
+      <li class="nav-item"
+          (click)="setIndex(1)">
+        <a class="nav-link" [class.active]="selectedIndex === 1">Graphs</a>
+      </li>
+      <li class="nav-item" [class.active]="selectedIndex === 2"
+          (click)="setIndex(2)">
+        <a class="nav-link" [class.active]="selectedIndex === 2">Tableau</a>
+      </li>
+    </ul>
+    <br/><br/><br/><br/>
+    <div class="row">
+      <div class="col-lg-10 col-md-10">
+
+        <app-chart [hidden]="selectedIndex !== 1"></app-chart>
+        <app-table [hidden]="selectedIndex !== 2"></app-table>
       </div>
-      <p>Période</p>
-      <div class="text-center">
-        <img style="height:8vh; margin-bottom: 1vh;" [@filterState]="lumIndex === 1" (click)="getAccidentsLum(1)" src="../../../assets/icons/004-sun.svg" class="img-fluid shadow"/><br/>
-        <img style="height:8vh; margin-bottom: 1vh;" [@filterState]="lumIndex === 2" (click)="getAccidentsLum(2)" src="../../../assets/icons/day.svg" class="img-fluid shadow"/>
+      <div class="col-lg-2 col-md-2">
+        <b>Recherche rapide</b>
+        <p>Gravité</p>
+        <div class="text-center">
+          <!--<img style="height:8vh; margin-bottom: 1vh;" [@filterState]="''+(gravIndex === 3)" [class.border-selected]="gravIndex === 3" (click)="getAccidentsGrav(3)" src="../../../assets/icons/006-injured.svg" class="img-fluid shadow"/><br/>-->
+          <img style="height:8vh; margin-bottom: 1vh;" [@filterState]="''+(gravIndex === 3)"
+               (click)="getAccidentsGrav(3)" src="../../../assets/icons/006-injured.svg" class="img-fluid shadow"/><br/>
+          <img style="height:8vh; margin-bottom: 1vh;" [@filterState]="gravIndex === 1" (click)="getAccidentsGrav(1)"
+               src="../../../assets/icons/004-heart.svg" class="img-fluid shadow"/><br/>
+        </div>
+        <p>Période</p>
+        <div class="text-center">
+          <img style="height:8vh; margin-bottom: 1vh;" [@filterState]="lumIndex === 1" (click)="getAccidentsLum(1)"
+               src="../../../assets/icons/004-sun.svg" class="img-fluid shadow"/><br/>
+          <img style="height:8vh; margin-bottom: 1vh;" [@filterState]="lumIndex === 2" (click)="getAccidentsLum(2)"
+               src="../../../assets/icons/day.svg" class="img-fluid shadow"/>
+        </div>
+        <p>Cond. atm.</p>
+        <div class="text-center">
+          <img style="height:8vh; margin-bottom: 1vh;" [@filterState]="atmIndex === 4" (click)="getAccidentsAtm(4)"
+               src="../../../assets/icons/003-snowflake.svg" class="img-fluid shadow"/><br/>
+          <img style="height:8vh; margin-bottom: 1vh;" [@filterState]="atmIndex === 6" (click)="getAccidentsAtm(6)"
+               src="../../../assets/icons/001-wind.svg" class="img-fluid shadow"/><br/>
+        </div>
+        <p>Surface</p>
+        <div class="text-center">
+          <img style="height:8vh; margin-bottom: 1vh;" [@filterState]="surfIndex === 4" (click)="getAccidentsSurf(4)"
+               src="../../../assets/icons/flood.svg" class="img-fluid shadow"/><br/>
+          <img style="height:8vh; margin-bottom: 1vh;" [@filterState]="surfIndex === 5" (click)="getAccidentsSurf(5)"
+               src="../../../assets/icons/nature.svg" class="img-fluid shadow"/><br/>
+        </div>
+        <button class="btn btn-info pull-right" (click)="resetFilter()">Reinitialiser</button>
       </div>
-      <p>Cond. atm.</p>
-      <div class="text-center">
-        <img style="height:8vh; margin-bottom: 1vh;" [@filterState]="atmIndex === 4" (click)="getAccidentsAtm(4)" src="../../../assets/icons/003-snowflake.svg" class="img-fluid shadow"/><br/>
-        <img style="height:8vh; margin-bottom: 1vh;" [@filterState]="atmIndex === 6" (click)="getAccidentsAtm(6)" src="../../../assets/icons/001-wind.svg" class="img-fluid shadow"/><br/>
-      </div>
-      <p>Surface</p>
-      <div class="text-center">
-        <img style="height:8vh; margin-bottom: 1vh;" [@filterState]="surfIndex === 4" (click)="getAccidentsSurf(4)" src="../../../assets/icons/flood.svg" class="img-fluid shadow"/><br/>
-        <img style="height:8vh; margin-bottom: 1vh;" [@filterState]="surfIndex === 5" (click)="getAccidentsSurf(5)" src="../../../assets/icons/nature.svg" class="img-fluid shadow"/><br/>
-      </div>
-      <button class="btn btn-info pull-right" (click)="resetFilter()">Reinitialiser</button>
     </div>
   </div>
-</div>
 </div>
