@@ -41,10 +41,7 @@ export class MapPageComponent implements OnInit {
     // style = 'mapbox://styles/jonahadkins/cim3kbhey0091cwm21d1dvsgo';
     private lat = 48.86;
     private lng = 2.33;
-    message = '';
-    // data
-    source: any;
-    markers: any;
+
 
     constructor(private dataService: DataService,  private mapService: MapService) {
     }
@@ -61,7 +58,6 @@ export class MapPageComponent implements OnInit {
                 this.geojson[_i] = resp;
                 console.log(this.geojson);
                 this.showMarkers(_i);
-                // this.dataService.changeAccidentList(accidents); // update accidentList to component which are subscribed
             });
         }
 
@@ -99,8 +95,6 @@ export class MapPageComponent implements OnInit {
                 // We check if he is close to an accident area
                 this.checkAreaForAccident();
 
-                // alert('position changed');
-
             });
         }
         this.buildMap();
@@ -128,18 +122,6 @@ export class MapPageComponent implements OnInit {
             trackUserLocation: true
         }));
 
-        // Show user location
-        //
-
-        /// Add realtime firebase data on map load
-        this.map.on('load', (event) => {
-           // this.showMarkers();
-        });
-    }
-
-    /// Helpers
-    removeMarker(marker) {
-        // this.mapService.removeMarker(marker.$key)
     }
 
     flyTo(data: GeoJson) {
