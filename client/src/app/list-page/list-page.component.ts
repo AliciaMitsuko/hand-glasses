@@ -67,16 +67,38 @@ export class ListPageComponent implements OnInit {
         }
     }
 
-    atmToIcon(num: number) {
+    atmToIcon(num: number): string {
         return this.iconService.atmToIcon(num);
     }
 
-    lumToIcon(num: number) {
+    lumToIcon(num: number): string {
         return this.iconService.lumToIcon(num);
     }
 
-    gravToIcon(num: number) {
+    gravToIcon(num: number): string {
         return this.iconService.gravToIcon(num);
+    }
+
+    gravToText(num: number): string {
+        const myNum = '' + num;
+        switch (parseInt(myNum)) {
+            case 1: {
+                return 'Accident léger';
+            }
+            case 2: {
+                return 'Accident grave';
+            }
+            case 3 : {
+                return 'Accident léger';
+            }
+            case 4 : {
+                return 'Accident léger';
+            }
+            default: {
+                // return 'indéfini';
+                return '';
+            }
+        }
     }
 
 
