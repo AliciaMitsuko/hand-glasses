@@ -38,8 +38,50 @@ app.mongoConnect = function(){
 };
 
 var options = {
-    title: packageJson.title,
-    version: packageJson.version
+   title: packageJson.title,
+   description: packageJson.description,
+   termsOfService: 'You may only use this api for reasons!',
+   contact: {
+       name: '',
+       url: '',
+       email: ''
+   },
+   license: {
+       name: '',
+       url: ''
+   },
+   version: packageJson.version,
+   host: 'localhost',
+   basePath: '/',
+   schemes: ['http'],
+   consumes: ['application/json'],
+   produces: ['application/json'],
+   paths: {
+       //manual paths here if desired, not required.
+   },
+   definitions: {
+       //manual definitions here if desired, not required.
+   },
+   parameters: {
+       //manual definitions here if desired, not required.
+   },
+   responses: {
+       //manual responses here if desired, not required.
+   },
+   tags: [
+       {
+           name: 'Dangers',
+           description: 'Récupération des dangers proche géographiquement',
+           externalDocs: {
+               description: 'MongoDB GeoQuery doc',
+               url: 'https://docs.mongodb.com/manual/reference/operator/query-geospatial/'
+           }
+       }
+   ],
+   externalDocs: {
+       description: 'This doc describes how to use swagger spec express',
+       url: 'https://github.com/eXigentCoder/swagger-spec-express'
+   }
 };
 
 console.log(JSON.stringify(options));
