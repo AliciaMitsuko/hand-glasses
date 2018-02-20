@@ -23,17 +23,17 @@
     "mongoose-paginate": "^5.0.3",
     "morgan": "~1.8.1",
     "node-rest-client": "^3.1.0",
-    "nodemon": "^1.15.0",
+    "nodemon": "^1.15.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "q": "^1.5.1",
     "serve-favicon": "^2.4.5",
-    "swagger-spec-express": "2.0.4",
+    "swagger-spec-express": "^2.0.4",
     "swagger-ui": "^3.10.0",
     "swagger-ui-express": "^2.0.15"
   },
   "devDependencies": {
-    "jest": "^22.3.0",
+    "jest": "^22.4.0",
     "supertest": "^3.0.0"
   }
 }
