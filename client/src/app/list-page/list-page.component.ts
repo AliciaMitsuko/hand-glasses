@@ -87,8 +87,6 @@ export class ListPageComponent implements OnInit {
             return;
         }
 
-        //console.log(sort.active);
-
        /* if (sort.active === 'distance') {
 
 
@@ -125,7 +123,7 @@ export class ListPageComponent implements OnInit {
                     default: return 0;
                 }
             });
-        //}
+        // }
     }
 
     compare(a, b, isAsc) {
