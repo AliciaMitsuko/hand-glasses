@@ -18,6 +18,14 @@ app.mongoConnect();
  * Get port from environment and store in Express.
  */
 
+ // [SH] Require Passport
+ var passport = require('passport');
+ // [SH] Bring in the Passport config after model is defined
+ require('./../config/passport');
+ // [SH] Initialise Passport before using the route middleware
+ app.use(passport.initialize());
+
+
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 

@@ -4,8 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-// [SH] Require Passport
-var passport = require('passport');
+
 var app = express();
 
 
@@ -23,11 +22,6 @@ const swaggerUi = require('swagger-ui-express');
 
 
 
-// [SH] Bring in the Passport config after model is defined
-require('./config/passport');
-
-// [SH] Initialise Passport before using the route middleware
-app.use(passport.initialize());
 
 
 var mongoose = require('mongoose');
