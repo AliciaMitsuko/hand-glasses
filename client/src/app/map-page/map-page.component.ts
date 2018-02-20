@@ -5,7 +5,6 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import Accident from '../models/accident.model';
 import {LngLat, Map} from 'mapbox-gl';
 import {environment} from '../../environments/environment';
-import {forEach} from '@angular/router/src/utils/collection';
 import {DataService} from '../services/data.service';
 import {Subscription} from 'rxjs/Subscription';
 import {MapService} from '../services/map.service';
@@ -52,11 +51,9 @@ export class MapPageComponent implements OnInit {
         this.subscription = this.mapService.getMessage().subscribe(message => { this.map.flyTo({center: [message.text[0], message.text[1]]}); });
 
         for (let _i = 1; _i < 4; _i++) {
-            console.log(_i);
             this.mapService.getAllAccidentGeoJson(_i).
             subscribe(resp => {
                 this.geojson[_i] = resp;
-                console.log(this.geojson);
                 this.showMarkers(_i);
             });
         }
