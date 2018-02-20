@@ -18,11 +18,11 @@ Contact Anthony Loroscio & Alicia Marin
 Go to `http://localhost:4200/`
 
 #### Computer view
-![alt text](https://github.com/AliciaMitsuko/hand-glasses/blob/master/resources/screen/map-desktop.png)
+![alt text](https://github.com/AliciaMitsuko/hand-glasses/blob/master/resources/screen/map-desktop.png | height=100)
 
 #### Mobile view
-![alt text](https://github.com/AliciaMitsuko/hand-glasses/blob/master/resources/screen/map-mobile.png)
-![alt text](https://github.com/AliciaMitsuko/hand-glasses/blob/master/resources/screen/liste-mobile.png)
+![alt text](https://github.com/AliciaMitsuko/hand-glasses/blob/master/resources/screen/map-mobile.png | height=100)
+![alt text](https://github.com/AliciaMitsuko/hand-glasses/blob/master/resources/screen/liste-mobile.png | height=100)
 
 Contact Anthony Loroscio
 
