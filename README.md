@@ -21,8 +21,8 @@ Go to `http://localhost:4200/`
 <img src="https://github.com/AliciaMitsuko/hand-glasses/blob/master/resources/screen/map-desktop.png" width="1000"/>
 
 #### Mobile view
-<img src="https://github.com/AliciaMitsuko/hand-glasses/blob/master/resources/screen/map-mobile.png" width="1000"/>
-<img src="https://github.com/AliciaMitsuko/hand-glasses/blob/master/resources/screen/liste-mobile.png" width="1000"/>
+<img src="https://github.com/AliciaMitsuko/hand-glasses/blob/master/resources/screen/map-mobile.png" height="500"/>
+<img src="https://github.com/AliciaMitsuko/hand-glasses/blob/master/resources/screen/liste-mobile.png" height="500"/>
 
 Contact Anthony Loroscio
 
