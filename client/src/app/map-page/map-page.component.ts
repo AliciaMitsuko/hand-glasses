@@ -136,15 +136,12 @@ export class MapPageComponent implements OnInit {
                 'type': 'geojson',
                 'data': this.geojson[gravite]
             },
-            'layout': {
-                'visibility': 'visible'
-            },
             'paint': {
                 'circle-radius': {
                     'base': 1.75,
-                    'stops': [[12, 2], [22, 180]]
+                    'stops': [[6, 2], [8, 4], [10, 6], [12, 8], [14, 10], [16, 12], [18, 14], [22, 180]]
                 },
-                'circle-color': this.gravityColors[gravite]
+                'circle-color': this.gravityColors[gravite],
             }
         });
 
@@ -166,10 +163,15 @@ export class MapPageComponent implements OnInit {
 
         if (this.calculateDistance(this.lat, this.lastLatCheck, this.lng, this.lastLngCheck) > this.bufferDistance ) {
 
+            //console.log("recall");
+
             // If the user moved more than 10km from the last API call, then we call again to refresh our nearby accident list
             this.mapService.getAccidentWithinPerimeter(this.lat, this.lng, this.bufferDistance * 1000).
             subscribe(resp => {
                 this.nearAccidentList = resp;
+
+                /*this.lastLatCheck = this.lat;
+                this.lastLngCheck = this.lng;*/
 
                 // We check if we got an accident within the 50m
                 // We go through the class var which contains the nearby accident and pop an alert if one is close
@@ -184,6 +186,9 @@ export class MapPageComponent implements OnInit {
 
 
         } else {
+
+            //console.log("not recall");
+
             // We check if we got an accident within the 50m
             // We go through the class var which contains the nearby accident and pop an alert if one is close
             for (const accident of this.nearAccidentList) {
