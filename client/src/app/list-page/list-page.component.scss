@@ -34,6 +34,7 @@ mat-card {
   margin-left: 2px;
   height: 20vh;
   margin-bottom: -24px;
+  color: black;
 }
 
 .vote-number {
@@ -58,4 +59,9 @@ mat-card {
 
 .center-icon {
   padding-top: 20px;
+}
+
+.danger {
+  background-color:  #ff6666;
+  color: white;
 }

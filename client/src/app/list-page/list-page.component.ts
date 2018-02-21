@@ -24,7 +24,7 @@ export class ListPageComponent implements OnInit {
         private iconService: IconService, private dataService: DataService, private mapService: MapService, private accidentService: AccidentService) { }
 
     ngOnInit() {
-        this.dataService.accidentsListMap.subscribe(message => {this.accidentsList = message; console.log(message); });
+        this.dataService.accidentsListMap.subscribe(message => {this.accidentsList = message; });
     }
 
     addGood(accident: Accident) {
@@ -33,10 +33,7 @@ export class ListPageComponent implements OnInit {
             accident.good -= 1;
             this.accidentService.editAccident(accident).subscribe(res => {
                 this.hasAlreadyVotedGood.push(accident);
-                console.log('Update Succesful');
             }, err => {
-
-                console.error('Update Unsuccesful');
             });
         }
     }
@@ -47,10 +44,7 @@ export class ListPageComponent implements OnInit {
             accident.bad -= 1;
             this.accidentService.editAccident(accident).subscribe(res => {
                 this.hasAlreadyVotedBad.push(accident);
-                console.log('Update Succesful');
             }, err => {
-
-                console.error('Update Unsuccesful');
             });
         }
 
@@ -67,16 +61,38 @@ export class ListPageComponent implements OnInit {
         }
     }
 
-    atmToIcon(num: number) {
+    atmToIcon(num: number): string {
         return this.iconService.atmToIcon(num);
     }
 
-    lumToIcon(num: number) {
+    lumToIcon(num: number): string {
         return this.iconService.lumToIcon(num);
     }
 
-    gravToIcon(num: number) {
+    gravToIcon(num: number): string {
         return this.iconService.gravToIcon(num);
+    }
+
+    gravToText(num: number): string {
+        const myNum = '' + num;
+        switch (parseInt(myNum)) {
+            case 1: {
+                return 'Accident léger';
+            }
+            case 2: {
+                return 'Accident grave';
+            }
+            case 3 : {
+                return 'Accident léger';
+            }
+            case 4 : {
+                return 'Accident léger';
+            }
+            default: {
+                // return 'indéfini';
+                return '';
+            }
+        }
     }
 
 
