@@ -292,7 +292,7 @@ exports.getAccidentsByVote = async function(req, res, next){
 
   var threshold = req.query.threshold ? req.query.threshold : 0;
 
-  console.log('CHIBRE : ' + threshold);
+  console.log('Threshold : ' + threshold);
 
   try{
     var query = { $where : "(this.good - this.bad) <= " + threshold};
