@@ -30,7 +30,7 @@ export class ListPageComponent implements OnInit {
     addGood(accident: Accident) {
 
         if (!this.hasAlreadyVotedGood.includes(accident)) {
-            accident.good += 1;
+            accident.good -= 1;
             this.accidentService.editAccident(accident).subscribe(res => {
                 this.hasAlreadyVotedGood.push(accident);
                 console.log('Update Succesful');
@@ -44,7 +44,7 @@ export class ListPageComponent implements OnInit {
     addBad(accident: Accident) {
 
         if (!this.hasAlreadyVotedBad.includes(accident)) {
-            accident.bad += 1;
+            accident.bad -= 1;
             this.accidentService.editAccident(accident).subscribe(res => {
                 this.hasAlreadyVotedBad.push(accident);
                 console.log('Update Succesful');
