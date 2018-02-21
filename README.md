@@ -21,8 +21,7 @@ Go to `http://localhost:4200/`
 <img src="https://github.com/AliciaMitsuko/hand-glasses/blob/master/resources/screen/map-desktop.png" width="1000"/>
 
 #### Mobile view
-<img src="https://github.com/AliciaMitsuko/hand-glasses/blob/master/resources/screen/map-mobile.png" height="500"/>
-<img src="https://github.com/AliciaMitsuko/hand-glasses/blob/master/resources/screen/liste-mobile.png" height="500"/>
+<img src="https://github.com/AliciaMitsuko/hand-glasses/blob/master/resources/screen/map-mobile.png" height="500"/> <img src="https://github.com/AliciaMitsuko/hand-glasses/blob/master/resources/screen/liste-mobile.png" height="500"/>
 
 Contact Anthony Loroscio
 
@@ -31,7 +30,7 @@ Go to `http://localhost:4200/admin`
 
 Login : toto@gmail.com
 
-Pwd :toto
+Pwd : toto
 
 #### Charts
 ![alt text](https://github.com/AliciaMitsuko/hand-glasses/blob/master/resources/screen/charts.png)
