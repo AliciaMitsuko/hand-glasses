@@ -5,7 +5,6 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import Accident from '../models/accident.model';
 import {LngLat, Map} from 'mapbox-gl';
 import {environment} from '../../environments/environment';
-import {forEach} from '@angular/router/src/utils/collection';
 import {DataService} from '../services/data.service';
 import {Subscription} from 'rxjs/Subscription';
 import {MapService} from '../services/map.service';
@@ -52,11 +51,9 @@ export class MapPageComponent implements OnInit {
         this.subscription = this.mapService.getMessage().subscribe(message => { this.map.flyTo({center: [message.text[0], message.text[1]]}); });
 
         for (let _i = 1; _i < 4; _i++) {
-            console.log(_i);
             this.mapService.getAllAccidentGeoJson(_i).
             subscribe(resp => {
                 this.geojson[_i] = resp;
-                console.log(this.geojson);
                 this.showMarkers(_i);
             });
         }
@@ -139,15 +136,12 @@ export class MapPageComponent implements OnInit {
                 'type': 'geojson',
                 'data': this.geojson[gravite]
             },
-            'layout': {
-                'visibility': 'visible'
-            },
             'paint': {
                 'circle-radius': {
                     'base': 1.75,
-                    'stops': [[12, 2], [22, 180]]
+                    'stops': [[6, 2], [8, 4], [10, 6], [12, 8], [14, 10], [16, 12], [18, 14], [22, 180]]
                 },
-                'circle-color': this.gravityColors[gravite]
+                'circle-color': this.gravityColors[gravite],
             }
         });
 
@@ -169,10 +163,15 @@ export class MapPageComponent implements OnInit {
 
         if (this.calculateDistance(this.lat, this.lastLatCheck, this.lng, this.lastLngCheck) > this.bufferDistance ) {
 
+            //console.log("recall");
+
             // If the user moved more than 10km from the last API call, then we call again to refresh our nearby accident list
             this.mapService.getAccidentWithinPerimeter(this.lat, this.lng, this.bufferDistance * 1000).
             subscribe(resp => {
                 this.nearAccidentList = resp;
+
+                /*this.lastLatCheck = this.lat;
+                this.lastLngCheck = this.lng;*/
 
                 // We check if we got an accident within the 50m
                 // We go through the class var which contains the nearby accident and pop an alert if one is close
@@ -187,6 +186,9 @@ export class MapPageComponent implements OnInit {
 
 
         } else {
+
+            //console.log("not recall");
+
             // We check if we got an accident within the 50m
             // We go through the class var which contains the nearby accident and pop an alert if one is close
             for (const accident of this.nearAccidentList) {

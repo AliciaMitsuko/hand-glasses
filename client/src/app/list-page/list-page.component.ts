@@ -24,19 +24,16 @@ export class ListPageComponent implements OnInit {
         private iconService: IconService, private dataService: DataService, private mapService: MapService, private accidentService: AccidentService) { }
 
     ngOnInit() {
-        this.dataService.accidentsListMap.subscribe(message => {this.accidentsList = message; console.log(message); });
+        this.dataService.accidentsListMap.subscribe(message => {this.accidentsList = message; });
     }
 
     addGood(accident: Accident) {
 
         if (!this.hasAlreadyVotedGood.includes(accident)) {
-            accident.good += 1;
+            accident.good -= 1;
             this.accidentService.editAccident(accident).subscribe(res => {
                 this.hasAlreadyVotedGood.push(accident);
-                console.log('Update Succesful');
             }, err => {
-
-                console.error('Update Unsuccesful');
             });
         }
     }
@@ -44,13 +41,10 @@ export class ListPageComponent implements OnInit {
     addBad(accident: Accident) {
 
         if (!this.hasAlreadyVotedBad.includes(accident)) {
-            accident.bad += 1;
+            accident.bad -= 1;
             this.accidentService.editAccident(accident).subscribe(res => {
                 this.hasAlreadyVotedBad.push(accident);
-                console.log('Update Succesful');
             }, err => {
-
-                console.error('Update Unsuccesful');
             });
         }
 

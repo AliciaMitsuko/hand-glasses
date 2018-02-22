@@ -24,7 +24,6 @@ export class HomePageComponent implements OnInit {
           .subscribe(accidents => {
               this.accidentsList = accidents;
               this.dataService.changeAccidentListMap(accidents);
-              console.log(accidents);
           });
   }
 
