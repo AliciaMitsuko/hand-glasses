@@ -75,6 +75,7 @@ The API documentation (WIP) is accessible here => `http://localhost:3000/api-doc
 ### Database Setup
 
 The database is running remotely at `:mongodb://mlab.com:33966/hand-glasses`
+You need a VPN to access it from within the Polytech network
 
 Contact Nicolas Bighetti & Thibaut Terris & Alicia Marin
 
