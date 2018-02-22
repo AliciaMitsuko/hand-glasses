@@ -53,7 +53,7 @@ var options = {
        url: ''
    },
    version: packageJson.version,
-   host: 'localhost',
+   host: 'localhost:3000',
    basePath: '/',
    schemes: ['http'],
    consumes: ['application/json'],
